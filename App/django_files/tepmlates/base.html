@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+  
+  
+  {% block header %}
+        
+       
+    <head>
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">  
+      <link rel="stylesheet" href="{% static 'css/kamadatepicker.min.css' %}">
+        <meta charset="UTF-8">
+       
+        
+        <title>{% block title %}honeymoon science{% endblock %}</title>
+        
+        
+     </head>
+  
+     {% endblock %}
+
+<body >
+    <!-- <header class="grid" dir="rtl" > -->
+     
+      <header>
+        <!-- Top Navigation -->
+        <!-- <nav class="menu" dir="rtl"> -->
+          <nav>
+           <!-- logo -->
+           <!-- <div class="container"> -->
+            <div>
+            <!-- <div class="centered"> -->
+              <a href="{% url 'home' %}" >
+                <img src="{% static 'img/honeymoon.png' %}">
+             </a>
+              <!-- محتوای دلخواه -->
+            <!-- </div> -->
+          </div>
+           
+          <nav> 
+              <ul>
+                
+                
+                <li><a href="{% url 'home' %}">صفحه اصلی</a></li>
+                <li><a href="#">دریافت گزارشات</a>
+                 
+                    <ul>
+                      <li><a href="{% url 'get_the_report_app:get_report' %}">دریافت فایل از گزارشات حسابرو</a></li>
+                      <li>
+                        <a href="{% url 'get_coin_report_app:get_report' %}">دریافت فایل از گزارشات سکه از حسابرو</a>
+                      </li>
+                    </ul>
+                 
+                  
+                    <li><a href="#">آنالیز فایل های اکسل</a>
+                 
+                      <ul type="none">
+                        <li><a href="{% url 'analyse_excels_app:analyse_list' %}">لیست کل آنالیزها</a></li>
+                        <br>
+                        <li><a href="{% url 'analyse_excels_app:merge_factors_hamyar_with_hesabro' %}">ادغام فاکتورهای حسابرو، همیار</a></li>
+                        <li>
+                          <a href="{% url 'analyse_excels_app:merge_final_merged_factors_with_customers' %}">ادغام مشخصات مشتری با تجمیع شده فاکتورها</a>
+                        </li>
+                      </ul>
+                   
+         
+                <li><a href="{% url 'product_app:product_page' %}">محصولات</a></li>
+                <li><a href="{% url 'birthday_app:birthday_page' %}">تولدی ها</a></li>
+                
+                
+                
+                <!-- <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li> -->
+              </ul>
+          </nav>
+        </nav>
+      </header>
+    <div id="content" class="container">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+    
+</body>
+
+<script src= "{% static 'js/jquery.js' %}"></script>
+<script src= "{% static 'js/kamadatepicker.min.js' %}"></script>
+<script>
+    let options = {
+        // placeholder: "تاریخ",
+        nextButtonIcon: "{% static 'img/date/next.png' %}",
+        previousButtonIcon: "{% static 'img/date/prev.png' %}",
+        forceFarsiDigits: true,
+        markToday: true,
+        markHolidays: true,
+        highlightSelectedDay: true,
+        // gotoToday : true
+    }
+    // kamaDatepicker("taghvim", options);
+    kamaDatepicker("taghvim_start", options);
+    kamaDatepicker("taghvim_end", options);
+</script>
+
+</html>

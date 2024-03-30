@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+   
+</head>
+<body dir="rtl">
+    {% block content %}
+    
+    
+        <h3>محاسبه حقوق</h3>
+    
+    <ul>
+    <li>
+        <h4>
+            جهت محاسبه حقوق از <strong>فاکتور های حسابرو</strong> می توانید با انتخاب فایل فاکتورهای حسابرو و انتخاب بازه تاریخی حقوق را محاسبه نمایید
+        </h4>
+    </li>
+    
+    
+    </ul>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+      
+            {% csrf_token %} 
+                <!-- <input type="text" formmethod="post",name="sms_text",value = "متن دلخواه خود را وارد نمایید"> -->
+                <label>موارد درخواستی را تکمیل نمایید:</label>
+                <br>
+               
+                <label for="file">فایل فاکتورهای حسابرو:</label>
+                <label for="taghvim_start">تاریخ شروع محاسبه:</label>
+                
+                <input type="text" id="taghvim_start" name="startDate" >
+                <br>
+                <label for="taghvim_end">تاریخ پایان محاسبه:</label>
+                <input type="text" id="taghvim_end" name="endDate" >
+                <br>
+                {{ form }}
+                
+            <!-- {% if result == "stoped" %}   -->
+                <button type="submit" >محاسبه</button>
+            <!-- {% else %}
+                <button type="submit" formmethod="post"  name="act" value="stoped">توقف</button> -->
+            <!-- {% endif %} -->
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   
+        </form>
+    </div>
+    
+    {% endblock %}
+    
+</body>
+</html>
