@@ -34,7 +34,10 @@
             <form >
                 {% csrf_token %} 
                 {% if result == "stoped" %}
-                    
+                <label for="taghvim_start">تاریخ شروع محاسبه:</label>
+                
+                <input type="text" id="taghvim_start" name="startDate" >
+                <br>
                     <!-- <input type="text" formmethod="post",name="sms_text",value = "متن دلخواه خود را وارد نمایید"> -->
                     <label for="submit">جهت اجرا دگمه روبرو را کلیک نمایید</label>
                      
