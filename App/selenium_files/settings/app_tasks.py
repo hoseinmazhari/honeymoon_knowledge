@@ -1,20 +1,20 @@
 class task_name():
     
-    update_birthday = "update_birthday"
-    set_order_point = "set_order_point"
+    update_birthday = "دریافت مشتریان برای پیامک تبریک تولد"
+    set_order_point = "ذخیره نمودن نقطه سفارش"
     get_report_from_hesabro_link = "get_report_from_hesabro_link"
-    get_coin_report_from_hesabro_link = "get_coin_report_from_hesabro_linkf"
-    run_honeymoonatr = "run_honeymoonatr"
-    salary = "salary"
-    update_birthday_call_brs = "update_birthday_call_brs"
+    get_coin_report_from_hesabro_link = "دریافت سکه های مشتریان از گزارشات با استفاده از لینک"
+    run_honeymoonatr = "سایت هانی مون عطر قدیم"
+    salary = "حقوق"
+    update_birthday_call_brs = "دریافت مشخصات مشتریان برای تماس شعب"
     
     
     def __init__(self):
-        self.update_birthday = "update_birthday"
-        self.set_order_point = "set_order_point"
+        self.update_birthday = "دریافت مشتریان برای پیامک تبریک تولد"
+        self.set_order_point =  "ذخیره نمودن نقطه سفارش"
         self.get_report_from_hesabro_link = "get_report_from_hesabro_link"
-        self.get_coin_report_from_hesabro_link = "get_coin_report_from_hesabro_linkf"
-        self.run_honeymoonatr = "run_honeymoonatr"
-        self.salary = "salary"
-        self.update_birthday_call_brs = "update_birthday_call_brs"
+        self.get_coin_report_from_hesabro_link = "دریافت سکه های مشتریان از گزارشات با استفاده از لینک"
+        self.run_honeymoonatr = "سایت هانی مون عطر قدیم"
+        self.salary = "حقوق"
+        self.update_birthday_call_brs = "دریافت مشخصات مشتریان برای تماس شعب"
         

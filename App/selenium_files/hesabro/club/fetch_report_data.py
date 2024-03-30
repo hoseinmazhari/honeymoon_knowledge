@@ -87,7 +87,8 @@ def download_data(driver, title, this_delay):
                 element =driver.find_element(By.XPATH,xph.create_reportcustomer.dataReport.next_p)
                 
                 
-                
+                # thisData = pd.DataFrame(lsData)
+                # thisData.to_excel("thisDataTest.xlsx",index=False)
                 if element.is_displayed():
                         element.click()
                         # time.sleep(1)

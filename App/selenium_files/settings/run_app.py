@@ -16,6 +16,7 @@ from . import app_address
 from ..hesabro.merchandise.order_points import set_order_point
 from ..hesabro.merchandise.order_points_allBrs import set_order_point_allBrs
 from . import app_tasks as tsk
+from ..hesabro.club import fetch_birthdays_data as fbsd
 from ..hesabro.club import fetch_birthday as upb
 from ..hesabro.club import fetch_report_data as frd
 from ..hesabro.club import fetch_coin_report_data as fcrd
@@ -314,9 +315,12 @@ def task_selector(selected,args_= "",**kwargs):
         main_url = f"{hesabro_domain}/site/index"
         print(selected)
         if selected == tsk.task_name.update_birthday_call_brs:
-            # pass
-            
-            answer = update_birthday_for_call_brs(args_)
+            driver, is_logged_in = run_hesabro()
+            if is_logged_in:
+                title = tsk.task_name.update_birthday_call_brs
+                dfData = fbsd.get_birthdays_data(driver,title)
+                dfData.to_excel(f"{title}.xlsx", index= False)
+            # answer = update_birthday_for_call_brs(args_)
         if selected == tsk.task_name.salary:
             # pass
             df_invoices = args_[asts.salary_requires.invoices]
