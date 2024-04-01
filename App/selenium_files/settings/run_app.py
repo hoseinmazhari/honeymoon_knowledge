@@ -316,12 +316,64 @@ def task_selector(selected,args_= "",**kwargs):
         print(selected)
         if selected == tsk.task_name.send_birthday_data_to_sheets:
             df_invoices = args_[asts.send_birthday_toSheets_require.invoices]
-            branchs_sheets = args_[asts.send_birthday_toSheets_require.branchs]
-            brs = branchs_sheets.keys()
-            for branch in brs:
-                dfbranchs = df_invoices.loc[df_invoices[asts.tjCol.branch]==branch]
-                dfbranchs.to_excel(f"{branch}.xlsx",index =False)
+            monthNum = "01"
+            df_invoices = df_invoices[df_invoices[asts.tjCol.birthday].str.contains(f'/{monthNum}/', na=False)]
+            # branchs_sheets = args_[asts.send_birthday_toSheets_require.branchs]
+            # brs = branchs_sheets.keys()
+            tjIndex = asts.getIndexTj(df_invoices)
+            thisPath = os.getcwd()
+            os.chdir(f"{thisPath}/media/exported")
+            try:
+                os.mkdir(tsk.task_name.send_birthday_data_to_sheets)
+            except:
+                pass
+            thisPath = os.getcwd()
+            os.chdir(f"{thisPath}/{tsk.task_name.send_birthday_data_to_sheets}")
+            df_invoices = df_invoices[[asts.tjCol.branch,asts.tjCol.mobile,asts.tjCol.birthday]]#asts.tjCol.buyer,
+            # df_invoices.to_excel("alll.xlsx",index=False)
             
+            
+            temp_birthday="temp_birthday"
+            tjIndex = asts.getIndexTj(df_invoices)
+            shape = df_invoices.shape
+            columnCount = shape[1]
+            df_invoices.insert(columnCount,temp_birthday,"")
+            
+            for i in range(len(df_invoices)):
+                try:
+                    df_invoices.iat[i,columnCount]= df_invoices.iat[i,tjIndex.birthday][5:]
+                except:
+                    df_invoices.iat[i,columnCount]= "0000/00/00"
+            df_invoices = df_invoices.sort_values(by=temp_birthday)
+            # # end sort on day
+            # # کد مرتب سازی تا اینجاست
+
+
+            # # حذف و اضافه نمودن ستون های دلخواه
+            # # df_invoices = df_invoices[[frCol.mobile,frCol.buyer,frCol.branch,frCol.birthday]]
+            df_invoices.insert(4,"تماس گیرنده","")
+            df_invoices.insert(5,"تاریخ پیگیری اول","")
+            df_invoices.insert(6,"تاریخ پیگیری دوم","")
+            df_invoices.insert(7,"تاریخ پیگیری سوم","")
+            df_invoices.insert(8,"تاریخ پیگیری چهارم","")
+            df_invoices.insert(9,"نتیجه","")
+            df_invoices.insert(10,"توضیحات","")
+
+            df_invoices.drop(temp_birthday, axis=1 , inplace=True) 
+
+            while len(df_invoices):
+                branch = df_invoices.iat[0, tjIndex.branch]
+                dfbranchs = df_invoices.loc[df_invoices[asts.tjCol.branch]==branch]
+                df_invoices = df_invoices.loc[df_invoices[asts.tjCol.branch]!=branch]
+                dfbranchs.to_excel(f"{branch}.xlsx",index =False)
+                
+                # mybrowser = Browser()
+                # this_address = branchs_sheets[branch]
+                
+                # # mybrowser.change_url(main_url)
+                # driver = mybrowser.driver
+                # driver.get(this_address)
+                
         if selected == tsk.task_name.update_birthday_call_brs:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:

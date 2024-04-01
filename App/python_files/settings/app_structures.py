@@ -60,6 +60,7 @@ class tjCol():
     to_other_person = "پرداخت به شخص"
     check = "چک"
     discount_code = "کد تخفیف"
+    birthday = "تاریخ تولد"
 
 def getIndexTj(df):
     tjIndex = tjCol()
@@ -134,6 +135,8 @@ def getIndexTj(df):
             tjIndex.education = thisIndex # type: ignore
         elif tjIndex.check == col:
             tjIndex.check = thisIndex # type: ignore
+        elif tjIndex.birthday == col:
+            tjIndex.birthday = thisIndex # type: ignore
     return tjIndex
 ############################################################################################
 class myDataType_names():
