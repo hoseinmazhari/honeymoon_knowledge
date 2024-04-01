@@ -314,6 +314,14 @@ def task_selector(selected,args_= "",**kwargs):
         # selected = "5"
         main_url = f"{hesabro_domain}/site/index"
         print(selected)
+        if selected == tsk.task_name.send_birthday_data_to_sheets:
+            df_invoices = args_[asts.send_birthday_toSheets_require.invoices]
+            branchs_sheets = args_[asts.send_birthday_toSheets_require.branchs]
+            brs = branchs_sheets.keys()
+            for branch in brs:
+                dfbranchs = df_invoices.loc[df_invoices[asts.tjCol.branch]==branch]
+                dfbranchs.to_excel(f"{branch}.xlsx",index =False)
+            
         if selected == tsk.task_name.update_birthday_call_brs:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:

@@ -7,7 +7,7 @@ class task_name():
     run_honeymoonatr = "سایت هانی مون عطر قدیم"
     salary = "حقوق"
     update_birthday_call_brs = "دریافت مشخصات مشتریان برای تماس شعب"
-    
+    send_birthday_data_to_sheets = "ارسال تولدی ها در گوگل شیت"
     
     def __init__(self):
         self.update_birthday = "دریافت مشتریان برای پیامک تبریک تولد"
@@ -17,4 +17,5 @@ class task_name():
         self.run_honeymoonatr = "سایت هانی مون عطر قدیم"
         self.salary = "حقوق"
         self.update_birthday_call_brs = "دریافت مشخصات مشتریان برای تماس شعب"
+        self.send_birthday_data_to_sheets = "ارسال تولدی ها در گوگل شیت"
         

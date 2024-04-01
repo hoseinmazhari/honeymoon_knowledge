@@ -11,7 +11,7 @@ sys.path.append("..")
 from selenium_files.settings.run_app import run_hesabro
 from selenium_files.settings.run_app import task_selector
 from selenium_files.settings import app_tasks as atk
-
+from python_files.settings import app_structures as asts
 def timeCheck()->bool:
     import time
     thisTime = time.ctime()
@@ -62,8 +62,13 @@ def update_birthday_call_brs(request):
                     df_invoices = pd.read_csv(invoices_file,sep=",")
                 # driver = webdriver.Firefox()
                 # if timeCheck():
-                df = task_selector(atk.task_name.update_birthday_call_brs, brs)
-                
+                # df = task_selector(atk.task_name.update_birthday_call_brs, brs)
+                df_invoices = df_invoices.sort_values(by=asts.tjCol.history)
+                df_invoices.drop_duplicates(subset=asts.tjCol.mobile, inplace=True)
+                args_ = {asts.send_birthday_toSheets_require.invoices:df_invoices, 
+                        asts.send_birthday_toSheets_require.branchs: brs}#type: ignore
+                final_result = task_selector(atk.task_name.send_birthday_data_to_sheets,args_)
+                # df = pd.read_excel("")
             # driver.get('http://aradpayamak.net')
                 # driver.get("https://honeymoonatr.com")
                     # for t in driver.title:

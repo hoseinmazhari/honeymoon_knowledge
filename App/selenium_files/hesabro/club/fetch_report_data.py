@@ -55,8 +55,10 @@ def download_data(driver, title, this_delay):
         # mobile = []
         # birthday = []
         lsData = []
+        counter_page = 1
+        repeat_count = 1
         while is_true==False:
-            
+            thisReport = driver.current_url
             try:
                 element = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, xph.create_reportcustomer.dataReport.tbody)))
@@ -65,6 +67,7 @@ def download_data(driver, title, this_delay):
                 # element =driver.find_element(By.XPATH,xph.create_reportcustomer.dataReport.tbody)
                 # element[1].click()
                 trs = element.find_elements(By.TAG_NAME, "tr")
+                driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
                 for tr_index in trs:
                     tds = tr_index.find_elements(By.TAG_NAME, "td")
                     row = (tds[0].text)
@@ -82,25 +85,70 @@ def download_data(driver, title, this_delay):
                         report_output_cols.passport_id : passport_id, report_output_cols.email : email,
                         report_output_cols.mobile : mobile, report_output_cols.trusted : trusted
                                   })
-                driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
-                time.sleep(0.5)
+                    
+                # for more pretty actions in ui , ux this code writed to next_p
+                
+                # time.sleep(0.6)
+                thisPage = driver.current_url
+                pageIndexStart = thisPage.find("&page=")+1
+                pageIndexEnd = thisPage.find("&per-page")
+                print(thisPage[pageIndexStart:pageIndexEnd])
+                print(time.ctime())
+                print(counter_page)
+                print("-------------------------")
+                
+                
+                
+                
                 element =driver.find_element(By.XPATH,xph.create_reportcustomer.dataReport.next_p)
+                counter_page += 1
                 
-                
-                # thisData = pd.DataFrame(lsData)
-                # thisData.to_excel("thisDataTest.xlsx",index=False)
+               
                 if element.is_displayed():
                         element.click()
+                        
                         # time.sleep(1)
                 else:
                     is_true = True
                     # driver.close()
                 # time.sleep(6)
+                if counter_page%50==0:
+                    # counter_page = 1
+                    thisData = pd.DataFrame(lsData)
+                    thisData.to_excel(f"{title}bk_p50.xlsx",index=False)
             except Exception as e:
                 # print(e)
-                data = pd.DataFrame(lsData)
-                data.to_excel(f"{title}.xlsx",index=False)
-                is_true = True
+                repeat_count += 1
+                if repeat_count>20:
+                    break
+                try:
+                    data = pd.read_excel(f"{title}bk_p50.xlsx")
+                    row = data['row'].max()
+                    page_index = row//50
+                except:
+                    page_index =1
+                pageIndexStart = thisPage.find("&page=")+6
+                pageIndexEnd = thisPage.find("&per-page")
+                # print(thisPage[pageIndexStart:pageIndexEnd])
+                step1 = thisReport[:pageIndexStart]
+                step2 = thisReport[pageIndexEnd:]
+                this_address = f"{step1}{page_index}{step2}"
+                driver.close()
+                from ...settings.run_app import run_hesabro
+                driver, is_logged_in = run_hesabro()
+                
+                driver.get(this_address)
+                this_delay = 3
+                while driver.current_url != this_address: # جهت اطمینان از باز شدن صفحه ی درخواست شده در گزینه 1 از حلقه استفاده شده است
+                    driver.get(this_address)
+                    time.sleep(this_delay)
+                    this_delay += 1
+                # data = pd.DataFrame(lsData)
+                # data.to_excel(f"{title}.xlsx",index=False)
+                # is_true = True
+                
+                
+                
             #     time.sleep(5)
             #     is_true = False
         data = pd.DataFrame(lsData)
@@ -167,6 +215,7 @@ def get_report_data(driver, title, this_address, **kwargs):
     #  1- تغییر آدرس مرورگر به صفححه ایجاد گزاشات
     # this_address = app_address.urls["birthday"]["create_rpt"]
     # this_address = app_address.url_address.create_report.birthday
+    # this_address = "https://hesabro.ir/@hm/report-customer/view?id=100&page=469&per-page=50"
     driver.get(this_address)
     this_delay = 3
     while driver.current_url != this_address: # جهت اطمینان از باز شدن صفحه ی درخواست شده در گزینه 1 از حلقه استفاده شده است
@@ -175,10 +224,14 @@ def get_report_data(driver, title, this_address, **kwargs):
         this_delay += 1
     
     # this_delay 
-    
+        
+    # thisPage = driver.current_url
+    # pageIndexStart = thisPage.find("&page=")+1
+    # pageIndexEnd = thisPage.find("&per-page")
+    # print(thisPage[pageIndexStart:pageIndexEnd])
     
 
-    this_delay = 3
+    this_delay = 2
     
     dfData = download_data(driver, title, this_delay)
     return dfData
