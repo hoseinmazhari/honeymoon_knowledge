@@ -1794,7 +1794,7 @@
 }
 
 .text-start {
-  text-align: left !important;
+  text-align: right !important;
 }
 
 .text-end {
@@ -3096,7 +3096,7 @@
     column-gap: 3rem !important;
   }
   .text-sm-start {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-sm-end {
     text-align: right !important;
@@ -3657,7 +3657,7 @@
     column-gap: 3rem !important;
   }
   .text-md-start {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-md-end {
     text-align: right !important;
@@ -4218,7 +4218,7 @@
     column-gap: 3rem !important;
   }
   .text-lg-start {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-lg-end {
     text-align: right !important;
@@ -4779,7 +4779,7 @@
     column-gap: 3rem !important;
   }
   .text-xl-start {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-xl-end {
     text-align: right !important;
@@ -5340,7 +5340,7 @@
     column-gap: 3rem !important;
   }
   .text-xxl-start {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-xxl-end {
     text-align: right !important;

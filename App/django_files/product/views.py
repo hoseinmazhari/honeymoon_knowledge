@@ -11,20 +11,22 @@ from python_files.settings import app_structures as asts
 def active_in_site(request):
     form = ExcelUploadForm()
     result = "stoped"
+    for i in range(10):
+        print("start")
     scales = [10, 15, 20, 30, 50]
     if request.method == 'POST':
         data = request.POST
         action = data.get("act")
         
         if action == "run":
-            # for w in range(10):
-            #         print(result)
+            for w in range(10):
+                    print(result)
             form = ExcelUploadForm(request.POST, request.FILES)
             if form.is_valid():
             # if True:
                 result = "running"
-                # for w in range(10):
-                #     print(result)
+                for w in range(10):
+                    print(result)
                 product_list = request.FILES['product_list']
                 # for w in range(10):
                 #     print(invoices_file)
@@ -39,6 +41,8 @@ def active_in_site(request):
                 # df_invoices.drop_duplicates(subset=asts.tjCol.mobile, inplace=True)
                 args_ = scales#type: ignore
                 final_result = task_selector(atk.task_name.active_in_site,args_)
+                for i in range(10):
+                    print("run")
                 # df = pd.read_excel("")
             # driver.get('http://aradpayamak.net')
                 # driver.get("https://honeymoonatr.com")
@@ -47,6 +51,8 @@ def active_in_site(request):
         else:
             result = "stoped"
             print("stop")
+            for i in range(10):
+                print("stped")
             # driver.close()
         
         # return redirect(("arad/"))
@@ -64,12 +70,14 @@ def order_point(request):
         if action == "run":
             # driver = webdriver.Firefox()
             task_selector(atk.task_name.set_order_point)
+            
         # driver.get('http://aradpayamak.net')
             # driver.get("https://honeymoonatr.com")
                 # for t in driver.title:
             # result = {"result":(f"عنوان سایت بارگزاری شده: {driver.title}") }
         else:
             print("stop")
+           
             # driver.close()
         
         # return redirect(("arad/"))

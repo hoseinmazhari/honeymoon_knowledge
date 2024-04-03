@@ -1798,7 +1798,7 @@
 }
 
 .text-end {
-  text-align: left !important;
+  text-align: right !important;
 }
 
 .text-center {
@@ -3091,7 +3091,7 @@
     text-align: right !important;
   }
   .text-sm-end {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-sm-center {
     text-align: center !important;
@@ -3652,7 +3652,7 @@
     text-align: right !important;
   }
   .text-md-end {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-md-center {
     text-align: center !important;
@@ -4213,7 +4213,7 @@
     text-align: right !important;
   }
   .text-lg-end {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-lg-center {
     text-align: center !important;
@@ -4774,7 +4774,7 @@
     text-align: right !important;
   }
   .text-xl-end {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-xl-center {
     text-align: center !important;
@@ -5335,7 +5335,7 @@
     text-align: right !important;
   }
   .text-xxl-end {
-    text-align: left !important;
+    text-align: right !important;
   }
   .text-xxl-center {
     text-align: center !important;
