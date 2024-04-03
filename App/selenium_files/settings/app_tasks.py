@@ -8,6 +8,7 @@ class task_name():
     salary = "حقوق"
     update_birthday_call_brs = "دریافت مشخصات مشتریان برای تماس شعب"
     send_birthday_data_to_sheets = "ارسال تولدی ها در گوگل شیت"
+    active_in_site = "فعال نمودن محصولات در سایت مای هانی مون"
     
     def __init__(self):
         self.update_birthday = "دریافت مشتریان برای پیامک تبریک تولد"
@@ -18,4 +19,4 @@ class task_name():
         self.salary = "حقوق"
         self.update_birthday_call_brs = "دریافت مشخصات مشتریان برای تماس شعب"
         self.send_birthday_data_to_sheets = "ارسال تولدی ها در گوگل شیت"
-        
+        self.active_in_site = "فعال نمودن محصولات در سایت مای هانی مون"

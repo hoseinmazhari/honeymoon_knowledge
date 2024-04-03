@@ -20,13 +20,13 @@ from . import views
 app_name = "A_app"
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('@birthday/',include('birthday.urls'),name='birthday'),
-    path('@product/',include('product.urls'),name='product'),
-    path('@get_report/',include('get_the_report.urls'),name='get_the_report'),
-    path('@get_coin_report/',include('get_coin_report.urls'),name='get_coin_report'),
-    path('@honeymoonatr/',include('honeymoonatr.urls'),name='honeymoonatr'),
-    path('@analyse_excels/',include('analyse_excels.urls'),name='analyse_excels'),
-    # path('@analyse_excels/result/',include('analyse_excels.urls'),name='sub_analyse_excels'),
+    path('@hm/birthday/',include('birthday.urls'),name='birthday'),
+    path('@hm/product/',include('product.urls'),name='product'),
+    path('@hm/get_report/',include('get_the_report.urls'),name='get_the_report'),
+    path('@hm/get_coin_report/',include('get_coin_report.urls'),name='get_coin_report'),
+    path('@hm/honeymoonatr/',include('honeymoonatr.urls'),name='honeymoonatr'),
+    path('@hm/analyse_excels/',include('analyse_excels.urls'),name='analyse_excels'),
+    # path('@hm/analyse_excels/result/',include('analyse_excels.urls'),name='sub_analyse_excels'),
     path('',views.home,name = 'home'),
 ]
 

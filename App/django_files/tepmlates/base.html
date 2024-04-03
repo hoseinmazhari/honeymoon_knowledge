@@ -14,7 +14,7 @@
       <meta content="" name="keywords">
 
       <!-- Favicons -->
-      <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+      <link href="{% static 'logo.png' %}" rel="icon">
       <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
       <!-- Google Fonts -->
@@ -50,15 +50,16 @@
 <body >
     <!-- <header class="grid" dir="rtl" > -->
       <header id="header" class="fixed-top ">
+        
         <div class="container d-flex align-items-center">
     
-          <h1 class="logo me-auto"><a href="index.html">هانی مون</a></h1>
+          
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="index.html" class="logo me-auto"><img src="{% static 'assets/img/logo.png' %}" alt="" class="img-fluid"></a>-->
     
           <nav id="navbar" class="navbar">
             <ul>
-              <li><a class="nav-link scrollto active" href="#hero">صفحه نخست</a></li>
+              <li><a class="nav-link scrollto active" href="{% url 'home' %}">صفحه نخست</a></li>
               <li><a class="nav-link scrollto" href="#about">راجع ما</a></li>
               <li><a class="nav-link scrollto" href="#services">سرویس ها</a></li>
               <li><a class="nav-link   scrollto" href="#portfolio">پروفایل</a></li>
@@ -85,8 +86,9 @@
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
           </nav><!-- .navbar -->
-    
+          <h1 class="logo me-auto"><a href="{% url 'home' %}">HONEYMOON</a></h1>
         </div>
+        
       </header>
        <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
@@ -159,7 +161,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <h4>به ما بپیوندید</h4>
-            <p><a href="https://instagram.com/honeymoonatr">@honeymoonatr</a></p>
+            <p><a href="https://instagram.com/honeymoonatr">instagram: @honeymoonatr</a></p>
             <form action="" method="post">
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>
@@ -310,6 +312,7 @@
 <script>
     let options = {
         // placeholder: "تاریخ",
+        // nextButtonIcon: "{% static 'img/date/next.png' %}",
         nextButtonIcon: "{% static 'img/date/next.png' %}",
         previousButtonIcon: "{% static 'img/date/prev.png' %}",
         forceFarsiDigits: true,

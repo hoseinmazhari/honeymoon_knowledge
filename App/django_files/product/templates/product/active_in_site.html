@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    
+    
+        
+</head>
+<body dir="rtl">
+    {% block content %}
+        <h1>فعال نمودن فروش محصولات</h1>
+        
+        <li>
+            <p>جهت فعال نمودن امکان فروش محصولات ثبت شده در لیست محصولات حسابرو می توانید از این صفحه استفاده نمایید</p>
+        </li>
+        <li>
+            <h4>جهت اجرا دکمه زیر کلیک نمایید</h4>
+        </li>
+        </ul>
+        <form class="buttons has-addons">
+            {% csrf_token %} 
+            {% if result == "stoped" %}
+                <button type="submit" formmethod="post" name="act" value="run">بروزرسانی</button>
+            {% else %}
+                <button type="submit" formmethod="post"  name="act" value="stop">توقف</button>
+            {% endif %}
+        </form>
+    {% endblock %}
+    
+</body>
+</html>
