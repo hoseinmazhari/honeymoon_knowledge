@@ -198,6 +198,7 @@ def _run_active_shop(driver, shopUrl, thisData) :
     element =driver.find_element(By.XPATH,xpath_hesabro.shop.product.tbody)
                 # element[1].click()
     trs = element.find_elements(By.TAG_NAME, "tr")
+    find_product = False
     for tr_index in trs:
         tds = tr_index.find_elements(By.TAG_NAME, "td")
        
@@ -210,49 +211,51 @@ def _run_active_shop(driver, shopUrl, thisData) :
                 edit_ico = tds[9]
                 edit_ico = edit_ico.find_elements(By.TAG_NAME,"a")
                 edit_ico = edit_ico[3]
+                find_product = True
                 edit_ico.click()
                 
                 break
     time.sleep(3)
-    try:
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.slug}")))
-        element.click()
-        element.clear()
-        write_in_element(slug, element)
-    except:
-        is_true = False
-    try:
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.page_title}")))
-        element.click()
-        element.clear()
-        write_in_element(page_title, element)
-    except:
-        is_true = False
-    try:
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.des}")))
-        element.click()
-        element.clear()
-        write_in_element(des, element)
-    except:
-        is_true = False
-    try:
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.act}")))
-        change_chk(element, act_chk)
-    except:
-        is_true = False
-    try:
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.save}")))
-        element.click()
-        time.sleep(3)
-        
-        # print("Save")
-    except:
-        is_true = False
+    if find_product:
+        try:
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.slug}")))
+            element.click()
+            element.clear()
+            write_in_element(slug, element)
+        except:
+            is_true = False
+        try:
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.page_title}")))
+            element.click()
+            element.clear()
+            write_in_element(page_title, element)
+        except:
+            is_true = False
+        try:
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.des}")))
+            element.click()
+            element.clear()
+            write_in_element(des, element)
+        except:
+            is_true = False
+        try:
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.act}")))
+            change_chk(element, act_chk)
+        except:
+            is_true = False
+        try:
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.shop.product.edit_p.save}")))
+            element.click()
+            time.sleep(3)
+            
+            # print("Save")
+        except:
+            is_true = False
     return is_true
 
 def run_active_products_inSite(driver,main_url,dfData):
