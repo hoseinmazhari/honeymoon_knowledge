@@ -104,6 +104,10 @@ def _run_active_product_in_site(driver,main_url,thisData):
                     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.site_price}")))
                 element.click()
                 element.clear()
+                for iter in range(100):
+                    element.send_keys(Keys.BACK_SPACE)
+                    element.send_keys(Keys.DELETE)
+                time.sleep(2)
                 write_in_element(store_price,element)
             except:
                 is_true = False
@@ -111,21 +115,27 @@ def _run_active_product_in_site(driver,main_url,thisData):
             try:
                 element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.site_chekbox}")))
+                time.sleep(2)
                 change_chk(element, act_chk)
+                time.sleep(2)
             except:
                 is_true = False
             
             try:
                 element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.select_Supplier}")))
+                time.sleep(2)
                 element.click()
+                time.sleep(2)
             except:
                 is_true = False
             
             try:
                 element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.select_Supplier_site}")))
+                time.sleep(2)
                 element.click()
+                time.sleep(2)
             except:
                 is_true = False
             time.sleep(3)
@@ -194,13 +204,15 @@ def _run_active_shop(driver, shopUrl, thisData) :
         category =(tds[2].text)
         print(category)
         if category == "نیش پرفیوم انحصاری" or category == "نیش پرفیوم تجاری":
-            print("is category")
-            edit_ico = tds[9]
-            edit_ico = edit_ico.find_elements(By.TAG_NAME,"a")
-            edit_ico = edit_ico[3]
-            edit_ico.click()
-            
-            break
+            print(category , tds[5])
+            if product_name == tds[5]:
+                
+                edit_ico = tds[9]
+                edit_ico = edit_ico.find_elements(By.TAG_NAME,"a")
+                edit_ico = edit_ico[3]
+                edit_ico.click()
+                
+                break
     time.sleep(3)
     try:
         element = WebDriverWait(driver, 10).until(
