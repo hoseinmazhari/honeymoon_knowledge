@@ -1,8 +1,8 @@
 import os, sys
 
-parent = os.path.abspath('.')
-sys.path.insert(1, parent)
-from ....settings.app_structures import _make_farsi_text,tjCol,sale_hesabro_payment
+# parent = os.path.abspath('.')
+# sys.path.insert(1, parent)
+from python_files.settings_python.app_structures import _make_farsi_text,tjCol,sale_hesabro_payment
 # from main import _make_farsi_text
 # from main import *
 def cumulative_cols(df_cumulativeSales):

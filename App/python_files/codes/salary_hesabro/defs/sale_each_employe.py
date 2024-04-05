@@ -1,10 +1,10 @@
 import os, sys, pandas as pd
 
-parent = os.path.abspath('.')
-sys.path.insert(1, parent)
+# parent = os.path.abspath('.')
+# sys.path.insert(1, parent)
 from . import target 
 from .target import targetCol
-from ....settings.app_structures import _make_farsi_text,tjCol
+from python_files.settings_python.app_structures import _make_farsi_text,tjCol
 # from main import * 
 
 class thisCols():

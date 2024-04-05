@@ -8,9 +8,9 @@ from selenium import webdriver
 # sys.path.insert(1, r'C:/honeymoon_project/selenium/hesabro/settings')
 import os,sys
 sys.path.append("..")
-from selenium_files.settings.run_app import run_hesabro
-from selenium_files.settings.run_app import task_selector
-from selenium_files.settings import app_tasks as atk
+# from selenium_files.settings_selenium.run_app import run_hesabro
+from selenium_files.settings_selenium.run_app import task_selector
+from selenium_files.settings_selenium import app_tasks as atk
 import pandas as pd
 from selenium_files.hesabro.club.fetch_report_data import report_output_cols as roc,get_index_report_output_cols as giroc
 class tjCol():

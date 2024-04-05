@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
-from selenium import webdriver
+# from selenium import webdriver
 # some_file.py
 # import sys
 # # caution: path[0] is reserved for script path (or '' in REPL)
@@ -8,10 +8,13 @@ from selenium import webdriver
 import os,sys, time, pandas as pd
 from .forms import ExcelUploadForm
 sys.path.append("..")
-from selenium_files.settings.run_app import run_hesabro
-from selenium_files.settings.run_app import task_selector
-from selenium_files.settings import app_tasks as atk
-from python_files.settings import app_structures as asts
+from selenium_files.settings_selenium.run_app import task_selector as tsksl_s
+from selenium_files.settings_selenium import app_tasks as atk_s
+from python_files.settings_python import app_structures as asts_p
+# from selenium_files.settings_selenium.run_app import run_hesabro
+# from selenium_files.settings_selenium.run_app import task_selector
+# from selenium_files.settings_selenium import app_tasks as atk
+# from python_files.settings_python import app_structures as asts
 def timeCheck()->bool:
     import time
     thisTime = time.ctime()
@@ -62,12 +65,12 @@ def update_birthday_call_brs(request):
                     df_invoices = pd.read_csv(invoices_file,sep=",")
                 # driver = webdriver.Firefox()
                 # if timeCheck():
-                # df = task_selector(atk.task_name.update_birthday_call_brs, brs)
-                df_invoices = df_invoices.sort_values(by=asts.tjCol.history)
-                df_invoices.drop_duplicates(subset=asts.tjCol.mobile, inplace=True)
-                args_ = {asts.send_birthday_toSheets_require.invoices:df_invoices, 
-                        asts.send_birthday_toSheets_require.branchs: brs}#type: ignore
-                final_result = task_selector(atk.task_name.send_birthday_data_to_sheets,args_)
+                # df = tsksl_s(atk_s.task_name.update_birthday_call_brs, brs)
+                df_invoices = df_invoices.sort_values(by=asts_p.tjCol.history)
+                df_invoices.drop_duplicates(subset=asts_p.tjCol.mobile, inplace=True)
+                args_ = {asts_p.send_birthday_toSheets_require.invoices:df_invoices, 
+                        asts_p.send_birthday_toSheets_require.branchs: brs}#type: ignore
+                final_result = tsksl_s(atk_s.task_name.send_birthday_data_to_sheets,args_)
                 # df = pd.read_excel("")
             # driver.get('http://aradpayamak.net')
                 # driver.get("https://honeymoonatr.com")
@@ -92,7 +95,7 @@ def update_db_to_sendSms(request):
         if action == "run":
             # driver = webdriver.Firefox()
             if timeCheck():
-                task_selector(atk.task_name.update_birthday,sms_text)
+                tsksl_s(atk_s.task_name.update_birthday,sms_text)
         # driver.get('http://aradpayamak.net')
             # driver.get("https://honeymoonatr.com")
                 # for t in driver.title:
@@ -109,13 +112,13 @@ def birthday_page(request):
     # 
     return render(request,'birthday/birthday_page.html')
 def arad_detail(request):
+    pass
+    # for i in range(20):
+    #     print(i)
+    # driver = webdriver.Firefox()
+    # # driver.get('http://aradpayamak.net')
+    # driver.get("https://honeymoonatr.com")
+    #     # for t in driver.title:
+    # result = (f"عنوان سایت بارگزاری شده: {driver.title}")  
     
-    for i in range(20):
-        print(i)
-    driver = webdriver.Firefox()
-    # driver.get('http://aradpayamak.net')
-    driver.get("https://honeymoonatr.com")
-        # for t in driver.title:
-    result = (f"عنوان سایت بارگزاری شده: {driver.title}")  
-    
-    return render(request,"birthday/arad/arad_detail.html")
+    # return render(request,"birthday/arad/arad_detail.html")

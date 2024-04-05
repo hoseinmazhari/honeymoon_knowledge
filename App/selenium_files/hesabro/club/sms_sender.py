@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import time
 from .fetch_birthday import birthday_output_cols as boc_class
-from ...settings.app_tasks import task_name 
+from selenium_files.settings_selenium.app_tasks import task_name 
 def get_index_boc(df):
     this_itter = -1
     this_class = boc_class()

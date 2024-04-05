@@ -1,6 +1,9 @@
-from ...settings.xpath import get_xpath
-from ...settings.app_address import get_address
-from ...settings.browser import Browser,write_in_element
+# from ...settings.xpath import get_xpath
+# from ...settings_selenium.app_address import get_address
+from selenium_files.settings_selenium import xpath_hesabro 
+from ...settings_selenium.browser import Browser
+from selenium_files.settings_selenium.main_defs import write_in_element
+# ,write_in_element
 from selenium.webdriver.common.keys import Keys
 import time
 
@@ -100,18 +103,7 @@ def check_matrook(driver,main_url):
         return False
 
     return is_matrook
-def search_fieldProduct(driver):
-    is_search_fieldProduct =False
-    while is_search_fieldProduct == False:
-        try:
-            _search = driver.find_element(by="xpath",value=f"{get_xpath('search','merchandise')}")
-            #driver.execute_script("return arguments[0].scrollIntoView();", _search)
-            _search.click()
-            is_search_fieldProduct = True
-            time.sleep(1)
-        except:
-            pass
-    return is_search_fieldProduct
+
 
 def update_product(act,merchandise,driver,main_url):
     if act== "exit_product":

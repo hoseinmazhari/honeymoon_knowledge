@@ -1,5 +1,5 @@
-from ..settings import xpath_honeymoonatr as xph
-from ..settings import DateJuToJa as djtj
+from selenium_files.settings_selenium import xpath_honeymoonatr as xph
+from python_files.settings_python import DateJuToJa as djtj
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,7 +13,7 @@ import os
 from selenium.webdriver.common.keys import Keys
 # from .merchandise import search_fieldProduct
 # from ...settings.browser import write_in_element
-from ..settings import app_address
+from selenium_files.settings_selenium import app_address
 # from tqdm import tqdm
 # from .te
 

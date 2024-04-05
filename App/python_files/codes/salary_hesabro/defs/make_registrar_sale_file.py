@@ -3,8 +3,8 @@ import os, sys,pandas as pd
 
 parent = os.path.abspath('.')
 sys.path.insert(1, parent)
-from ....settings.app_structures import  _make_farsi_text,getIndexTj,tjCol
-from ....settings import printProgress as prgs
+from python_files.settings_python.app_structures import  _make_farsi_text,getIndexTj,tjCol
+from python_files.settings_python import printProgress as prgs
 # from main import _make_farsi_text
 # from main import * 
 

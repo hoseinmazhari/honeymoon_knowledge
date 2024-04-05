@@ -1,16 +1,18 @@
-from ...settings import DateJuToJa as djtj
-from selenium import webdriver
+
+# from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 # from .xpath import get_xpath
-from ...settings.xpath import get_xpath
+# from ...settings.xpath import get_xpath
 import time
 import pandas as pd
 import os
 from selenium.webdriver.common.keys import Keys
-from .merchandise import search_fieldProduct
-from ...settings.browser import write_in_element
+# from .merchandise import 
+from selenium_files.settings_selenium.main_defs import write_in_element,search_fieldProduct_navbar
+# from ...settings_selenium.browser import write_in_element
+from python_files.settings_python import DateJuToJa as djtj
 class Order_point():
     name = "عنوان کالا"
     # order_point= "حد سفارش"

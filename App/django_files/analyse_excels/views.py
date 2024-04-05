@@ -3,14 +3,14 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
 # from selenium import webdriver
 from django.http import FileResponse
-import os,sys
-sys.path.append("..")
-from python_files.codes.a00001_invoices import a0_1_invoices_Count
-from python_files.file_types.excel_files import tjCol
-from python_files.file_types.excel_files import getIndexTj
-from selenium_files.settings.run_app import task_selector
-from selenium_files.settings import app_tasks as atk
-from python_files.settings import app_structures as asts
+# import os,sys
+# sys.path.append("..")
+# from python_files.codes.a00001_invoices import a0_1_invoices_Count
+# from python_files.file_types.excel_files import tjCol
+# from python_files.file_types.excel_files import getIndexTj
+from selenium_files.settings_selenium.run_app import task_selector
+from selenium_files.settings_selenium import app_tasks as atk
+from python_files.settings_python import app_structures as asts
 # from .forms import UploadFileForm
 # from somewhere import handle_uploaded_file
 import pandas as pd

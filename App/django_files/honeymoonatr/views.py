@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from selenium_files.settings.run_app import task_selector
-from selenium_files.settings import app_tasks as atk
+from selenium_files.settings_selenium.run_app import task_selector
+from selenium_files.settings_selenium import app_tasks as atk
+
 
 # Create your views here.
 def honeymoonatr_panel(request):

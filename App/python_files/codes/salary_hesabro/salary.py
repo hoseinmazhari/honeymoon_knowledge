@@ -7,13 +7,13 @@ sys.path.insert(1, parent)
 from .defs import sale_each_employe, concat_sale_with_target as cswt,commission
 # from codes.salary_new.defs import concat_sale_with_target as cswt
 # from codes.salary_new.defs import commission 
-from ...settings.app_structures import export_path, mediaName, _make_farsi_text, prtLines, getDateTimeForFileName, getIndexTj,myDataType_names, tjCol, condition, loadData, yearDetail, monthCol, monthsSelector
+from python_files.settings_python.app_structures import export_path, mediaName, _make_farsi_text, prtLines, getDateTimeForFileName, getIndexTj,myDataType_names, tjCol, condition, loadData, yearDetail, monthCol, monthsSelector
 # from main import * 
 from ..merger.defs import cols_selector as csr
 # import merger.defs.cols_selector  as csr
-from .defs import RegistrarChecker as RgsChk
+# from .defs import RegistrarChecker as RgsChk
 from .defs import make_registrar_sale_file as mrsf
-from ...settings import DateJuToJa
+# from python_files.settings_python import DateJuToJa
 class chechOutCol():
     branch = tjCol.branch
     saleId = tjCol.saleId
