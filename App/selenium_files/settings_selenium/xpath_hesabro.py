@@ -12,11 +12,14 @@ class navbar():
     class searchbar():
         mobile = "//span[@id='select2-shortcutCustomerName-container']"
         merchandise ="//span[@id='select2-shortcutChecks-container']//span[1]"
+        merchandise_list = '//*[@id="select2-shortcutChecks-results"]'
+        # //*[@id="select2-shortcutChecks-results"]
 class shop():
     class product():
         search_show = '//*[@id="accordion"]/div[1]/h4/a'
         product_name = '//*[@id="productmainsearch-title"]' #title
         search_btn = '//*[@id="w0"]/div/div[2]/button[1]'
+        thead_category = '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div[2]/div/table/thead/tr/th[3]/a'
         table = '//*[@id="w1-container"]/table'
         tbody = '//*[@id="w1-container"]/table/tbody'
         

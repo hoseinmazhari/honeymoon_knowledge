@@ -31,3 +31,10 @@ def change_chk(element, act_chk):
     elif act_chk == False or act_chk == "False":
         if is_checked != False:
             element.send_keys(Keys.SPACE)
+            
+def clear_txt(element):
+    element.click()
+    input_text = element.get_attribute("value")
+    for i in range(len(input_text)):
+        element.send_keys(Keys.BACK_SPACE)
+        element.send_keys(Keys.DELETE)
