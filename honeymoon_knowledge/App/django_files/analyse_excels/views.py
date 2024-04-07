@@ -21,6 +21,7 @@ import pandas as pd
 # import 
 # from ...selenium_files.hesabro.settings.run_app import run_hesabro
 from .forms import ExcelUploadForm
+def 
 def factors_count(request):
     # print("this is test")
     result = {"result":"stoped"}

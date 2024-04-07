@@ -54,7 +54,11 @@ class product():
         select_Supplier_site = '//*[@id="product-company_id"]/option[2]'
         site_chekbox = '//*[@id="product-for_sale"]'
         btn_submit = '/html/body/div[2]/div/div[2]/form/div/div[2]/button' #"//button[@type='submit']"
-
+        prop = '//*[@id="propertiesform-0-property_id"]' # خاصیت
+        attr = '//*[@id="propertiesform-0-child_id"]' # ویژگی حجم
+        
+        
+        
 # class searchbar():
 #     mobile = "//span[@id='select2-shortcutCustomerName-container']",
 #     merchandise = "//span[@id='select2-shortcutChecks-container']//span[1]",
