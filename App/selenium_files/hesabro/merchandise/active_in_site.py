@@ -43,52 +43,7 @@ def get_index_active_inSite(df):
         # elif col == thisClass.buy_price:
         #     thisClass.buy_price = thisItter # type: ignore
     return thisClass
-       
-def _run_active_product_in_site(driver,main_url,thisData): 
-    # if act== "exit_product":
-    is_true = True
-    scales = [10, 15, 20, 30, 50, 100]
-    pre = "نیش"
-    aft = "میل"
-    # thisData = active_inSiteCols()
-    
-    act_chk = thisData.act
-    for scale in scales:
-        driver.get(main_url)
-        time.sleep(4)
-        
-        product_name = f"{pre} {thisData.product_name} {scale} {aft}"
-        product_name2 = f"{pre} {thisData.product_name} - {scale} {aft}"
-        # is_search_fieldProduct = search_fieldProduct_navbar(driver)
-        search_fieldProduct_navbar(driver)
-        # while search_fieldProduct(driver)
-        _product_input = driver.switch_to.active_element
-        tryCount = 0
-        is_exist_product = False
-        while is_exist_product== False:
-            tryCount += 1
-            
-            _product_input.clear()
-            write_in_element(product_name, _product_input)
-            _product_input.send_keys(Keys.ENTER)
-            time.sleep(3.5)
-            element = driver.find_element(By.XPATH,xpath_hesabro.navbar.searchbar.merchandise_list)
-            lst = element.find_elements(By.TAG_NAME,"li")
-            for item in lst:
-                if item.text == product_name or item.text == product_name2:
-                    item.click()
-                    break
-            time.sleep(3)
-            if driver.current_url == main_url:
-                _product_input.send_keys(Keys.ENTER)
-                time.sleep(3.5)
-            driver.implicitly_wait(2)
-            if driver.current_url != main_url:
-                is_exist_product = True
-            if tryCount >= 3:
-                break
-                # while driver.current_url!=main_url:
-        if is_exist_product:   
+def change_product_attr(driver,scales,scale)    :
             try:
                 element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.view.act_button}")))
@@ -101,6 +56,7 @@ def _run_active_product_in_site(driver,main_url,thisData):
                 element.click()
             except:
                 is_true = False
+            
             try:
                 time.sleep(2)
                 element = WebDriverWait(driver, 10).until(
@@ -128,6 +84,95 @@ def _run_active_product_in_site(driver,main_url,thisData):
             except:
                 is_true = False
             
+            
+            try:
+                element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.warranty_selector}")))
+                time.sleep(1)
+                element.click()
+                time.sleep(1)
+            except Exception as e:
+                print(e)
+                is_true = False
+            try:
+                element =  driver.switch_to.active_element
+                element.send_keys(Keys.ENTER)
+                # element = WebDriverWait(driver, 10).until(
+                #     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.warranty_item}")))
+                # time.sleep(1)
+                # element.click()
+                # time.sleep(1)
+            except Exception as e:
+                print(e)
+                is_true = False 
+            try:
+                element = driver.find_element(By.XPATH,xpath_hesabro.product.update_form.unit_selector)
+                # element = WebDriverWait(driver, 10).until(
+                #     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.unit_selector}")))
+                # time.sleep(1)
+                element.click()
+                time.sleep(1)
+            except:
+                # try:
+                    for u in range(10):
+                        print("select Unit not found")
+                    # element = driver.find_element(By.XPATH,xpath_hesabro.product.update_form.btn_add_unitScale)
+                    element = driver.find_element(By.XPATH,xpath_hesabro.product.update_form.div_add_unitScale)
+                    # element = WebDriverWait(driver, 10).until(
+                    #     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.btn_add_unitScale}")))
+                    # time.sleep(1)
+                    # element.click
+                    time.sleep(1)
+                    
+                    element = element.find_element(By.TAG_NAME,'button')
+                    # element.send_keys(Keys.ENTER)
+                    # element = WebDriverWait(driver, 10).until(
+                    #     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.btn_add_unitScale}")))
+                    # time.sleep(1)
+                    element.click()
+                    time.sleep(4)
+                    
+                # except:
+                #     for u in range(10):
+                #         print("select addUnit not found")
+                #     is_true =False
+                # try:
+                    element = driver.find_element(By.XPATH,xpath_hesabro.product.update_form.div_scaleContainer)
+                    element = WebDriverWait(element, 10).until(
+                        EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.unit_selector}")))
+                    time.sleep(1)
+                    element.click()
+                    time.sleep(1)
+                # except:
+                #     is_true =False
+                # try:
+                    # element = element.find_element(By.TAG_NAME,"option")
+                    # element[2].click()
+                    element= WebDriverWait(driver, 10).until(
+                        EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.unit_item}")))
+                    time.sleep(1)
+                    element.click()
+                    time.sleep(1)
+                # except:
+                #     is_true =False
+                # try:
+                    element = WebDriverWait(driver, 10).until(
+                        EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.scale_selector}")))
+                    time.sleep(1)
+                    element.click()
+                    time.sleep(1)
+                # except:
+                #     is_true =False
+                # try:
+                    item = f"{xpath_hesabro.product.update_form.scale_item}option[{scales.index(scale)+2}]"
+                    element = WebDriverWait(driver, 10).until(
+                        EC.presence_of_element_located((By.XPATH, f"{item}")))
+                    time.sleep(1)
+                    element.click()
+                    time.sleep(1)
+                # except:
+                #     is_true =False
+                
             try:
                 element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.select_Supplier}")))
@@ -146,6 +191,7 @@ def _run_active_product_in_site(driver,main_url,thisData):
             except:
                 is_true = False
             time.sleep(3)
+            
             try:
                 element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.btn_submit}")))
@@ -158,6 +204,65 @@ def _run_active_product_in_site(driver,main_url,thisData):
                 is_true = False
             
            
+def _run_active_product_in_site(driver,main_url,thisData): 
+    # if act== "exit_product":
+    is_true = True
+    scales = [10,  20, 30, 50, 100, 15]
+    # scales = [30, 50, 100, 15]
+    pre = "نیش"
+    aft = "میل"
+    # thisData = active_inSiteCols()
+    
+    act_chk = thisData.act
+    for scale in scales:
+        driver.get(main_url)
+        time.sleep(4)
+        
+        product_name = f"{pre} {thisData.product_name} {scale} {aft}"
+        product_name1 = f"{thisData.product_name} {scale} {aft}"
+        product_name2 = f"{thisData.product_name} - {scale} {aft}"
+        
+        # is_search_fieldProduct = search_fieldProduct_navbar(driver)
+        search_fieldProduct_navbar(driver)
+        # while search_fieldProduct(driver)
+        _product_input = driver.switch_to.active_element
+        tryCount = 0
+        is_exist_product = False
+        while is_exist_product== False:
+            tryCount += 1
+            
+            _product_input.clear()
+            write_in_element(product_name, _product_input)
+            # _product_input.send_keys(Keys.ENTER)
+            time.sleep(3.5)
+            element = driver.find_element(By.XPATH,xpath_hesabro.navbar.searchbar.merchandise_list)
+            lst = element.find_elements(By.TAG_NAME,"li")
+            # lst = element
+            for item in lst:
+                if pre in item.text:
+                    if product_name1 in item.text  or product_name2 in item.text  :
+                        item.click()
+                        # for w in range(10):
+                        #     print(item.text)
+                        # element = driver.active_element
+                        # element.send_keys(Keys.ENTER)
+                        # item.send_keys(Keys.ENTER)
+                        time.sleep(3)
+                        break
+                # element.send_keys(Keys.DOWN)
+            # if driver.current_url == main_url:
+                # _product_input.send_keys(Keys.ENTER)
+                # time.sleep(3.5)
+                
+            driver.implicitly_wait(2)
+            if driver.current_url != main_url:
+                is_exist_product = True
+            if tryCount >= 2:
+                break
+                # while driver.current_url!=main_url:
+        if is_exist_product:   
+            
+            change_product_attr(driver,scales,scale)
             
     return is_true
             # is_search_fieldProduct = search_fieldProduct(driver)
@@ -304,6 +409,8 @@ def run_active_products_inSite(driver,main_url,dfData):
         
         is_act = _run_active_shop(driver,p_ul,thisData)
         dfData = dfData.loc[dfData[ThisCols.product_name] != thisData.product_name]
+        print(os.getcwd())
+        dfData.to_excel("مانده های فعال سازی در سایت.xlsx",index=False)
         # if is_True:
         #     dfData = dfData.loc[dfData[ThisCols.product_name] != thisData.product_name]
         #     dfData.to_excel(f"ثبت نشده های فرایند فعال سازی در سایت مای هانی مون {todayIs}.xlsx",index= False)
