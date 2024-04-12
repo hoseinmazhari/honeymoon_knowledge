@@ -55,7 +55,7 @@ def modification_barcodes(request):
         # return redirect(("arad/"))
     # message ={"messages":"test"}
     
-    return render(request, 'product/active_in_site.html',{'form': form, "result":"stoped"})
+    return render(request, 'product/modification_barcodes.html',{'form': form, "result":"stoped"})
     # ret
 def active_in_site(request):
     form = ExcelUploadForm()
