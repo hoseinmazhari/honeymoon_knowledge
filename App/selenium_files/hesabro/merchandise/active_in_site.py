@@ -37,7 +37,7 @@ def get_index_active_inSite(df):
         elif col == thisClass.slug:
             thisClass.slug = thisItter # type: ignore
         elif col == thisClass.des:
-            thisClass.des = thisItter # type: ignore
+           thisClass.des = thisItter # type: ignore
         elif col == thisClass.act:
             thisClass.act = thisItter # type: ignore
         # elif col == thisClass.buy_price:

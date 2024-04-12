@@ -6,5 +6,8 @@ urlpatterns = [
     path('',views.product_page,name="product_page"),
     path('order_point/',views.order_point,name="order_point"),
     path('active_in_site/',views.active_in_site,name="active_in_site"),
+    path('modification_barcodes/',views.modification_barcodes,name="modification_barcodes"),
+    
+    
     
 ]
