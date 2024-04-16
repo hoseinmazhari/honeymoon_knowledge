@@ -207,8 +207,40 @@ def run_honeymoonatr():
             time.sleep(print_delay)
             print("now exit check cookies files")
             time.sleep(print_delay)
+            wp_admin = "https://honeymoonatr.com/wp-admin/"
+            driver.get(wp_admin)
+            time.sleep(4)
             is_logged_in = True
+            if  driver.current_url != wp_admin:
+                is_logged_in = False
+                driver.get(main_url)
+                os.remove(f'{cookie_fileName}.pkl') 
+                time.sleep(5)
+            
             break
+    if is_logged_in == False:
+        for i in range(30):
+            print(i, end="\r")
+            time.sleep(1)
+    # print("load main_url is complete0")
+        
+        waiter = input("press any key and enter: ")
+        is_true = False
+        while is_true ==False:
+            try:
+                Browser.save_cookies(mybrowser,"honeymoonatr_cookies")
+                time.sleep(3)
+                is_true =True
+            except:
+                pass
+        print("cookies is saved please wait...")
+        for i in range(30):
+                print(i, end="\r")
+                time.sleep(1)
+        driver.get("https://honeymoonatr.com/wp-admin/edit.php?post_type=product")
+        
+        
+        
     os.chdir(thisPath)
     return driver, is_logged_in 
     # time.sleep(20)
