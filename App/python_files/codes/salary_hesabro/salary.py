@@ -371,7 +371,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # xlsxFileNum += 1
         
         df_final = commission.commission(df_ConcatWithTargets,df_targets)
-        thisFileName = f"فایل نهایی برای مشاوران اصلی در {startDate.replace("/","-")} تا {endDate.replace("/", "-")} ماه.xlsx"
+        thisFileName = f"فایل نهایی برای مشاوران اصلی در {startDate.replace('/','-')} تا {endDate.replace('/', '-')} ماه.xlsx"
         xlsxFileNum = make_file(df_final, thisFileName, xlsxFileNum)
         # thisFileName = f"{xlsxFileNum}- {thisFileName}"
         # df_final.to_excel(thisFileName,index = False
