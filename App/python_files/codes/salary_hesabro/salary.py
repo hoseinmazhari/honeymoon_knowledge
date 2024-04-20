@@ -69,34 +69,34 @@ def getIndexInvoicesMerge(df):
             thisClass.shiftWork = thisIndex # type: ignore
     return thisClass
 
-def getIndexConcatSaleWithTarget(df):
-    thisIndex= -1
-    thisClass = concatSaleWithTargetCol()
-    for col in df.columns:
-        thisIndex += 1
-        if col == thisClass.branch:
-            thisClass.branch = thisIndex # type: ignore
-        elif col == thisClass.commission:
-            thisClass.commission = thisIndex # type: ignore
-        elif col == thisClass.commissionExclusive:
-            thisClass.commissionExclusive = thisIndex # type: ignore
-        elif col == thisClass.commission_nonExclusive:
-            thisClass.commission_nonExclusive = thisIndex # type: ignore
-        elif col == thisClass.exclusivePercent:
-            thisClass.exclusivePercent = thisIndex # type: ignore
-        elif col == thisClass.exclusiveReceived:
-            thisClass.exclusiveReceived = thisIndex # type: ignore
-        elif col == thisClass.nonExclusivePercent:
-            thisClass.nonExclusivePercent = thisIndex # type: ignore
-        elif col == thisClass.nonExclusiveReceived:
-            thisClass.nonExclusiveReceived = thisIndex # type: ignore
-        elif col == thisClass.Received:
-            thisClass.Received = thisIndex # type: ignore
-        elif col == thisClass.Registrar:
-            thisClass.Registrar = thisIndex # type: ignore
-        elif col == thisClass.shiftWork:
-            thisClass.shiftWork = thisIndex # type: ignore
-    return thisClass
+# def getIndexConcatSaleWithTarget(df):
+#     thisIndex= -1
+#     thisClass = concatSaleWithTargetCol()
+#     for col in df.columns:
+#         thisIndex += 1
+#         if col == thisClass.branch:
+#             thisClass.branch = thisIndex # type: ignore
+#         elif col == thisClass.commission:
+#             thisClass.commission = thisIndex # type: ignore
+#         elif col == thisClass.commissionExclusive:
+#             thisClass.commissionExclusive = thisIndex # type: ignore
+#         elif col == thisClass.commission_nonExclusive:
+#             thisClass.commission_nonExclusive = thisIndex # type: ignore
+#         elif col == thisClass.exclusivePercent:
+#             thisClass.exclusivePercent = thisIndex # type: ignore
+#         elif col == thisClass.exclusiveReceived:
+#             thisClass.exclusiveReceived = thisIndex # type: ignore
+#         elif col == thisClass.nonExclusivePercent:
+#             thisClass.nonExclusivePercent = thisIndex # type: ignore
+#         elif col == thisClass.nonExclusiveReceived:
+#             thisClass.nonExclusiveReceived = thisIndex # type: ignore
+#         elif col == thisClass.Received:
+#             thisClass.Received = thisIndex # type: ignore
+#         elif col == thisClass.Registrar:
+#             thisClass.Registrar = thisIndex # type: ignore
+#         elif col == thisClass.shiftWork:
+#             thisClass.shiftWork = thisIndex # type: ignore
+#     return thisClass
 
 
 
@@ -113,7 +113,7 @@ def calculateSaleEachSaler(dfData):
         Deposit = int(dfRegistrar[tjCol.Deposit].sum())
         transitional = int(dfRegistrar[tjCol.transitional].sum())
         check = int(dfRegistrar[tjCol.check].sum())
-        to_other_person = 0#int(dfRegistrar[tjCol.to_other_person].sum())
+        to_other_person = int(dfRegistrar[tjCol.to_other_person].sum())
         Received = Cash+earnest+tasvieBaMarjooe+Deposit+transitional+check+to_other_person
         
         

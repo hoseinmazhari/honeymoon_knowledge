@@ -40,8 +40,9 @@ def makeRegistrarSaleFile(dfData,shiftWork): #,df_detailes,dfExclusiveBite
             tasvieBaMarjooe = int(dfBranch[tjCol.tasvieBaMarjooe].sum())
             Deposit = int(dfBranch[tjCol.Deposit].sum())
             transitional = int(dfBranch[tjCol.transitional].sum())
-                
-            Received = Cash+earnest+tasvieBaMarjooe+Deposit+transitional
+            to_other_person = int(dfBranch[tjCol.to_other_person].sum())
+            check = int(dfBranch[tjCol.check].sum())
+            Received = Cash+earnest+tasvieBaMarjooe+Deposit+transitional+check + to_other_person
             
             
             ls_Checkout.append({tjCol.branch:branch,tjCol.idBranch:idBranch,tjCol.Registrar:Registrar,tjCol.Registrar_id:Registrar_id,

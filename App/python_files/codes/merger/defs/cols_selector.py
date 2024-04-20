@@ -11,7 +11,7 @@ def cumulative_cols(df_cumulativeSales):
   for i in range(len(df_cumulativeSales)):
     this_ls.append(0)
   df_cumulativeSales.loc[:, tjCol.check] =this_ls
-  # df_cumulativeSales.loc[:, tjCol.to_other_person]= this_ls
+  df_cumulativeSales.loc[:, tjCol.to_other_person]= this_ls
   df_cumulativeSales = df_cumulativeSales[[tjCol.saleId,tjCol.history,tjCol.branch,tjCol.idBranch,tjCol.Registrar,
                                           tjCol.Registrar_id,tjCol.mobile,tjCol.TotalOne,tjCol.chargeUse,
                                           tjCol.buyer,
@@ -19,7 +19,7 @@ def cumulative_cols(df_cumulativeSales):
                                           tjCol.Cash,
                                           tjCol.earnest,tjCol.tasvieBaMarjooe,
                                           tjCol.Discount,
-                                          # tjCol.to_other_person,
+                                          tjCol.to_other_person,
                                           tjCol.check,
                                           tjCol.transitional,tjCol.saleTime]]
   return df_cumulativeSales
@@ -36,7 +36,7 @@ def cumulative_hesabro_cols(df_cumulativeSales_hesabro):
                                                              payCol.discount_code,
                                                              
                                                              payCol.check,
-                                                            #  payCol.to_other_person,
+                                                             payCol.to_other_person,
                                                              payCol.saleTime]]
     df_cumulativeSales_hesabro[tjCol.earnest]=0
             
@@ -47,7 +47,7 @@ def cumulative_hesabro_cols(df_cumulativeSales_hesabro):
                                             payCol.cart:tjCol.Deposit,
                                             payCol.cash:tjCol.Cash,payCol.check_out:tjCol.tasvieBaMarjooe,payCol.bank_transfer:tjCol.transitional,
                                             payCol.discount_code: tjCol.Discount,
-                                            # payCol.to_other_person:tjCol.to_other_person,
+                                            payCol.to_other_person:tjCol.to_other_person,
                                             payCol.check: tjCol.check,
                                             payCol.saleTime:tjCol.saleTime})
             # df_cumulativeSales_hesabro.to_excel("تجمیعی فروش حسابرو بعد از تغییر نام ستون ها.xlsx",index=False)

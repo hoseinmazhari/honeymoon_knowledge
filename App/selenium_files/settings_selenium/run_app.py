@@ -522,8 +522,8 @@ def task_selector(selected,args_= "",**kwargs):
 
             # driver = "1"
             # is_logged_in = True
-            if is_logged_in:
-                set_order_point_allBrs(driver,main_url)
+            # if is_logged_in:
+                # set_order_point_allBrs(driver,main_url)
         elif selected == "1":
             print("charges is loading! plese wait...")
             dfData = pd.read_excel('newCharge.xlsx')
@@ -548,25 +548,25 @@ def task_selector(selected,args_= "",**kwargs):
                 hamyar_condition = True
                 # if prgsCounter > 10:
                 #     hamyar_condition =False
-                action_True = coin_setter(this_mobile,driver,main_url,coin,hamyar_condition)
+                # action_True = coin_setter(this_mobile,driver,main_url,coin,hamyar_condition)
                 
                 dfData = dfData.loc[dfData["mobile"]!=mobile]
-                if action_True==False:
-                    # file.writelines(this_mobile)
-                    _ls_deactive_users.append({'mobile':this_mobile,'user':user,"coin":coin})
+                # if action_True==False:
+                #     # file.writelines(this_mobile)
+                #     _ls_deactive_users.append({'mobile':this_mobile,'user':user,"coin":coin})
                     
-                    # false_count += 1
-                else:
+                #     # false_count += 1
+                # else:
                     
-                    _ls_active_users.append({'mobile':this_mobile,'user':user,"coin":coin})
+                #     _ls_active_users.append({'mobile':this_mobile,'user':user,"coin":coin})
             
-                item = random.randint(1,len(urls['random']))
-                rnd_page = get_rnd_page(item)
-                driver.get(rnd_page)
+                # item = random.randint(1,len(urls['random']))
+                # rnd_page = get_rnd_page(item)
+                # driver.get(rnd_page)
                 time.sleep(1)
-                while driver.current_url != rnd_page:
-                    driver.get(rnd_page)
-                    time.sleep(3)
+                # while driver.current_url != rnd_page:
+                #     driver.get(rnd_page)
+                #     time.sleep(3)
                 if save_counter>10:
                     save_counter = 0
                     dfData.to_excel("newCharge.xlsx",index=False)
@@ -581,16 +581,16 @@ def task_selector(selected,args_= "",**kwargs):
                 os.chdir(acdcu)
                 if len(_ls_active_users):
                     df_active_users = pd.DataFrame(_ls_active_users)
-                    try:
-                        df_active_users.to_excel(f"active users{thisTime}.xlsx",index=False)
-                    except:
-                        pass
+                    # try:
+                    #     df_active_users.to_excel(f"active users{thisTime}.xlsx",index=False)
+                    # except:
+                    #     pass
                 if len(_ls_deactive_users):
                     df_deactive_users = pd.DataFrame(_ls_deactive_users)
-                    try:
-                        df_deactive_users.to_excel(f'deactive users{thisTime}.xlsx',index=False)
-                    except:
-                        pass
+                    # try:
+                    #     df_deactive_users.to_excel(f'deactive users{thisTime}.xlsx',index=False)
+                    # except:
+                    #     pass
                 os.chdir(thisPath)
                 # if len(_ls_active_users):
                 #     df_active_users = pd.DataFrame(_ls_active_users)
@@ -629,7 +629,7 @@ def task_selector(selected,args_= "",**kwargs):
                 #     hamyar_condition =False
                 # from product import update_product
                 act = "exit_product"
-                action_True = update_product(act,merchandise,driver,main_url)
+                # action_True = update_product(act,merchandise,driver,main_url)
                 
                 dfData = dfData.loc[dfData["merchandise"]!=merchandise]
                 
@@ -640,25 +640,29 @@ def task_selector(selected,args_= "",**kwargs):
             while matrook:
                 counter += 1
                 print(counter)
-                matrook = check_matrook(driver,main_url)
+                # matrook = check_matrook(driver,main_url)
 
             print("done")
         elif selected == "4":
-            testersPrice(driver,main_url)
+            # testersPrice(driver,main_url)
 
             print("done")
         elif selected == "5":
             set_order_point(driver,main_url)
         elif selected == "6":
-            create_product_address = urls["product"]["create_product"]
-            create_product(driver,main_url,create_product_address)
+            pass
+            # create_product_address = urls["product"]["create_product"]
+            # create_product(driver,main_url,create_product_address)
         elif selected == "7":
-            deactive_product(driver,main_url)
+            # deactive_product(driver,main_url)
+            pass
         elif selected == "8":
-            price_changer(driver,main_url)
+            # price_changer(driver,main_url)
+            pass
         elif selected == "9":
-            create_product_address = urls["product"]["create_product"]
-            create_testers(driver,main_url,create_product_address)
+            pass
+            # create_product_address = urls["product"]["create_product"]
+            # create_testers(driver,main_url,create_product_address)
             # dfData = pd.read_excel("product.xlsx")
             # print('product file now upload successfully')
             # _ls_deactive_users = []
