@@ -129,7 +129,16 @@ def make_file(df,thisFileName,xlsxFileNum):
     xlsxFileNum += 1
     # thisFileName = f'جمع فروش هر مشاور.xlsx'
     thisFileName = f"{xlsxFileNum}- {thisFileName}"
-    df.to_excel(thisFileName,index = False)
+    # file_name = 'MarksData.xlsx'
+ 
+    # creating an ExcelWriter object
+    # file_name = 'MarksData.xlsx'
+ 
+    # creating an ExcelWriter object
+    with pd.ExcelWriter(thisFileName) as writer:
+        # writing to the 'Employee' sheet
+        df.to_excel(writer, sheet_name='Sales', index=False)
+    # df.to_excel(thisFileName,index = False)
     prtLines(2)
     print(_make_farsi_text(f"{thisFileName} استخراج و ذخیره شد"))
     prtLines(2)

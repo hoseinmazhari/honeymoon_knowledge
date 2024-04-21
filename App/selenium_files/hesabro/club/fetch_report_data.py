@@ -112,7 +112,7 @@ def download_data(driver, title, this_delay):
                     is_true = True
                     # driver.close()
                 # time.sleep(6)
-                if counter_page%50==0:
+                if counter_page%1==0:
                     # counter_page = 1
                     thisData = pd.DataFrame(lsData)
                     thisData.to_excel(f"{title}bk_p50.xlsx",index=False)
