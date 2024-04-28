@@ -38,43 +38,59 @@ class shop():
             save = '//*[@id="form-ajax-product-main"]/div[2]/button'
             
         
-class product():
-    class view():
-        act_button = "//button[@id='w0-button']"
-        update_btn = "//a[@class='dropdown-item'][contains(text(),'بروز رسانی')]"
-    class update_form():
-        short_name = "//*[@id='product-sh_name']"
-        store_price = "//input[@id='product-price1']"
-        buy_price = "//input[@id='product-price4']"
-        site_price = '//*[@id="product-price2"]'
-        teammate_price = '//*[@id="product-price3"]'
-        off_price = '//*[@id="product-price_off"]'
-        main_price = '//*[@id="product-price5"]'
-        # warranty = '//*[@id="product-warranty_id"]'
-        select_Supplier = '//*[@id="product-company_id"]'
-        select_Supplier_site = '//*[@id="product-company_id"]/option[2]'
-        site_chekbox = '//*[@id="product-for_sale"]'
-        # warranty_selector = '//*[@id="product-warranty_id"]'
-        warranty_selector = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[1]/div[9]/div/span/span[1]/span/span[1]'
-        # warranty_selector =''
-        # warranty_selector = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[1]/div[9]/div/span/span[1]/span'
-        # warranty_selector = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[1]/div[9]/div/select/option[1]'
-        warranty_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[1]/div[9]/div/select/option[2]'
-        more_details = '//*[@id="accordion"]/div[1]/h4/a'
-        order_point = '//*[@id="product-order_point_inventory"]' #'/html/body/div[2]/div/div[2]/form/div/div[1]/div[2]/div[2]/div/div[3]/div/input'
-        btn_submit = '/html/body/div[2]/div/div[2]/form/div/div[2]/button' #"//button[@type='submit']"
-        # btn_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button'
-        # btn_add_unitScale = 'add-property btn btn-success btn-xs'
-        div_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]'
-        btn_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button/i'
-        div_scaleContainer = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]'
-        # /html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button
-        unit_selector = '//*[@id="propertiesform-0-property_id"]'
-        unit_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/select/option[2]'
-        # unit_item = '/div/div[1]/div/select/option[2]'
-        scale_selector = '//*[@id="propertiesform-0-child_id"]'
-        scale_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[2]/div/select/'
+class product_view():
+    class tabs():
+        class details():
+            link = ''
+            act_button = "//button[@id='w0-button']"
+            update_btn = "//a[@class='dropdown-item'][contains(text(),'بروز رسانی')]"
+            price1_store = '//*[@id="price_1"]'
+            class update_page():
+                short_name = "//*[@id='product-sh_name']"
+                store_price = "//input[@id='product-price1']"
+                buy_price = "//input[@id='product-price4']"
+                site_price = '//*[@id="product-price2"]'
+                teammate_price = '//*[@id="product-price3"]'
+                off_price = '//*[@id="product-price_off"]'
+                main_price = '//*[@id="product-price5"]'
+                # warranty = '//*[@id="product-warranty_id"]'
+                select_Supplier = '//*[@id="product-company_id"]'
+                select_Supplier_site = '//*[@id="product-company_id"]/option[2]'
+                site_chekbox = '//*[@id="product-for_sale"]'
+                # warranty_selector = '//*[@id="product-warranty_id"]'
+                warranty_selector = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[1]/div[9]/div/span/span[1]/span/span[1]'
+                # warranty_selector =''
+                # warranty_selector = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[1]/div[9]/div/span/span[1]/span'
+                # warranty_selector = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[1]/div[9]/div/select/option[1]'
+                warranty_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[1]/div[9]/div/select/option[2]'
+                more_details = '//*[@id="accordion"]/div[1]/h4/a'
+                order_point = '//*[@id="product-order_point_inventory"]' #'/html/body/div[2]/div/div[2]/form/div/div[1]/div[2]/div[2]/div/div[3]/div/input'
+                btn_submit = '/html/body/div[2]/div/div[2]/form/div/div[2]/button' #"//button[@type='submit']"
+                # btn_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button'
+                # btn_add_unitScale = 'add-property btn btn-success btn-xs'
+                div_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]'
+                btn_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button/i'
+                div_scaleContainer = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]'
+                # /html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button
+                unit_selector = '//*[@id="propertiesform-0-property_id"]'
+                unit_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/select/option[2]'
+                # unit_item = '/div/div[1]/div/select/option[2]'
+                scale_selector = '//*[@id="propertiesform-0-child_id"]'
+                scale_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[2]/div/select/'
 
+        class uniq_Barcode():
+            link = '/html/body/div[2]/div/div[2]/div[2]/div[1]/div/div[1]/ul/li[3]/a'
+            tbl = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table'
+            tbody = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table/tbody'
+            act_btn = '//*[@id="w3-button"]'
+            update_btn = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table/tbody/tr/td[15]/div/div/a[5]'
+            class update_form():
+                price = '//*[@id="productunique-out_sale_price"]'
+                submit_btn = '/html/body/div[2]/div/div[2]/div[3]/div/div/div[2]/div/form/div[2]/button'
+
+            # th = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table/tbody/tr/td[8]'
+
+    
 # class searchbar():/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[2]/div/select/option[5]
 #     mobile = "//span[@id='select2-shortcutCustomerName-container']",
 #     merchandise = "//span[@id='select2-shortcutChecks-container']//span[1]",

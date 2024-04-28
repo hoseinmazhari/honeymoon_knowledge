@@ -15,47 +15,39 @@ from selenium.webdriver.common.keys import Keys
 from selenium_files.settings_selenium.main_defs import write_in_element,search_fieldProduct_navbar,clear_txt, select_product_inSearchFeild
 # from ...settings_selenium.browser import write_in_element
 from python_files.settings_python import DateJuToJa as djtj
-class Order_point():
+class correct_barcodes():
     merchandise = "عنوان کالا"
-    # order_point= "حد سفارش"
-    order_point = 'کف سفارش'
-    # buy_price = "old sale price"
+    
+    
     id = "کد کالا"    
-    branch = "عنوان شرکت"
+    
 		# عنوان کالا	کد کالا	جمع واحد	مقدار	تعداد روز فعال شعبه	مجموع تعداد فروش	ماه	
 		
 
-def get_index_order_point_file(df):
+def get_index_correct_barcodes_file(df):
     thisItter = -1
-    thisClass = Order_point()
+    thisClass = correct_barcodes()
     for col in df.columns:
         thisItter += 1
         if col == thisClass.id:
             thisClass.id = thisItter # type: ignore
-        elif col == thisClass.branch:
-            thisClass.branch = thisItter
-
-        # elif col == thisClass.buy_price:
-        #     thisClass.buy_price = thisItter # type: ignore
+        
         elif col == thisClass.merchandise:
             thisClass.merchandise = thisItter # type: ignore
-        elif col == thisClass.order_point:
-            thisClass.order_point = thisItter # type: ignore
-        # elif col == thisClass.buy_price:
-        #     thisClass.buy_price = thisItter # type: ignore
+        
     return thisClass
 
-def update_product_order_point(driver,main_url,id,order_point): 
+def update_product_correct_barcodes(driver,main_url,id,correct_barcodes): 
     # if act== "exit_product":
         is_true = True
         is_search_fieldProduct = search_fieldProduct_navbar(driver)
         # while search_fieldProduct(driver)
         _product_input = driver.switch_to.active_element
         
-        select_product_inSearchFeild(driver, main_url, id, _product_input)
-        # write_in_element(id,_product_input)
-        # _product_input.send_keys(Keys.ENTER)
-        # time.sleep(3.5)
+        # select_product_inSearchFeild(driver, main_url, id, _product_input)
+        write_in_element(id,_product_input)
+        _product_input.send_keys(Keys.ENTER)
+        time.sleep(3.5)
         
         _product_input.send_keys(Keys.ENTER)
         time.sleep(3.5)
@@ -89,8 +81,8 @@ def update_product_order_point(driver,main_url,id,order_point):
                     time.sleep(0.4)
                     element.send_keys(Keys.DOWN)
                 element = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product_view.tabs.details.update_page.order_point}")))
-                    # EC.presence_of_element_located((By.XPATH, f"{get_xpath('merchandise','order_point')}")))
+                    EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product_view.tabs.details.update_page.correct_barcodes}")))
+                    # EC.presence_of_element_located((By.XPATH, f"{get_xpath('merchandise','correct_barcodes')}")))
                 element.click()
                 clear_txt(element)
                 # for i in range(20):
@@ -102,7 +94,7 @@ def update_product_order_point(driver,main_url,id,order_point):
                 #     element.send_keys(Keys.DELETE)
                 # time.sleep(1)
                 element.clear()
-                write_in_element(order_point,element)
+                write_in_element(correct_barcodes,element)
                 
                 time.sleep(1)
             except Exception as e:
@@ -135,7 +127,7 @@ def update_product_order_point(driver,main_url,id,order_point):
     
     
 
-def set_order_point(driver,main_url):
+def set_correct_barcodes(driver,main_url):
     print("please wait until see 'done'...")
     thisPath = os.getcwd()
     # chPath = f"{thisPath}/merchandises"
@@ -150,7 +142,7 @@ def set_order_point(driver,main_url):
     #     sheetName = "sh"+ sheetName
     #     dfData = pd.read_excel("..//dist/order point/order point.xlsx",sheet_name=sheetName)
     #     lsData.append(dfData)
-    #     # thisIndex = get_index_order_point_file(dfData)
+    #     # thisIndex = get_index_correct_barcodes_file(dfData)
     #     # print("start export file")
     #     # branch = dfData.iat[0,thisIndex.branch]
     #     # dfData.to_excel(f" {branch} -{todayIs}.xlsx",index= False)
@@ -160,8 +152,8 @@ def set_order_point(driver,main_url):
     # dfData.to_excel("order point all brs.xlsx")
     # return False
     counter = 0
-    dfData = pd.read_excel("..//dist/order point/orderPoint0209.xlsx")
-    thisIndex = get_index_order_point_file(dfData)
+    dfData = pd.read_excel("..//dist/order point/products.xlsx")
+    thisIndex = get_index_correct_barcodes_file(dfData)
     # ls_true = []
     # ls_false = []
     ls_ans = []
@@ -170,26 +162,25 @@ def set_order_point(driver,main_url):
         time.sleep(3)
         counter += 1
         merchandise = dfData.iat[0,thisIndex.merchandise]
-        order_point = f"{int(dfData.iat[0,thisIndex.order_point])}"
+        
         
         id = f"{int(dfData.iat[0,thisIndex.id])}"
         
         print(counter)
-        # is_True = update_product_order_point(driver,main_url,id,order_point)
-        is_True = update_product_order_point(driver,main_url,merchandise,order_point)
-        dfData = dfData.loc[dfData[Order_point.merchandise]!= (merchandise)]
-        # dfData = dfData.loc[dfData[Order_point.id]!= int(id)]
+        is_True = update_product_correct_barcodes(driver,main_url,id,correct_barcodes)
+        
+        dfData = dfData.loc[dfData[correct_barcodes.id]!= int(id)]
         if is_True:
-            ls_ans.append({"id":id, "product":merchandise,"order point":order_point,"is_True":True})
-            dfData.to_excel("order-mod.xlsx",index= False)
+            ls_ans.append({"id":id, "product":merchandise,"is_True":True})
+            dfData.to_excel("correct-mod.xlsx",index= False)
         else:
-            ls_ans.append({"id":id, "product":merchandise,"order point":order_point,"is_True":False})
+            ls_ans.append({"id":id, "product":merchandise,"is_True":False})
             # import random as r
             # sl = r.randint(2,6)
             # print(f"please wait for {sl} seconds ...")
             # time.sleep(sl)
         df_ans = pd.DataFrame(ls_ans)
-        df_ans.to_excel("ans orderPoint.xlsx",index=False)
+        df_ans.to_excel("ans correctBarcodes.xlsx",index=False)
         # if is_True:
         #     ls_true.append({testers.id:id,testers.tester:tester,testers.buy_price:buy_price,testers.sale_price:salePrice})
         #     df = pd.DataFrame(ls_true)
