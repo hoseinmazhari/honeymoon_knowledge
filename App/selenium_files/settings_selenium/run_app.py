@@ -522,8 +522,8 @@ def task_selector(selected,args_= "",**kwargs):
 
             # driver = "1"
             # is_logged_in = True
-            # if is_logged_in:
-                # set_order_point_allBrs(driver,main_url)
+            if is_logged_in:
+                set_order_point(driver,main_url)
         elif selected == "1":
             print("charges is loading! plese wait...")
             dfData = pd.read_excel('newCharge.xlsx')

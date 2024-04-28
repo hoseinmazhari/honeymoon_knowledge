@@ -9,8 +9,9 @@ import time
 import pandas as pd
 import os
 from selenium.webdriver.common.keys import Keys
-from .merchandise import search_fieldProduct
-from ...settings_selenium.browser import write_in_element #...
+# from .merchandise import search_fieldProduct
+from selenium_files.settings_selenium.main_defs import search_fieldProduct_navbar,write_in_element
+# from ...settings_selenium.browser import write_in_element #...
 from python_files.settings_python import DateJuToJa as djtj #....
 # from ...settings import xpath
 class ThisCols():
