@@ -20,6 +20,7 @@ from ..hesabro.merchandise.order_points import set_order_point
 # from ..hesabro.merchandise.order_points_allBrs import set_order_point_allBrs
 from . import app_tasks as tsk
 from selenium_files.hesabro.merchandise import active_in_site 
+from selenium_files.hesabro.merchandise import correct_zero_barcodes
 from ..hesabro.club import fetch_birthdays_data as fbsd
 from ..hesabro.club import fetch_birthday as upb
 from ..hesabro.club import fetch_report_data as frd
@@ -356,12 +357,12 @@ def task_selector(selected,args_= "",**kwargs):
         # selected = "5"
         main_url = f"{hesabro_domain}/site/index"
         print(selected)
-        if selected == tsk.task_name.modification_barcodes:
+        if selected == tsk.task_name.correct_zero_prices_barcodes:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:
-                title = tsk.task_name.active_in_site
+                title = tsk.task_name.correct_zero_prices_barcodes
                 dfData = args_
-                answer = active_in_site.run_active_products_inSite(driver,main_url,dfData)
+                answer = correct_zero_barcodes.run_correctPrices_to_barcodes(driver,main_url,dfData)
                 # dfData.to_excel(f"{title}.xlsx", index= False)
                 print(answer)
         if selected == tsk.task_name.active_in_site:

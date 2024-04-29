@@ -44,7 +44,7 @@ class product_view():
             link = ''
             act_button = "//button[@id='w0-button']"
             update_btn = "//a[@class='dropdown-item'][contains(text(),'بروز رسانی')]"
-            price1_store = '//*[@id="price_1"]'
+            lbl_price_store = '//*[@id="price_1"]'
             class update_page():
                 short_name = "//*[@id='product-sh_name']"
                 store_price = "//input[@id='product-price1']"
@@ -80,10 +80,14 @@ class product_view():
 
         class uniq_Barcode():
             link = '/html/body/div[2]/div/div[2]/div[2]/div[1]/div/div[1]/ul/li[3]/a'
-            tbl = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table'
+            # tbl = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table'
+            tbl = '//*[@id="w1-container"]/table'
             tbody = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table/tbody'
             act_btn = '//*[@id="w3-button"]'
+            
             update_btn = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table/tbody/tr/td[15]/div/div/a[5]'
+
+            next_p = '//*[@id="w1"]/ul/li[8]/a'
             class update_form():
                 price = '//*[@id="productunique-out_sale_price"]'
                 submit_btn = '/html/body/div[2]/div/div[2]/div[3]/div/div/div[2]/div/form/div[2]/button'

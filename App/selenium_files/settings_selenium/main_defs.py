@@ -16,7 +16,7 @@ def select_product_inSearchFeild(driver, main_url, product_name, _product_input)
         lst = element.find_elements(By.TAG_NAME,"li")
         # lst = element
         for item in lst:
-            if item == product_name:
+            if item.text == product_name:
             # if pre in item.text:
             #     if product_name1 in item.text  or product_name2 in item.text  :
                     item.click()
@@ -25,7 +25,7 @@ def select_product_inSearchFeild(driver, main_url, product_name, _product_input)
                     # element = driver.active_element
                     # element.send_keys(Keys.ENTER)
                     # item.send_keys(Keys.ENTER)
-                    time.sleep(3)
+                    time.sleep(5)
                     break
             # element.send_keys(Keys.DOWN)
         # if driver.current_url == main_url:

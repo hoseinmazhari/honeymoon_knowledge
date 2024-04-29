@@ -13,6 +13,7 @@ from selenium.webdriver.common.keys import Keys
 # from .merchandise import 
 # from selenium_files.settings_selenium.main_defs import    
 from selenium_files.settings_selenium.main_defs import write_in_element,search_fieldProduct_navbar,clear_txt, select_product_inSearchFeild
+from selenium_files.settings_selenium.app_address import urls_hesabro
 # from ...settings_selenium.browser import write_in_element
 from python_files.settings_python import DateJuToJa as djtj
 class Order_point():
@@ -48,17 +49,19 @@ def get_index_order_point_file(df):
 def update_product_order_point(driver,main_url,id,order_point): 
     # if act== "exit_product":
         is_true = True
-        is_search_fieldProduct = search_fieldProduct_navbar(driver)
+        # is_search_fieldProduct = search_fieldProduct_navbar(driver)
         # while search_fieldProduct(driver)
-        _product_input = driver.switch_to.active_element
+        # _product_input = driver.switch_to.active_element
         
-        select_product_inSearchFeild(driver, main_url, id, _product_input)
+        # select_product_inSearchFeild(driver, main_url, id, _product_input)
         # write_in_element(id,_product_input)
         # _product_input.send_keys(Keys.ENTER)
         # time.sleep(3.5)
-        
-        _product_input.send_keys(Keys.ENTER)
-        time.sleep(3.5)
+        this_product = f'{urls_hesabro.product.product_view_detail}{id}'
+        driver.get(this_product)
+        time.sleep(2.4)
+        # _product_input.send_keys(Keys.ENTER)
+        # time.sleep(3.5)
         driver.implicitly_wait(2)
         # while driver.current_url!=main_url:
         if driver.current_url != main_url:

@@ -12,6 +12,8 @@ class urls_hesabro():
         coin = f"{hesabro_domain}/customer/coin?id="
     class product():
         create_product = f"{hesabro_domain}/product-main/add-variety?copy_id=0&referrer=https%3A%2F%2Fhesabro.ir%2F%40hm%2Fproduct"
+        product_view_detail = f'{hesabro_domain}/product/view?id='
+        product_view_uniq_barcodes = f'{hesabro_domain}/product-method/view-unique?id='
     class create_report():
         birthday = f"{hesabro_domain}/report-customer/index"
     class random_page():

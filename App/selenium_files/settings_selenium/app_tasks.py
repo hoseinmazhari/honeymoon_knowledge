@@ -9,7 +9,8 @@ class task_name():
     update_birthday_call_brs = "دریافت مشخصات مشتریان برای تماس شعب"
     send_birthday_data_to_sheets = "ارسال تولدی ها در گوگل شیت"
     active_in_site = "فعال نمودن محصولات در سایت مای هانی مون"
-    modification_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
+    # modification_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
+    correct_zero_prices_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
     
     def __init__(self):
         self.update_birthday = "دریافت مشتریان برای پیامک تبریک تولد"
@@ -21,4 +22,5 @@ class task_name():
         self.update_birthday_call_brs = "دریافت مشخصات مشتریان برای تماس شعب"
         self.send_birthday_data_to_sheets = "ارسال تولدی ها در گوگل شیت"
         self.active_in_site = "فعال نمودن محصولات در سایت مای هانی مون"
-        self.modification_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
+        # self.modification_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
+        self.correct_zero_prices_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
