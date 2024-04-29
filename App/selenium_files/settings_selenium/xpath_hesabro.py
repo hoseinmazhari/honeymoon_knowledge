@@ -83,9 +83,9 @@ class product_view():
             # tbl = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table'
             tbl = '//*[@id="w1-container"]/table'
             tbody = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table/tbody'
-            act_btn = '//*[@id="w3-button"]'
+            # act_btn = '//*[@id="w3-button"]'
             
-            update_btn = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table/tbody/tr/td[15]/div/div/a[5]'
+            # update_btn = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table/tbody/tr/td[15]/div/div/a[5]'
 
             next_p = '//*[@id="w1"]/ul/li[8]/a'
             class update_form():

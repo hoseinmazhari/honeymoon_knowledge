@@ -102,8 +102,8 @@ def update_product_correct_prices_barcodes(driver,main_url,id,correct_barcodes):
                                     element = driver.find_element(By.XPATH,act_btn)
                                     element.click()
                                     time.sleep(2.3)
-
-                                    element = driver.find_element(By.XPATH,xpath_hesabro.product_view.tabs.uniq_Barcode.update_btn)
+                                    update_btn = f'//*[@id="w{this_row+1}"]/a[5]'
+                                    element = driver.find_element(By.XPATH,update_btn)
                                     element.click()
                                     time.sleep(2.3)
 
