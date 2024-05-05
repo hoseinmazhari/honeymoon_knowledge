@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+        
+</head>
+<body dir="rtl">
+    {% block content %}
+    <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+  
+          <div class="section-title">
+            <h2>محصولات</h2>
+            <p>در این صفحه کلیه امکاناتی که برای اعمال تغییرات در کالاها و محصولات مورد نیاز است پیش بینی شده اند. در حال حاضر امکان ثبت نقطه سفارش و همچنین فعال نمودن کالاها در سایت مای هانی مون وجود دارد</p>
+          </div>
+  
+          <div class="row">
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                <h4><a href="{% url 'product_app:order_point' %}">نقطه سفارش</a></h4>
+                <p>برای اجرای این مورد باید ابتدا فایل اکسلی حاوی کد محصول در حسابرو به همراه نقطه سفارش آماده سازید تا امکان اجرا فراهم شود.</p>
+              </div>
+            </div>
+  
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bx-file"></i></div>
+                <h4><a href="{% url 'product_app:active_in_site' %}">فعال نمودن کالا در سایت</a></h4>
+                <p>برای فعال نمودن کالا ها در سایت مای هانی مون از این قسمت استفاده نمایید.</p>
+              </div>
+            </div>
+  
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bx-tachometer"></i></div>
+                <h4><a href="{% url 'product_app:correct_zero_prices_barcodes' %}">اصلاح قیمت فروش بارکدها</a></h4>
+                <p>از این قسمت برای اصلاح بارکدهایی که قیمت ندارند استفاده می شود</p>
+              </div>
+            </div>
+  <!-- 
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bx-layer"></i></div>
+                <h4><a href="">Nemo Enim</a></h4>
+                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+              </div>
+            </div> -->
+  
+          </div>
+  
+        </div>
+      </section><!-- End Services Section -->
+  
+  
+
+
+
+
+    {% endblock %}
+    
+    
+</body>
+</html>
