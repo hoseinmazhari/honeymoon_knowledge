@@ -59,18 +59,19 @@ def update_product_correct_prices_barcodes(driver,main_url,id,correct_barcodes):
         # while driver.current_url!=main_url:
         if driver.current_url != main_url:
             element = driver.find_element(By.XPATH, xpath_hesabro.product_view.tabs.details.lbl_price_store)
-            store_price = (element.text).replace(',','')
-            print(store_price)
-            try:
-                element = WebDriverWait(driver, 10).until(
-                    
-                EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product_view.tabs.uniq_Barcode.link}")))
-                element.click()
-                time.sleep(2)
-            except:
-                is_true = False
+            store_price = str((element.text).replace(',',''))
+            
             # try:
-            if True:
+            if int(store_price)>10:
+                print("store price is: ", store_price)
+                try:
+                    element = WebDriverWait(driver, 10).until(
+                        
+                    EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product_view.tabs.uniq_Barcode.link}")))
+                    element.click()
+                    time.sleep(2)
+                except:
+                    is_true = False
                 # is_true = False
                 # name = []
                 # mobile = []
@@ -88,37 +89,56 @@ def update_product_correct_prices_barcodes(driver,main_url,id,correct_barcodes):
 
                             
                             element =element.find_element(By.XPATH,xpath_hesabro.product_view.tabs.uniq_Barcode.tbody)
-                            # element[1].click()
-                            trs = element.find_elements(By.TAG_NAME, "tr")
-                            driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
-                            this_row = 1
-                            for tr_index in trs:
-                                this_row += 2
-                                tds = tr_index.find_elements(By.TAG_NAME, "td")
-                                price = int(f"{(tds[7].text).replace(',', '')}") # 7 is sale price
-                                if price<10:
-                                # if True:
-                                    act_btn = f'//*[@id="w{this_row}-button"]'
-                                    element = driver.find_element(By.XPATH,act_btn)
-                                    element.click()
-                                    time.sleep(2.3)
-                                    update_btn = f'//*[@id="w{this_row+1}"]/a[5]'
-                                    element = driver.find_element(By.XPATH,update_btn)
-                                    element.click()
-                                    time.sleep(2.3)
-
-                                    element = driver.find_element(By.XPATH,xpath_hesabro.product_view.tabs.uniq_Barcode.update_form.price)
-                                    element.click()
-                                    time.sleep(2.3)
-                                    
-                                    clear_txt(element)
-                                    write_in_element(store_price)
-
-                                    element = driver.find_element(By.XPATH,xpath_hesabro.product_view.tabs.uniq_Barcode.update_form.submit_btn)
-                                    element.click()
-                                    time.sleep(2.3)
                         except:
                             break         
+
+                        try:
+                            # element[1].click()
+                            trs = element.find_elements(By.TAG_NAME, "tr")
+                            # driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+                            this_row = 1
+                        except:
+                            pass
+                        if True:
+                            for tr_index in trs:
+                                this_row += 2
+                                print("this_row = ", this_row)
+                                tds = tr_index.find_elements(By.TAG_NAME, "td")
+                                price = int(f"{(tds[7].text).replace(',', '')}") # 7 is sale price
+                                print("price is: ", price)
+                                # price = int(price)
+                                
+                                is_exit = f"{(tds[12].text)}"  # 12 is date exit
+                                # for yyy in range(10):
+                                print(is_exit, "len date exit is: " ,len(is_exit))
+                                if price < 10 and len(is_exit) == 0:
+                                # if True:
+                                    try:
+                                        act_btn = f'//*[@id="w{this_row}-button"]'
+                                        element = driver.find_element(By.XPATH,act_btn)
+                                        element.click()
+                                        time.sleep(2.3)
+                                        update_btn = f'//*[@id="w{this_row+1}"]/a[5]'
+                                        element = driver.find_element(By.XPATH,update_btn)
+                                        element.click()
+                                        time.sleep(2.3)
+
+                                        element = driver.find_element(By.XPATH,xpath_hesabro.product_view.tabs.uniq_Barcode.update_form.price)
+                                        element.click()
+                                        time.sleep(2.3)
+                                        
+                                        clear_txt(element)
+                                        time.sleep(2)
+                                        write_in_element(store_price, element)
+                                        time.sleep(2)
+                                        element = driver.find_element(By.XPATH,xpath_hesabro.product_view.tabs.uniq_Barcode.update_form.submit_btn)
+                                        element.click()
+                                        time.sleep(2.3)
+                                        element = driver.find_element(By.XPATH, xpath_hesabro.product_view.tabs.uniq_Barcode.update_form.close_form)
+                                        element.click()
+                                        time.sleep(2.3)
+                                    except:
+                                        pass    
                             # for i in range(len(tds)) :
                             #      print(f"{i}: { (tds[i].text)}")                       # for more pretty actions in ui , ux this code writed to next_p
                         
@@ -244,7 +264,7 @@ def run_correctPrices_to_barcodes(driver,main_url, dfData):
         dfData = dfData.loc[dfData[correct_barcodes.id]!= int(id)]
         if is_True:
             ls_ans.append({"id":id, "product":merchandise,"is_True":True})
-            dfData.to_excel("correct-mod.xlsx",index= False)
+            # dfData.to_excel("correct-mod.xlsx",index= False)
         else:
             ls_ans.append({"id":id, "product":merchandise,"is_True":False})
             # import random as r
@@ -252,6 +272,7 @@ def run_correctPrices_to_barcodes(driver,main_url, dfData):
             # print(f"please wait for {sl} seconds ...")
             # time.sleep(sl)
         df_ans = pd.DataFrame(ls_ans)
+        dfData.to_excel("ZeroBarcodes.xlsx", index=False)
         df_ans.to_excel("ans correctBarcodes.xlsx",index=False)
         # if is_True:
         #     ls_true.append({testers.id:id,testers.tester:tester,testers.buy_price:buy_price,testers.sale_price:salePrice})
@@ -261,6 +282,6 @@ def run_correctPrices_to_barcodes(driver,main_url, dfData):
         #     # try:
         #     ls_false.append({testers.id:id,testers.tester:tester,testers.buy_price:buy_price,testers.sale_price:salePrice})
         #     df = pd.DataFrame(ls_false)
-        #     df.to_excel("false_orders.xlsx",index=False)
+        #     df.to_excel("false_]orders.xlsx",index=False)
         #     # except:
         #     #     pass

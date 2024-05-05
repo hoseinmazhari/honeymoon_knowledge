@@ -91,6 +91,7 @@ class product_view():
             class update_form():
                 price = '//*[@id="productunique-out_sale_price"]'
                 submit_btn = '/html/body/div[2]/div/div[2]/div[3]/div/div/div[2]/div/form/div[2]/button'
+                close_form = '/html/body/div[2]/div/div[2]/div[3]/div/div/div[1]/button'
 
             # th = '/html/body/div[2]/div/div[2]/div[2]/div[3]/div/div[2]/div/table/tbody/tr/td[8]'
 
