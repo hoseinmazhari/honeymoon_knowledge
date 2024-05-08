@@ -46,7 +46,7 @@ def get_index_order_point_file(df):
         #     thisClass.buy_price = thisItter # type: ignore
     return thisClass
 
-def update_product_order_point(driver,main_url,id,order_point): 
+def update_product_order_point(driver,id,order_point): 
     # if act== "exit_product":
         is_true = True
         # is_search_fieldProduct = search_fieldProduct_navbar(driver)
@@ -138,7 +138,7 @@ def update_product_order_point(driver,main_url,id,order_point):
     
     
 
-def set_order_point(driver,main_url):
+def set_order_point(driver,dfData):
     print("please wait until see 'done'...")
     thisPath = os.getcwd()
     # chPath = f"{thisPath}/merchandises"
@@ -163,13 +163,13 @@ def set_order_point(driver,main_url):
     # dfData.to_excel("order point all brs.xlsx")
     # return False
     counter = 0
-    dfData = pd.read_excel("..//dist/order point/orderPoint0209.xlsx")
+    # dfData = pd.read_excel("..//dist/order point/orderPoint0209.xlsx")
     thisIndex = get_index_order_point_file(dfData)
     # ls_true = []
     # ls_false = []
     ls_ans = []
     while len(dfData):
-        driver.get(main_url)
+        # driver.get(main_url)
         time.sleep(3)
         counter += 1
         merchandise = dfData.iat[0,thisIndex.merchandise]
@@ -179,7 +179,7 @@ def set_order_point(driver,main_url):
         
         print(counter)
         # is_True = update_product_order_point(driver,main_url,id,order_point)
-        is_True = update_product_order_point(driver,main_url,merchandise,order_point)
+        is_True = update_product_order_point(driver,merchandise,order_point)
         dfData = dfData.loc[dfData[Order_point.merchandise]!= (merchandise)]
         # dfData = dfData.loc[dfData[Order_point.id]!= int(id)]
         if is_True:

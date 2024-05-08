@@ -12,15 +12,15 @@ from . import xpath_hesabro
 # from .app_address import hesabro_domain,get_rnd_page,urls,arad_payamek_domain,honeymoonatr_domain
 from .app_address import hesabro_domain,honeymoonatr_domain
 
-from selenium_files.hesabro.merchandise import obsolete
+from selenium_files.hesabro.product import obsolete
 from .user_pass import get_index_user_pass
 # from . import xpath
 from . import app_address
-from ..hesabro.merchandise.order_points import set_order_point
-# from ..hesabro.merchandise.order_points_allBrs import set_order_point_allBrs
+from ..hesabro.product.order_points import set_order_point
+# from ..hesabro.product.order_points_allBrs import set_order_point_allBrs
 from . import app_tasks as tsk
-from selenium_files.hesabro.merchandise import active_in_site 
-from selenium_files.hesabro.merchandise import correct_zero_barcodes
+from selenium_files.hesabro.product import active_in_site 
+from selenium_files.hesabro.product import correct_zero_barcodes
 from ..hesabro.club import fetch_birthdays_data as fbsd
 from ..hesabro.club import fetch_birthday as upb
 from ..hesabro.club import fetch_report_data as frd
@@ -527,12 +527,14 @@ def task_selector(selected,args_= "",**kwargs):
                 dfData = fcrd.get_coin_report_data(driver,tsk.task_name.get_coin_report_from_hesabro_link,args_)
             # dfData.to_excel("report_data.xlsx",index=False)
         elif selected == tsk.task_name.set_order_point:
-            driver,is_logged_in = run_hesabro()
-
-            # driver = "1"
-            # is_logged_in = True
+            driver, is_logged_in = run_hesabro()
             if is_logged_in:
-                set_order_point(driver,main_url)
+                title = tsk.task_name.obsolete
+                dfData = args_
+                answer = set_order_point(driver, dfData)
+                # dfData.to_excel(f"{title}.xlsx", index= False)
+                print(answer)
+
         elif selected == "1":
             print("charges is loading! plese wait...")
             dfData = pd.read_excel('newCharge.xlsx')
@@ -626,7 +628,7 @@ def task_selector(selected,args_= "",**kwargs):
                 save_counter += 1
                 driver.get(main_url)
                 time.sleep(2.5)
-                merchandise = dfData.iat[0,0]
+                product = dfData.iat[0,0]
                 # user = dfData.iat[0,1]
                 # this_mobile = f"0{int(mobile)}"
                 # coin = str(dfData.iat[0,2])
@@ -638,9 +640,9 @@ def task_selector(selected,args_= "",**kwargs):
                 #     hamyar_condition =False
                 # from product import update_product
                 act = "exit_product"
-                # action_True = update_product(act,merchandise,driver,main_url)
+                # action_True = update_product(act,product,driver,main_url)
                 
-                dfData = dfData.loc[dfData["merchandise"]!=merchandise]
+                dfData = dfData.loc[dfData["product"]!=product]
                 
         elif selected == "3":
             print("please wait until see 'done'...")
@@ -684,7 +686,7 @@ def task_selector(selected,args_= "",**kwargs):
             #     save_counter += 1
             #     driver.get(main_url)
             #     time.sleep(2.5)
-            #     merchandise = dfData.iat[0,0]
+            #     product = dfData.iat[0,0]
             #     # user = dfData.iat[0,1]
             #     # this_mobile = f"0{int(mobile)}"
             #     # coin = str(dfData.iat[0,2])
@@ -696,8 +698,8 @@ def task_selector(selected,args_= "",**kwargs):
             #     #     hamyar_condition =False
             #     # from product import update_product
             #     act = "exit_product"
-            #     action_True = update_product(act,merchandise,driver,main_url)
+            #     action_True = update_product(act,product,driver,main_url)
                 
-            #     dfData = dfData.loc[dfData["merchandise"]!=merchandise]
+            #     dfData = dfData.loc[dfData["product"]!=product]
         
         return answer    
