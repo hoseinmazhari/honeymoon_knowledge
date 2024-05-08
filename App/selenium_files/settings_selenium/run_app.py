@@ -362,7 +362,7 @@ def task_selector(selected,args_= "",**kwargs):
             if is_logged_in:
                 title = tsk.task_name.obsolete
                 dfData = args_
-                answer = obsolete.run_obsolete_products(driver,main_url,dfData)
+                answer = obsolete.run_obsolete_products(dfData, driver)
                 # dfData.to_excel(f"{title}.xlsx", index= False)
                 print(answer)
         if selected == tsk.task_name.correct_zero_prices_barcodes:

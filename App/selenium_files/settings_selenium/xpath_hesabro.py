@@ -65,7 +65,7 @@ class product_view():
                 warranty_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[1]/div[9]/div/select/option[2]'
                 more_details = '//*[@id="accordion"]/div[1]/h4/a'
                 order_point = '//*[@id="product-order_point_inventory"]' #'/html/body/div[2]/div/div[2]/form/div/div[1]/div[2]/div[2]/div/div[3]/div/input'
-                chech_exit = "//input[@id='product-abandoned']"
+                check_exit = "//input[@id='product-abandoned']"
                 btn_submit = '/html/body/div[2]/div/div[2]/form/div/div[2]/button' #"//button[@type='submit']"
                 # btn_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button'
                 # btn_add_unitScale = 'add-property btn btn-success btn-xs'
