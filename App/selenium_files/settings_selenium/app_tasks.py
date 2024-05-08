@@ -11,6 +11,7 @@ class task_name():
     active_in_site = "فعال نمودن محصولات در سایت مای هانی مون"
     # modification_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
     correct_zero_prices_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
+    obsolete = "متروک یا غیر متروک نمودن محصولات"
     
     def __init__(self):
         self.update_birthday = "دریافت مشتریان برای پیامک تبریک تولد"
@@ -24,3 +25,4 @@ class task_name():
         self.active_in_site = "فعال نمودن محصولات در سایت مای هانی مون"
         # self.modification_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
         self.correct_zero_prices_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
+        self.obsolete = "متروک یا غیر متروک نمودن محصولات"

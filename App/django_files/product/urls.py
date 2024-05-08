@@ -7,6 +7,7 @@ urlpatterns = [
     path('order_point/',views.order_point,name="order_point"),
     path('active_in_site/',views.active_in_site,name="active_in_site"),
     path('correct_zero_prices_barcodes/',views.correct_zero_prices_barcodes,name="correct_zero_prices_barcodes"),
+    path('obsolete/',views.obsolete,name="obsolete"),
     
     
     

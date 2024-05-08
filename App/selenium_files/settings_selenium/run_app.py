@@ -12,7 +12,7 @@ from . import xpath_hesabro
 # from .app_address import hesabro_domain,get_rnd_page,urls,arad_payamek_domain,honeymoonatr_domain
 from .app_address import hesabro_domain,honeymoonatr_domain
 
-
+from selenium_files.hesabro.merchandise import obsolete
 from .user_pass import get_index_user_pass
 # from . import xpath
 from . import app_address
@@ -357,6 +357,14 @@ def task_selector(selected,args_= "",**kwargs):
         # selected = "5"
         main_url = f"{hesabro_domain}/site/index"
         print(selected)
+        if selected == tsk.task_name.obsolete:
+            driver, is_logged_in = run_hesabro()
+            if is_logged_in:
+                title = tsk.task_name.obsolete
+                dfData = args_
+                answer = obsolete.run_obsolete_products(driver,main_url,dfData)
+                # dfData.to_excel(f"{title}.xlsx", index= False)
+                print(answer)
         if selected == tsk.task_name.correct_zero_prices_barcodes:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:

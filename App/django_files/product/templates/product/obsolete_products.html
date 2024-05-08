@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    
+    
+        
+</head>
+<body dir="rtl">
+    {% block content %}
+        <!-- <h1>فعال نمودن فروش محصولات</h1>
+        
+        <li>
+            <p</p>
+        </li>
+        <li>
+            <h4>جهت اجرا دکمه زیر کلیک نمایید</h4>
+        </li>
+        </ul> -->
+        
+            
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %} 
+             <!-- ======= Cta Section ======= -->
+                    <section id="cta" class="cta">
+                        <div class="container" data-aos="zoom-in">
+                  
+                                    <div class="row">
+                                      <div class="col-lg-9 text-center text-lg-start" style="text-align: right !important;">
+                                          <h3>متروک یا غیر متروک نمودن محصولات/h3>
+                                          <p>جهت اعمال تغییرات در متروک یا غیر متروک نمودن مصولات حسابرو می توانید پس از انتخاب فایل لیست محصولات دکمه اجرای روبرو را کلیک نمایید.
+                                            ابتدا فایل لیست محصولات را انتخاب سپس دکمه اجرا را بزنید
+                                            
+                                          
+                                          </p>
+                                          <br>
+                                          <p> {{ form }}</p>
+                                      </div>
+                                      <div class="col-lg-3 cta-btn-container text-center">
+                                              {% if result == "stoped" %}
+                                             
+                                                     <button class="cta-btn align-middle" style="background-color: #5ea4d9;" type="submit" formmethod="post"  name="act" value="run">اجرا</a>
+                                              {% else %}
+                                                      <button class="cta-btn align-middle" type="submit" formmethod="post" name="act" value="stoped">توقف</button>
+                                              {% endif %} 
+                                      </div>
+                            </div>
+                  
+                 
+                      </section><!-- End Cta Section -->
+            <!-- {% if result == "stoped" %}
+                <button type="submit" formmethod="post" name="act" value="run">بروزرسانی</button>
+            {% else %}
+                <button type="submit" formmethod="post"  name="act" value="stop">توقف</button>
+            {% endif %} -->
+            </form>
+    {% endblock %}
+    
+</body>
+</html>
