@@ -90,30 +90,42 @@ def update_product_correct_prices_barcodes(driver,main_url,id,correct_barcodes):
                             
                             element =element.find_element(By.XPATH,xpath_hesabro.product_view.tabs.uniq_Barcode.tbody)
                         except:
-                            break         
+                            # break         
+                            pass
 
                         try:
                             # element[1].click()
                             trs = element.find_elements(By.TAG_NAME, "tr")
                             # driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
                             this_row = 1
+                            # for xxxxx in range(10):
+                            #     print("trs len :", len(trs))
+                            # test_tr= 0
+                            # for tr_test in trs:
+                            #     test_tr += 1
+                            # print("test count tr is : ", test_tr)
                         except:
                             pass
-                        if True:
-                            for tr_index in trs:
-                                this_row += 2
-                                print("this_row = ", this_row)
+                        # if True :
+                        for tr_index in trs:
+                            this_row += 2
+                            # print("this_row = ", this_row)
+                            have_row = True
+                            try:
                                 tds = tr_index.find_elements(By.TAG_NAME, "td")
-                                price = int(f"{(tds[7].text).replace(',', '')}") # 7 is sale price
+                                price = (f"{(tds[7].text)}") # 7 is sale price
                                 print("price is: ", price)
                                 # price = int(price)
                                 
                                 is_exit = f"{(tds[12].text)}"  # 12 is date exit
                                 # for yyy in range(10):
                                 print(is_exit, "len date exit is: " ,len(is_exit))
-                                if price < 10 and len(is_exit) == 0:
+                            except: 
+                                have_row = False
+                            if have_row:
+                                if len(price)<3 and len(is_exit) == 0:
                                 # if True:
-                                    try:
+                                    # try:
                                         act_btn = f'//*[@id="w{this_row}-button"]'
                                         element = driver.find_element(By.XPATH,act_btn)
                                         element.click()
@@ -134,11 +146,18 @@ def update_product_correct_prices_barcodes(driver,main_url,id,correct_barcodes):
                                         element = driver.find_element(By.XPATH,xpath_hesabro.product_view.tabs.uniq_Barcode.update_form.submit_btn)
                                         element.click()
                                         time.sleep(2.3)
-                                        element = driver.find_element(By.XPATH, xpath_hesabro.product_view.tabs.uniq_Barcode.update_form.close_form)
-                                        element.click()
-                                        time.sleep(2.3)
-                                    except:
-                                        pass    
+                                        is_closed = False
+                                        while is_closed ==False:
+                                            try:
+                                                element = driver.find_element(By.XPATH, xpath_hesabro.product_view.tabs.uniq_Barcode.update_form.close_form)
+                                                element.click()
+                                                time.sleep(2.3)
+                                                is_closed = True
+                                            except:
+                                                is_closed = False
+                                        
+                                    # except:
+                                    #     pass    
                             # for i in range(len(tds)) :
                             #      print(f"{i}: { (tds[i].text)}")                       # for more pretty actions in ui , ux this code writed to next_p
                         
@@ -156,9 +175,15 @@ def update_product_correct_prices_barcodes(driver,main_url,id,correct_barcodes):
                         
                         
                         try:
+                            this_url = driver.current_ulr
                             element =driver.find_element(By.XPATH,xpath_hesabro.product_view.tabs.uniq_Barcode.next_p)
                             counter_page += 1
                             element.click()
+                            time.sleep(4)
+                            new_page = driver.current_url
+                            if new_page == this_url:
+                                time.sleep(1)
+                                break
                         except:
                             break
                     
