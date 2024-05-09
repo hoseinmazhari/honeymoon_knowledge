@@ -53,6 +53,7 @@ def search_fieldProduct_navbar(driver):
     return is_search_fieldProduct
 
 def write_in_element(text,element):
+    text = str(text)
     for _char in text:
         element.send_keys(_char)
         # t= random.random()

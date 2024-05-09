@@ -21,7 +21,7 @@ class Order_point_cols():
     order_point = 'کف سفارش'
     # buy_price = "old sale price"
     product_id = "کد کالا"    
-    branch = "عنوان شرکت"
+    # branch = "عنوان شرکت"
 		# عنوان کالا	کد کالا	جمع واحد	مقدار	تعداد روز فعال شعبه	مجموع تعداد فروش	ماه	
 		
 
@@ -46,7 +46,7 @@ def get_index_order_point_cols(df):
     return thisClass
 
 
-def set_order_point(dfData,driver):
+def set_order_point(driver,dfData):
     thisIndex = get_index_order_point_cols(dfData)
     thisCols = Order_point_cols()
     while len(dfData):
@@ -58,6 +58,13 @@ def set_order_point(dfData,driver):
         # try:
         if True:
             # time.sleep(2)
+            time.sleep(2)
+            element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product_view.tabs.details.update_page.more_details}")))
+            
+            element.click()
+            # driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+            time.sleep(1)
             element = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, f"{product_view.tabs.details.update_page.order_point}")))
             element.click()
