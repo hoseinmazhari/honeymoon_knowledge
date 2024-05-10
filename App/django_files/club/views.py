@@ -4,6 +4,9 @@ from selenium_files.settings_selenium.run_app import task_selector as tsksl_s
 from selenium_files.settings_selenium import app_tasks as atk_s
 import pandas as pd
 # Create your views here.
+def club_page(request):
+    return render(request,'club/club_page.html')
+
 def compare_customers_hesabro_hamyar(request):
     form = ExcelUploadForm()
     result = "stoped"
@@ -54,4 +57,4 @@ def compare_customers_hesabro_hamyar(request):
         # return redirect(("arad/"))
     # message ={"messages":"test"}
     
-    return render(request, 'product/order_point_products.html',{'form': form, "result":"stoped"})
+    return render(request, 'club/compare_customers_hesabro_hamyar.html',{'form': form, "result":"stoped"})

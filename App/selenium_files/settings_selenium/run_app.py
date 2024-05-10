@@ -30,6 +30,7 @@ from ..honeymoonatr import update_products as upsh
 # from ...python_files.codes.salary_hesabro import salary
 from  python_files.codes.salary_hesabro.salary import salary
 from python_files.settings_python import app_structures as asts
+from python_files.settings_python.app_structures import _make_farsi_text
 from python_files.settings_python import printProgress as prgs
 from python_files.settings_python import DateJuToJa as djtj
 def get_user_pass(this_domain):
@@ -356,7 +357,17 @@ def task_selector(selected,args_= "",**kwargs):
         # selected = input("please type and then enter num of your choice: ")
         # selected = "5"
         main_url = f"{hesabro_domain}/site/index"
-        print(selected)
+        print()
+        print(_make_farsi_text(selected))
+        print()
+        if selected == tsk.task_name.compare_customers_hesabro_hamyar:
+            driver, is_logged_in = run_hesabro()
+            if is_logged_in:
+                title = tsk.task_name.compare_customers_hesabro_hamyar
+                dfData = args_
+                answer = obsolete.run_obsolete_products(dfData, driver)
+                # dfData.to_excel(f"{title}.xlsx", index= False)
+                print(answer)
         if selected == tsk.task_name.obsolete:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:

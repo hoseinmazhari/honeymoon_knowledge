@@ -26,6 +26,7 @@ urlpatterns = [
     path('@hm/get_coin_report/',include('get_coin_report.urls'),name='get_coin_report'),
     path('@hm/honeymoonatr/',include('honeymoonatr.urls'),name='honeymoonatr'),
     path('@hm/analyse_excels/',include('analyse_excels.urls'),name='analyse_excels'),
+    path('@hm/club/',include('club.urls'),name='club'),
     # path('@hm/analyse_excels/result/',include('analyse_excels.urls'),name='sub_analyse_excels'),
     path('',views.home,name = 'home'),
 ]
