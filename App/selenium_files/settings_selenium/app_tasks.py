@@ -12,7 +12,7 @@ class task_name():
     # modification_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
     correct_zero_prices_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
     obsolete = "متروک یا غیر متروک نمودن محصولات"
-    
+    compare_customers_hesabro_hamyar = "مقایسه مشتریان همیار با حسابرو"
     def __init__(self):
         self.update_birthday = "دریافت مشتریان برای پیامک تبریک تولد"
         self.set_order_point =  "ذخیره نمودن نقطه سفارش"
@@ -26,3 +26,4 @@ class task_name():
         # self.modification_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
         self.correct_zero_prices_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
         self.obsolete = "متروک یا غیر متروک نمودن محصولات"
+        self.compare_customers_hesabro_hamyar = "مقایسه مشتریان همیار با حسابرو"
