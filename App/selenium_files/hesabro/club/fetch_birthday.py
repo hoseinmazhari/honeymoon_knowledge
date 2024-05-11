@@ -123,7 +123,8 @@ def set_birthdaytoday(driver, birthdaytoday, this_delay):
 def get_birthday_data(driver,main_url,title): 
     #  1- تغییر آدرس مرورگر به صفححه ایجاد گزاشات
     # this_address = app_address.urls["birthday"]["create_rpt"]
-    this_address = app_address.url_address.create_report.birthday
+    # this_address = app_address.url_address.create_report.birthday
+    this_address = app_address.urls_hesabro.create_report.birthday
     driver.get(this_address)
     while driver.current_url != this_address: # جهت اطمینان از باز شدن صفحه ی درخواست شده در گزینه 1 از حلقه استفاده شده است
         driver.get(this_address)

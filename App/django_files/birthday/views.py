@@ -94,7 +94,8 @@ def update_db_to_sendSms(request):
         sms_text = data.get("sms_text")
         if action == "run":
             # driver = webdriver.Firefox()
-            if timeCheck():
+            # if timeCheck():
+            if True:
                 tsksl_s(atk_s.task_name.update_birthday,sms_text)
         # driver.get('http://aradpayamak.net')
             # driver.get("https://honeymoonatr.com")

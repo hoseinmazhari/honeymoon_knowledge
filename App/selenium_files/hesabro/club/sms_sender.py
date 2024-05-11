@@ -56,16 +56,20 @@ def send_group_sms(dfData,kind = task_name.update_birthday,msg="تست"):
         
         while len(dfData):
             
-            this_mobile = dfData.iat[0,this_indexs.mobile]
+            this_mobile = (dfData.iat[0,this_indexs.mobile])
             df_sms = dfData.loc[dfData[boc_class.mobile]==this_mobile]
             dfData = dfData.loc[dfData[boc_class.mobile]!=this_mobile]
+            this_mobile = str(int(this_mobile))
             if len(df_sms):
-                name = df_sms.iat[0,this_indexs.name]
-                
-                this_msg = msg.replace(is_name,name)
-                
-                
-                send_sms(text_=this_msg,to_=this_mobile)
-                time.sleep(0.04)
+                if len(this_mobile)==10 and this_mobile[0]=="9":
+                    
+
+                    name = str(df_sms.iat[0,this_indexs.name])
+                    if len(name):    
+                        this_msg = msg.replace(is_name,name)
+                        
+                        
+                        send_sms(text_=this_msg,to_=this_mobile)
+                        time.sleep(0.1)
 # send_sms()
 # send_group_sms("test")

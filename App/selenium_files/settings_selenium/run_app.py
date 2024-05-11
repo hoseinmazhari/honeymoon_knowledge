@@ -480,23 +480,28 @@ def task_selector(selected,args_= "",**kwargs):
         elif selected == tsk.task_name.update_birthday:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:
-                dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
-                send_group_sms(dfData,tsk.task_name.update_birthday,args_)
+                # dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
+                
+                
+                # send_group_sms(dfData,tsk.task_name.update_birthday,args_)
                 try:
                     birthPath = os.getcwd()
                     reports = "reports"
                     os.mkdir(reports)
                 except:
                     pass
-                os.chdir(f"{birthPath}/{reports}")
-                birthPath = os.getcwd()
+                # os.chdir(f"{birthPath}/{reports}")
+
+                # birthPath = os.getcwd()
+                birthPath = f"{birthPath}/{reports}"
+                birthdayDir = f"{birthPath}/birthday"
                 try:
-                    birthdayDir = "birthday"
+                    # birthdayDir = "birthday"
                     os.mkdir(birthdayDir)
                 except:
                     pass
-                os.chdir(f"{birthPath}/{birthdayDir}")
-                dfData.to_excel(f"birthday in {djtj.getDateTimeForFileName()}.xlsx",index=False)
+                # os.chdir(f"{birthPath}/{birthdayDir}")
+                # dfData.to_excel(f"{birthdayDir}/birthday in {djtj.getDateTimeForFileName()}.xlsx",index=False)
             # mybrowser = Browser()
             # # mybrowser.change_url(main_url)
             # driver = mybrowser.driver
@@ -520,7 +525,7 @@ def task_selector(selected,args_= "",**kwargs):
             # this_dict = 
             ls.append({mobile:"09139960164", name: "حسین مظهری", birthday:"1365/06/29"})
             dfData = pd.DataFrame(ls)
-            dfData.to_excel("data.xlsx",index=False)
+            # dfData.to_excel("data.xlsx",index=False)
             send_group_sms(dfData,tsk.task_name.update_birthday,args_)
             # time.sleep(60)
             # driver.close()
