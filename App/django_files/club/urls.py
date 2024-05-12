@@ -4,7 +4,7 @@ app_name = "club_app"
 urlpatterns = [
     
     path('',views.club_page,name="club_page"),
-    path('compare_customers_hesabro_hamyar/',views.compare_customers_hesabro_hamyar,name="compare_customers_hesabro_hamyar"),
+    path('Update_hesabro_customers_from_hamyar/',views.Update_hesabro_customers_from_hamyar,name="Update_hesabro_customers_from_hamyar"),
     
     
     

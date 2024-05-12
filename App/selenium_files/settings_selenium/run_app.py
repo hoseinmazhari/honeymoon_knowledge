@@ -360,12 +360,12 @@ def task_selector(selected,args_= "",**kwargs):
         print()
         print(_make_farsi_text(selected))
         print()
-        if selected == tsk.task_name.compare_customers_hesabro_hamyar:
+        if selected == tsk.task_name.Update_hesabro_customers_from_hamyar:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:
-                title = tsk.task_name.compare_customers_hesabro_hamyar
+                title = tsk.task_name.Update_hesabro_customers_from_hamyar
                 dfData = args_
-                answer = obsolete.run_obsolete_products(dfData, driver)
+                answer = update_hesabro_customers_from_hamyar.run_Update_hesabro_customers_from_hamyar(dfData, driver)
                 # dfData.to_excel(f"{title}.xlsx", index= False)
                 print(answer)
         if selected == tsk.task_name.obsolete:

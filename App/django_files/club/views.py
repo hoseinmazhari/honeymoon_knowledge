@@ -7,7 +7,7 @@ import pandas as pd
 def club_page(request):
     return render(request,'club/club_page.html')
 
-def compare_customers_hesabro_hamyar(request):
+def Update_hesabro_customers_from_hamyar(request):
     form = ExcelUploadForm()
     result = "stoped"
     # for i in range(10):
@@ -57,4 +57,4 @@ def compare_customers_hesabro_hamyar(request):
         # return redirect(("arad/"))
     # message ={"messages":"test"}
     
-    return render(request, 'club/compare_customers_hesabro_hamyar.html',{'form': form, "result":"stoped"})
+    return render(request, 'club/Update_hesabro_customers_from_hamyar.html',{'form': form, "result":"stoped"})
