@@ -60,12 +60,17 @@ def get_index_Update_hesabro_customers_from_hamyar_cols(df):
             thisClass.education = thisItter #type: ignore
     return thisClass
 
-
+def act():
+    pass
 def run_Update_hesabro_customers_from_hamyar(driver,dfData):
     thisIndex = get_index_Update_hesabro_customers_from_hamyar_cols(dfData)
     thisCols = Update_hesabro_customers_from_hamyar_cols()
+    _ls_deactive_users = []
+    _ls_active_users = []
+    l = len(dfData)
     while len(dfData):
-        
+        # prgsCounter = l- len(dfData)
+        # prgs.printProgressBar(prgsCounter, l, prefix = 'Progress:', suffix = 'Complete', length = 25)    
         customer = dfData.iat[0, thisIndex.customer]
         charge = dfData.iat[0, thisIndex.charge]
         birthday = dfData.iat[0, thisIndex.birthday]
@@ -77,29 +82,82 @@ def run_Update_hesabro_customers_from_hamyar(driver,dfData):
         gender = dfData.iat[0, thisIndex.gender]
         education = dfData.iat[0, thisIndex.education]
         mobile = dfData.iat[0, thisIndex.mobile]
+        # dic_customer = {thisCols.mobile:mobile,}
         dfData = dfData.loc[dfData[thisCols.mobile] != mobile]
-        driver.get(f"{urls_hesabro.product.product_update}{mobile}")
-        time.sleep(3)
-        # try:
-        if True:
-            # time.sleep(2)
-            element = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, f"{product_view.tabs.details.update_page.check_exit}")))
-            change_chk(element, act)
-            # for xxx in range(100):
-            #     print(element.is_selected())
-            # element.send_keys(Keys.SPACE)
-            time.sleep(2)
-        # except Exception as e:
-        #     print(e)
-        # try:
-            element = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, f"{product_view.tabs.details.update_page.btn_submit}")))
-            element.click()
-            # while driver.current_url!= main_url:
-            #     driver.get(main_url)
-            #     time.sleep(2)
-            time.sleep(3)
-        # except:
-        #     pass
-    
+        
+        # print("charges is loading! plese wait...")
+                # dfData = pd.read_excel('newCharge.xlsx')
+                # print('charge file now upload successfully')
+        
+        print(f'numer of mobiles is {l}')
+
+        save_counter = 0
+        while len(dfData):
+            save_counter += 1
+            driver.get(main_url)
+            time.sleep(2.5)
+            mobile = dfData.iat[0,0]
+            user = dfData.iat[0,1]
+            this_mobile = f"0{int(mobile)}"
+            coin = str(dfData.iat[0,2])
+            
+            # print(f"charge {mobile} is doing! please wait...")
+            hamyar_condition = True
+            # if prgsCounter > 10:
+            #     hamyar_condition =False
+            # action_True = coin_setter(this_mobile,driver,main_url,coin,hamyar_condition)
+            
+            dfData = dfData.loc[dfData["mobile"]!=mobile]
+            # if action_True==False:
+            #     # file.writelines(this_mobile)
+            #     _ls_deactive_users.append({'mobile':this_mobile,'user':user,"coin":coin})
+                
+            #     # false_count += 1
+            # else:
+                
+            #     _ls_active_users.append({'mobile':this_mobile,'user':user,"coin":coin})
+
+            # item = random.randint(1,len(urls['random']))
+            # rnd_page = get_rnd_page(item)
+            # driver.get(rnd_page)
+            time.sleep(1)
+            # while driver.current_url != rnd_page:
+            #     driver.get(rnd_page)
+            #     time.sleep(3)
+            if save_counter>10:
+                save_counter = 0
+                dfData.to_excel("newCharge.xlsx",index=False)
+            time.sleep(random.randint(3,6))
+            
+            thisPath = os.getcwd()
+            acdcu = "active and deactive users"
+            try:
+                os.mkdir(acdcu)
+            except:
+                pass
+            os.chdir(acdcu)
+            if len(_ls_active_users):
+                df_active_users = pd.DataFrame(_ls_active_users)
+                # try:
+                #     df_active_users.to_excel(f"active users{thisTime}.xlsx",index=False)
+                # except:
+                #     pass
+            if len(_ls_deactive_users):
+                df_deactive_users = pd.DataFrame(_ls_deactive_users)
+                # try:
+                #     df_deactive_users.to_excel(f'deactive users{thisTime}.xlsx',index=False)
+                # except:
+                #     pass
+            os.chdir(thisPath)
+            # if len(_ls_active_users):
+            #     df_active_users = pd.DataFrame(_ls_active_users)
+            #     try:
+            #         df_active_users.to_excel(f"active users.xlsx",index=False)
+            #     except:
+            #         pass
+            # if len(_ls_deactive_users):
+            #     df_deactive_users = pd.DataFrame(_ls_deactive_users)
+            #     try:
+            #         df_deactive_users.to_excel('deactive users.xlsx',index=False)
+            #     except:
+        #         pass
