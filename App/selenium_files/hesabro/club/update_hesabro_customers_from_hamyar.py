@@ -65,10 +65,20 @@ def run_Update_hesabro_customers_from_hamyar(driver,dfData):
     thisIndex = get_index_Update_hesabro_customers_from_hamyar_cols(dfData)
     thisCols = Update_hesabro_customers_from_hamyar_cols()
     while len(dfData):
-        act = dfData.iat[0, thisIndex.act]
-        id = dfData.iat[0, thisIndex.id]
-        dfData = dfData.loc[dfData[thisCols.id] != id]
-        driver.get(f"{urls_hesabro.product.product_update}{id}")
+        
+        customer = dfData.iat[0, thisIndex.customer]
+        charge = dfData.iat[0, thisIndex.charge]
+        birthday = dfData.iat[0, thisIndex.birthday]
+        address = dfData.iat[0, thisIndex.address]
+        postalCode = dfData.iat[0, thisIndex.postalCode]
+        work = dfData.iat[0, thisIndex.work]
+        phone = dfData.iat[0, thisIndex.phone]
+        codeMelli = dfData.iat[0, thisIndex.codeMelli]
+        gender = dfData.iat[0, thisIndex.gender]
+        education = dfData.iat[0, thisIndex.education]
+        mobile = dfData.iat[0, thisIndex.mobile]
+        dfData = dfData.loc[dfData[thisCols.mobile] != mobile]
+        driver.get(f"{urls_hesabro.product.product_update}{mobile}")
         time.sleep(3)
         # try:
         if True:
