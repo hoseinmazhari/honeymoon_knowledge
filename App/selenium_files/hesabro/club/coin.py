@@ -1,6 +1,8 @@
-from xpath import get_xpath
-from app_address import get_address
-from browser import Browser,write_in_element
+# from xpath import get_xpath
+from selenium_files.settings_selenium import xpath_hesabro
+from selenium_files.settings_selenium.app_address import urls_hesabro
+# from browser import Browser,write_in_element
+from selenium_files.settings_selenium.main_defs import write_in_element, clear_txt
 from selenium.webdriver.common.keys import Keys
 import time
 
@@ -289,8 +291,7 @@ def _add_first_charge(driver,coin,main_url):
                     _ok_button = False
                 
 
-def coin_setter(mobile,driver,main_url,coin,hamyar_condition):
-    # try:
+def coin_setter(mobile, driver, main_url, coin, hamyar_condition):
     is_search_fieldMobile = search_fieldMobile(driver)
     if is_search_fieldMobile:
         # #######print(f"is searched = {is_search_fieldMobile}")
