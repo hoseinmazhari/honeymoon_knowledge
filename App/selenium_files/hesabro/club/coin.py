@@ -71,7 +71,8 @@ def search_fieldMobile(driver):
     is_search_fieldMobile =False
     while is_search_fieldMobile == False:
         try:
-            _search = driver.find_element(by="xpath",value=f"{get_xpath('search','mobile')}")
+            # _search = driver.find_element(by="xpath",value=f"{get_xpath('search','mobile')}")
+            _search = driver.find_element(by="xpath",value=f"{xpath_hesabro.navbar.searchbar.mobile}")
             #driver.execute_script("return arguments[0].scrollIntoView();", _search)
             _search.click()
             is_search_fieldMobile = True
@@ -80,7 +81,7 @@ def search_fieldMobile(driver):
             pass
     return is_search_fieldMobile
     
-def user_details_coin(driver):
+def user_details_coin(driver, coin_address):
     is_tab_coin =True
     # try:
         # time.sleep(2)
@@ -89,11 +90,24 @@ def user_details_coin(driver):
         # _coin.click()
     try:
         element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
+        EC.presence_of_element_located((By.XPATH, xpath_hesabro.user_detail.tabs.coin.link))    )
+        # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
         #driver.execute_script("return arguments[0].scrollIntoView();", element)
         element.click()
+        time.sleep(2.5)
     except:
         is_tab_coin = False
+    # if is_tab_coin == False:
+    itter = 0
+    while driver.current_url != coin_address:
+        driver.get(coin_address)
+        if itter < 10:
+            itter += 1
+            time.sleep(2.5)
+        else:
+            itter = 0
+            time.sleep(60)
+    is_tab_coin = True # this is test beacause while loop with address are added to reach address
     # except:
     #     try:
     #         time.sleep(2)
@@ -117,10 +131,12 @@ def change_address(driver, thisUrl):
     # #######print(driver.current_url)
 def count_first_charge(driver,Initial_charge):
     count = 0
-    tbl= driver.find_element(by="xpath",value=get_xpath('user_detail','coin_table'))
+    # tbl= driver.find_element(by="xpath",value=get_xpath('user_detail','coin_table'))
+    tbl= driver.find_element(by="xpath",value= xpath_hesabro.user_detail.tabs.coin.table)
     # for tr in tbl:
     #     #######print(tr.text)
-    trs=tbl.find_elements(by="xpath",value=get_xpath('user_detail','coin_table_tr'))
+    # trs=tbl.find_elements(by="xpath",value=get_xpath('user_detail','coin_table_tr'))
+    trs=tbl.find_elements(by="xpath",value= xpath_hesabro.user_detail.tabs.coin.table_tr)
     # # inner_for = True
     # row_count = 0
     # rows = len(trs)
@@ -165,8 +181,10 @@ def _remove_first_charge(driver,Initial_charge,coin_address):
             #     for i in range(rowCount):
             #         #######print(f"start loop removing with {rowCount} iter")
                     try:
-                        tbl= driver.find_element(by="xpath",value=get_xpath('user_detail','coin_table'))
-                        trs=tbl.find_elements(by="xpath",value=get_xpath('user_detail','coin_table_tr'))
+                        # tbl= driver.find_element(by="xpath",value=get_xpath('user_detail','coin_table'))
+                        tbl= driver.find_element(by="xpath",value=xpath_hesabro.user_detail.tabs.coin.table)
+                        # trs=tbl.find_elements(by="xpath",value=get_xpath('user_detail','coin_table_tr'))
+                        trs=tbl.find_elements(by="xpath",value=xpath_hesabro.user_detail.tabs.coin.table_tr)
                         # inner_for = True
                         
                         for r in trs:
@@ -194,7 +212,7 @@ def _remove_first_charge(driver,Initial_charge,coin_address):
                                         driver.implicitly_wait(4)
                                         alert_del = driver.switch_to.active_element
                                         alert_del.send_keys(Keys.ENTER)
-                                        inner_for = user_details_coin(driver)
+                                        inner_for = user_details_coin(driver, coin_address)
                                         time.sleep(3.5)
                                         # alert_del.find_element(by='xpath',value=f".//button[text()='بله']").click()
                                         # r.find_element(by="xpath",value=f"//td[@title='{del_title}']").click
@@ -215,12 +233,12 @@ def _remove_first_charge(driver,Initial_charge,coin_address):
                         change_address(driver,coin_address)
     # _coin= driver.find_element(by="xpath",value=get_xpath('user_detail','coin'))
     # _coin.click()    
-def _add_first_charge(driver,coin,main_url):
+def _add_first_charge(driver, coin, main_url, coin_address):
     # for i in range(3):
         # time.sleep(1)
         # driver.implicitly_wait(6)
         #########print("start for add charge")
-        is_tab_coin = user_details_coin(driver)
+        is_tab_coin = user_details_coin(driver, coin_address)
         
         # charge_checked = False
         # counter=1
@@ -228,21 +246,29 @@ def _add_first_charge(driver,coin,main_url):
             # try:y
         # time.sleep(1)
         if is_tab_coin:
-            try:
-                tbl= driver.find_element(by="xpath",value=f"//table")
-            except:
+            tbl_find = False
+            itter = 1
+            while tbl_find == False:
                 try:
-                    time.sleep(1)
                     tbl= driver.find_element(by="xpath",value=f"//table")
-                    #########print("table step:2")
+                    tbl_find = True
                 except:
-                    try:
-                        time.sleep(1)
-                        tbl= driver.find_element(by="xpath",value=f"//table")
-                        #########print("table step:3")
-                    except:
-                        time.sleep(4)
-                        tbl= driver.find_element(by="xpath",value=f"//table")
+                    time.sleep(itter)
+                    itter += 1
+                    if itter>10: itter = 1
+                    
+            #     try:
+            #         time.sleep(1)
+            #         tbl= driver.find_element(by="xpath",value=f"//table")
+            #         #########print("table step:2")
+            #     except:
+            #         try:
+            #             time.sleep(1)
+            #             tbl= driver.find_element(by="xpath",value=f"//table")
+            #             #########print("table step:3")
+            #         except:
+            #             time.sleep(4)
+            #             tbl= driver.find_element(by="xpath",value=f"//table")
                         ########print("table step:4")
             
             is_icon=False
@@ -292,6 +318,8 @@ def _add_first_charge(driver,coin,main_url):
                 
 
 def coin_setter(mobile, driver, main_url, coin, hamyar_condition):
+    driver.get(main_url)
+    time.sleep(3)
     is_search_fieldMobile = search_fieldMobile(driver)
     if is_search_fieldMobile:
         # #######print(f"is searched = {is_search_fieldMobile}")
@@ -309,15 +337,20 @@ def coin_setter(mobile, driver, main_url, coin, hamyar_condition):
             address_id = driver.current_url
             index_id = address_id.find("=")
             this_id = address_id[index_id+1:]
+
             Initial_charge = "شارژ اولیه"
-            coin_address = get_address("user_detail","coin",this_id)
+            # coin_address = get_address("user_detail","coin",this_id)
+            coin_address = f"{urls_hesabro.user_detail.coin}{this_id}"
+            driver.get(coin_address)
+            time.sleep(2.5)
             #######print("strat get coin address")
             while driver.current_url != coin_address:
 
                 # driver.get(coin_address)
                 try:
                     element = WebDriverWait(driver, 10).until(
-                        EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}")))
+                        EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.user_detail.tabs.coin.link}")))
+                    # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}")))
                     element.click()
                 except:
                     pass
@@ -342,7 +375,7 @@ def coin_setter(mobile, driver, main_url, coin, hamyar_condition):
                     count = count_first_charge(driver,hamyar_charge) 
 
             if int(coin)>0:
-                _add_first_charge(driver,coin,main_url)    
+                _add_first_charge(driver, coin, main_url, coin_address)    
             
             return True
         else:

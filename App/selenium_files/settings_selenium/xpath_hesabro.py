@@ -133,10 +133,14 @@ class create_coin_report_hesabro():
 # xpath = {
     
    
-
-    
+class user_detail():
+    class tabs():
+        class coin():
+            link = "//a[text()='سکه های مشتری']"
+            table = "//table"
+            table_tr = "//tr"
 #     'user_detail':{
-#         'coin':"//a[text()='سکه های مشتری']",
+#         'coin':
 #         'coin_table': "//table",
 #         'coin_table_tr':"//tr",
 #         # 'coin_title' : f"//td[text()='{Initial_charge}']"

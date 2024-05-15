@@ -129,11 +129,11 @@ def run_Update_hesabro_customers_from_hamyar(driver, main_url, dfData):
         
         # thisPath = os.getcwd()
         acdcu = "active and deactive users"
-        try:
-            os.mkdir(acdcu)
-        except:
-            pass
-        os.chdir(acdcu)
+        # try:
+        #     os.mkdir(acdcu)
+        # except:
+        #     pass
+        # os.chdir(acdcu)
         if len(_ls_active_users):
             df_active_users = pd.DataFrame(_ls_active_users)
             # try:
