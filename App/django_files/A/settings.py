@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'get_the_report',
     'get_coin_report',
     'analyse_excels',
+    'club',
     # 'django_celery_results',
     # 'django_celery_beat',
     

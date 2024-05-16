@@ -23,6 +23,7 @@ class Update_hesabro_customers_from_hamyar_cols():
     mobile = "موبایل"
     customer = "نام ونام خانوادگی"
     charge = "مانده شارژ"
+    coin = "شارژ معادل برای حسابرو"
     birthday = 'تاریخ تولد'
     address = 'آدرس'
     postalCode = 'کدپستی'
@@ -42,6 +43,8 @@ def get_index_Update_hesabro_customers_from_hamyar_cols(df):
             thisClass.customer = thisItter #type: ignore
         elif col == thisClass.charge:
             thisClass.charge = thisItter #type: ignore
+        elif col == thisClass.coin:
+            thisClass.coin = thisItter #type: ignore
         elif col == thisClass.birthday:
             thisClass.birthday = thisItter #type: ignore
         elif col == thisClass.address:
@@ -67,6 +70,7 @@ def run_Update_hesabro_customers_from_hamyar(driver, main_url, dfData):
     thisCols = Update_hesabro_customers_from_hamyar_cols()
     _ls_deactive_users = []
     _ls_active_users = []
+    thisTime = time.ctime()
     l = len(dfData)
     save_counter = 0
     while len(dfData):
@@ -74,6 +78,7 @@ def run_Update_hesabro_customers_from_hamyar(driver, main_url, dfData):
         # prgs.printProgressBar(prgsCounter, l, prefix = 'Progress:', suffix = 'Complete', length = 25)    
         customer = dfData.iat[0, thisIndex.customer]
         charge = dfData.iat[0, thisIndex.charge]
+        coin = dfData.iat[0, thisIndex.coin]
         birthday = dfData.iat[0, thisIndex.birthday]
         address = dfData.iat[0, thisIndex.address]
         postalCode = dfData.iat[0, thisIndex.postalCode]
@@ -83,6 +88,7 @@ def run_Update_hesabro_customers_from_hamyar(driver, main_url, dfData):
         gender = dfData.iat[0, thisIndex.gender]
         education = dfData.iat[0, thisIndex.education]
         mobile = dfData.iat[0, thisIndex.mobile]
+        
         # dic_customer = {thisCols.mobile:mobile,}
         dfData = dfData.loc[dfData[thisCols.mobile] != mobile]
         
@@ -103,17 +109,32 @@ def run_Update_hesabro_customers_from_hamyar(driver, main_url, dfData):
         # if prgsCounter > 10:
         #     hamyar_condition =False
         
-        action_True = coin_setter(mobile, driver, main_url, charge, hamyar_condition)
+        action_True = coin_setter(mobile, driver, main_url, coin, hamyar_condition)
         
         # dfData = dfData.loc[dfData["mobile"]!=mobile]
-        if action_True==False:
+        if action_True == False:
             # file.writelines(this_mobile)
-            _ls_deactive_users.append({'mobile':mobile,'user':customer,"coin":charge})
+            _ls_deactive_users.append({thisCols.mobile:mobile,thisCols.customer:customer,thisCols.charge:charge,
+                                   thisCols.coin: coin, thisCols.birthday:birthday, thisCols.address:address,
+                                   thisCols.postalCode:postalCode, thisCols.work:work, thisCols.phone:phone,
+                                   thisCols.codeMelli: codeMelli, thisCols.gender: gender, thisCols.education : education,
+                                   })
+            df = pd.DataFrame(_ls_deactive_users)
+            thisPath = os.getcwd()
             
+            df.to_excel(f"{thisPath}/media/deative_users {thisTime}.xlsx")
             # false_count += 1
         else:
             
-            _ls_active_users.append({'mobile':mobile,'user':customer,"coin":charge})
+            _ls_active_users.append({thisCols.mobile:mobile,thisCols.customer:customer,thisCols.charge:charge,
+                                   thisCols.coin: coin, thisCols.birthday:birthday, thisCols.address:address,
+                                   thisCols.postalCode:postalCode, thisCols.work:work, thisCols.phone:phone,
+                                   thisCols.codeMelli: codeMelli, thisCols.gender: gender, thisCols.education : education,
+                                   })
+            df = pd.DataFrame(_ls_active_users)
+            thisPath = os.getcwd()
+            
+            df.to_excel(f"{thisPath}/media/Active_users {thisTime}.xlsx")
 
         # item = random.randint(1,len(urls['random']))
         # rnd_page = get_rnd_page(item)
@@ -124,25 +145,25 @@ def run_Update_hesabro_customers_from_hamyar(driver, main_url, dfData):
         #     time.sleep(3)
         if save_counter>10:
             save_counter = 0
-            dfData.to_excel("newCharge.xlsx",index=False)
+            dfData.to_excel(f"{thisPath}/media/newCharge.xlsx",index=False)
         # time.sleep(random.randint(3,6))
         
         # thisPath = os.getcwd()
-        acdcu = "active and deactive users"
+        # acdcu = "active and deactive users"
         # try:
         #     os.mkdir(acdcu)
         # except:
         #     pass
         # os.chdir(acdcu)
-        if len(_ls_active_users):
-            df_active_users = pd.DataFrame(_ls_active_users)
-            # try:
-            #     df_active_users.to_excel(f"active users{thisTime}.xlsx",index=False)
-            # except:
-            #     pass
-        if len(_ls_deactive_users):
-            df_deactive_users = pd.DataFrame(_ls_deactive_users)
-            # try:
+        # if len(_ls_active_users):
+        #     df_active_users = pd.DataFrame(_ls_active_users)
+        #     # try:
+        #     #     df_active_users.to_excel(f"active users{thisTime}.xlsx",index=False)
+        #     # except:
+        #     #     pass
+        # if len(_ls_deactive_users):
+        #     df_deactive_users = pd.DataFrame(_ls_deactive_users)
+        #     # try:
             #     df_deactive_users.to_excel(f'deactive users{thisTime}.xlsx',index=False)
             # except:
             #     pass

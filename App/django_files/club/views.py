@@ -39,7 +39,7 @@ def Update_hesabro_customers_from_hamyar(request):
                 # df_invoices = df_invoices.sort_values(by=asts.tjCol.history)
                 # df_invoices.drop_duplicates(subset=asts.tjCol.mobile, inplace=True)
                 # args_ = scales#type: ignore
-                final_result = tsksl_s(atk_s.task_name.compare_customers_hesabro_hamyar,df_Data)
+                final_result = tsksl_s(atk_s.task_name.Update_hesabro_customers_from_hamyar,df_Data)
                 # for i in range(10):
                 #     print("run", final_result)
                 # df = pd.read_excel("")
