@@ -10,28 +10,19 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-def _coin_form_finder(driver):
-    # is_showed = True
-    try:
-        _coin_form = driver.find_element(by="xpath",value=f"//form[@id='ajax-create-or-update-coin']")
-    except:
+def _coin_form_finder(driver, tbl):
+    is_showed = False
+    counter = 0
+    while  is_showed == False:
         try:
-            time.sleep(1)
             _coin_form = driver.find_element(by="xpath",value=f"//form[@id='ajax-create-or-update-coin']")
             ########print("coin add form step:2")
+            is_showed = True
         except:
-            try:
-                time.sleep(2)
-                _coin_form = driver.find_element(by="xpath",value=f"//form[@id='ajax-create-or-update-coin']")
-                ########print("coin add form step:3")
-            except:
-                try:
-                    time.sleep(3)
-                    _coin_form = driver.find_element(by="xpath",value=f"//form[@id='ajax-create-or-update-coin']")
-                    ########print("coin add form step:3")
-                except:
-                    # is_showed =False
-                    pass
+            counter += 1
+            if counter >15:
+                is_icon = ico_add_coin(driver,tbl)     
+            time.sleep(counter)
         
     return _coin_form
                 ########print("coin add form step:4")
@@ -47,22 +38,24 @@ def _is_clickable_input_coin(driver,coin,_coin_form):
             is_clickable = False
     return is_clickable
 def ico_add_coin(driver, tbl):
-    is_ico_add_coin = True
-    try:
-        tbl_th = tbl.find_elements(by="xpath",value=f"//th")
-        _coin_add = tbl_th[-1]
-        th_a = _coin_add.find_element(by='xpath',value='.//a')
-        th_a_span = _coin_add.find_element(by='xpath',value='.//span')
-        #driver.execute_script("return arguments[0].scrollIntoView();", th_a_span)
-        time.sleep(0.5)
-        th_a_span.click()
-        time.sleep(1.3)
-        # element = WebDriverWait(driver, 10).until(
-        # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
-        # element.click()
-    except:
-        is_ico_add_coin = False
-    
+    is_ico_add_coin = False
+    while is_ico_add_coin == False:
+        try:
+            tbl_th = tbl.find_elements(by="xpath",value=f"//th")
+            _coin_add = tbl_th[-1]
+            th_a = _coin_add.find_element(by='xpath',value='.//a')
+            th_a_span = _coin_add.find_element(by='xpath',value='.//span')
+            #driver.execute_script("return arguments[0].scrollIntoView();", th_a_span)
+            time.sleep(0.5)
+            th_a_span.click()
+            time.sleep(1.3)
+            is_ico_add_coin = True
+            # element = WebDriverWait(driver, 10).until(
+            # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
+            # element.click()
+        except:
+            is_ico_add_coin = False
+        
     return is_ico_add_coin
 
 
@@ -274,7 +267,7 @@ def _add_first_charge(driver, coin, main_url, coin_address):
             is_icon=False
             while is_icon==False:
                 is_icon = ico_add_coin(driver,tbl)     
-            _coin_form = _coin_form_finder(driver)
+            _coin_form = _coin_form_finder(driver,tbl)
             # win = driver.switch_to.active_element
             
             is_clickable_input_coin = _is_clickable_input_coin(driver,coin,_coin_form)
@@ -348,10 +341,11 @@ def coin_setter(mobile, driver, main_url, coin, hamyar_condition):
 
                 # driver.get(coin_address)
                 try:
-                    element = WebDriverWait(driver, 10).until(
-                        EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.user_detail.tabs.coin.link}")))
-                    # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}")))
-                    element.click()
+                    driver.get(coin_address)
+                    # element = WebDriverWait(driver, 10).until(
+                    #     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.user_detail.tabs.coin.link}")))
+                    # # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}")))
+                    # element.click()
                 except:
                     pass
             #######print("end get coin address")
