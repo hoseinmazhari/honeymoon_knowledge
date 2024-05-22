@@ -7,7 +7,8 @@ class file_locations():
     cookies = "cookies"
     
 class urls_hesabro():
-    
+    class customers():
+        create = "https://hesabro.ir/@hm/customer/create"
     class user_detail():
         coin = f"{hesabro_domain}/customer/coin?id="
     class product():
