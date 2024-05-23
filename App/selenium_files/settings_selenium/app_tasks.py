@@ -13,6 +13,7 @@ class task_name():
     correct_zero_prices_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
     obsolete = "متروک یا غیر متروک نمودن محصولات"
     Update_hesabro_customers_from_hamyar =  "بروزرسانی مشتریان حسابرو از فایل همیار"
+    Create_hesabro_customers_from_hamyar =  "ایجاد مشتریان در حسابرو از فایل مشخصات همیار"
     def __init__(self):
         self.update_birthday = "دریافت مشتریان برای پیامک تبریک تولد"
         self.set_order_point =  "ذخیره نمودن نقطه سفارش"
@@ -27,3 +28,4 @@ class task_name():
         self.correct_zero_prices_barcodes = "اصلاح قیمت بارکدهای بدون قیمت"
         self.obsolete = "متروک یا غیر متروک نمودن محصولات"
         self.Update_hesabro_customers_from_hamyar = "بروزرسانی مشتریان حسابرو از فایل همیار"
+        self.Create_hesabro_customers_from_hamyar =  "ایجاد مشتریان در حسابرو از فایل مشخصات همیار"

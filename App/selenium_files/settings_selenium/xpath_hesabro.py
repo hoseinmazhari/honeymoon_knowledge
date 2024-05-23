@@ -37,7 +37,26 @@ class shop():
             act = '//*[@id="productmain-site_visible"]'
             save = '//*[@id="form-ajax-product-main"]/div[2]/button'
             
+
+
+
+            
+class customers():
+    class create():
+        kind = '//*[@id="customerform-type_id"]'
+        gender = '//*[@id="customerform-sex"]'
+        nationality = '//*[@id="customerform-national"]'
+        name = '//*[@id="customerform-first_name"]'
+        last_name = '//*[@id="customerform-last_name"]'
+        alias_name = '//*[@id="customerform-show_title"]'
+        national_id = '//*[@id="customerform-nationalid"]'
+        birthday = '//*[@id="customerform-birthday"]'
+        email = '//*[@id="customerform-email"]'
+        work = '/html/body/div[2]/div/div[2]/div[2]/form/div[1]/div/div[11]/div/span/span[1]/span/ul/li/input'
+        mobile = '//*[@id="customerform-mobile"]'
+        postal_code = '//*[@id="customerform-zipcode"]'
         
+
 class product_view():
     class tabs():
         class details():
