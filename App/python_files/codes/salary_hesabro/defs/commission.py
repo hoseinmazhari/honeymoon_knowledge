@@ -10,9 +10,9 @@ from python_files.settings_python.app_structures import _make_farsi_text,tjCol
 # from main import * 
 class finalTargetCol():
     branch=tjCol.branch
-    branch_id= tjCol.idBranch
-    Registrar = tjCol.Registrar
-    Registrar_id = tjCol.Registrar_id
+    branch_id= tjCol.branch_id
+    seller_name = tjCol.seller_name
+    seller_id = tjCol.seller_id
     Received = tjCol.Received
     saleTime = tjCol.saleTime
     commission_percent = targetCol.commission_percent
@@ -30,10 +30,10 @@ def get_index_finalTarget(df):
             thisClass.branch = thisItter #type: ignore
         elif thisClass.branch_id == col:
             thisClass.branch_id = thisItter  #type: ignore
-        elif thisClass.Registrar == col:
-            thisClass.Registrar = thisItter  #type: ignore
-        elif thisClass.Registrar_id == col:
-            thisClass.Registrar_id = thisItter #type: ignore
+        elif thisClass.seller_name == col:
+            thisClass.seller_name = thisItter  #type: ignore
+        elif thisClass.seller_id == col:
+            thisClass.seller_id = thisItter #type: ignore
         elif thisClass.Received == col:
             thisClass.Received = thisItter #type: ignore
         elif thisClass.saleTime == col:
@@ -53,19 +53,19 @@ def commission(dfData,dfTarget):
     df_ans = pd.DataFrame()
     ls_ans = []
     while len(dfData):
-        Registrar = dfData.iat[0,thisIndex.Registrar]
-        Registrar_id = dfData.iat[0,thisIndex.Registrar_id]
-        dfRegistrar = dfData.loc[dfData[finalTargetCol.Registrar_id]==Registrar_id]
-        Received = int(dfRegistrar[finalTargetCol.Received].sum())
-        commission = int(dfRegistrar[finalTargetCol.commission].sum())
-        dfBaseSalary = dfTarget.loc[dfTarget[targetCol.adviser]==Registrar]
+        seller_name = dfData.iat[0,thisIndex.seller_name]
+        seller_id = dfData.iat[0,thisIndex.seller_id]
+        dfseller_name = dfData.loc[dfData[finalTargetCol.seller_id]==seller_id]
+        Received = int(dfseller_name[finalTargetCol.Received].sum())
+        commission = int(dfseller_name[finalTargetCol.commission].sum())
+        dfBaseSalary = dfTarget.loc[dfTarget[targetCol.adviser]==seller_name]
         if len(dfBaseSalary):
             baseSalary = dfBaseSalary.iat[0,targetIndex.baseSalary]
             goodTarget = dfBaseSalary.iat[0,targetIndex.goodTarget]
             branch = dfBaseSalary.iat[0,targetIndex.branch]
             perfectTarget = dfBaseSalary.iat[0,targetIndex.perfectTarget]
             salary = baseSalary+commission
-            ls_ans.append({finalTargetCol.branch:branch,finalTargetCol.Registrar:Registrar,targetCol.goodTarget:goodTarget,
+            ls_ans.append({finalTargetCol.branch:branch,finalTargetCol.seller_name:seller_name,targetCol.goodTarget:goodTarget,
                                     targetCol.perfectTarget:perfectTarget,finalTargetCol.Received:Received,
                                     finalTargetCol.commission:commission,targetCol.baseSalary:baseSalary,
                                     finalTargetCol.salary:salary}) # type: ignore
@@ -76,12 +76,12 @@ def commission(dfData,dfTarget):
             perfectTarget = 0
             salary = 0
             commission = 0
-            ls_ans.append({finalTargetCol.branch:branch,finalTargetCol.Registrar:Registrar,targetCol.goodTarget:goodTarget,
+            ls_ans.append({finalTargetCol.branch:branch,finalTargetCol.seller_name:seller_name,targetCol.goodTarget:goodTarget,
                                     targetCol.perfectTarget:perfectTarget,finalTargetCol.Received:Received,
                                     finalTargetCol.commission:commission,targetCol.baseSalary:baseSalary,
                                     finalTargetCol.salary:salary}) # type: ignore
         
-        dfData = dfData.loc[dfData[finalTargetCol.Registrar_id]!= Registrar_id]
+        dfData = dfData.loc[dfData[finalTargetCol.seller_id]!= seller_id]
     df_ans = pd.DataFrame(ls_ans)
     return df_ans
 

@@ -20,14 +20,14 @@ def concatWithTargets(dfData,df_targets):
     while len(dfData):
         
         branch= dfData.iat[0,tjIndex.branch]
-        branch_id =  dfData.iat[0,tjIndex.idBranch]
+        branch_id =  dfData.iat[0,tjIndex.branch_id]
         # print(tjIndex.branch)
         # print(branch)
         prgsCounter = l- len(dfData)
         prgs.printProgressBar(prgsCounter, l, prefix = 'Progress:', suffix = 'Complete', length = 25)
      
 
-        df_branch = dfData.loc[dfData[tjCol.idBranch]==branch_id]
+        df_branch = dfData.loc[dfData[tjCol.branch_id]==branch_id]
         while len(df_branch):
             saleTime = df_branch.iat[0,tjIndex.saleTime]
             df_thisTarget = df_targets.loc[df_targets[targetCol.branch]==branch]
@@ -40,8 +40,8 @@ def concatWithTargets(dfData,df_targets):
                 
             dfsaleTime = df_branch.loc[df_branch[tjCol.saleTime]==saleTime]
             while len(dfsaleTime):
-                Registrar = dfsaleTime.iat[0,tjIndex.Registrar]
-                Registrar_id = dfsaleTime.iat[0,tjIndex.Registrar_id]
+                seller_name = dfsaleTime.iat[0,tjIndex.seller_name]
+                seller_id = dfsaleTime.iat[0,tjIndex.seller_id]
                 Received = dfsaleTime.iat[0,tjIndex.Received]
                 
                 # Received = dfsaleTime.iat[0,tjIndex.Received]
@@ -50,14 +50,14 @@ def concatWithTargets(dfData,df_targets):
                 else:
                     commission = 0
                
-                ls_employes.append({tjCol.branch:branch,tjCol.idBranch:branch_id,tjCol.Registrar:Registrar,tjCol.Registrar_id:Registrar_id,
+                ls_employes.append({tjCol.branch:branch,tjCol.branch_id:branch_id,tjCol.seller_name:seller_name,tjCol.seller_id:seller_id,
                         tjCol.Received:Received, tjCol.saleTime:saleTime,
                         
                         targetCol.commission_percent:commission_percent,
                         targetCol.commission:commission
                         
                         }) # type: ignore
-                dfsaleTime= dfsaleTime.loc[dfsaleTime[tjCol.Registrar]!=Registrar]
+                dfsaleTime= dfsaleTime.loc[dfsaleTime[tjCol.seller_name]!=seller_name]
             df_branch = df_branch.loc[df_branch[tjCol.saleTime]!=saleTime]
         dfData = dfData.loc[dfData[tjCol.branch]!=branch]
     prgs.printProgressBar(l, l, prefix = 'Progress:', suffix = 'Complete', length = 25)

@@ -11,13 +11,14 @@ from python_files.settings_python.app_structures import export_path, mediaName, 
 # from main import * 
 from ..merger.defs import cols_selector as csr
 # import merger.defs.cols_selector  as csr
-# from .defs import RegistrarChecker as RgsChk
-from .defs import make_registrar_sale_file as mrsf
+# from .defs import seller_nameChecker as RgsChk
+from .defs import make_sellers_sale_file as mrsf
+from .defs import compare_saler_on_target as csot
 # from python_files.settings_python import DateJuToJa
 class chechOutCol():
     branch = tjCol.branch
     saleId = tjCol.saleId
-    Registrar = tjCol.Registrar
+    seller_name = tjCol.seller_name
     Received = tjCol.Received
     shiftWork = condition.shiftWork
     exclusiveReceived = "دریافتی نیش انحصاری"
@@ -25,7 +26,7 @@ class chechOutCol():
 class chechOutIndex():
     branch = 0
     saleId = 1
-    Registrar = 2
+    seller_name = 2
     Received = 3
     shiftWork = 4
     exclusiveReceived = 5
@@ -33,7 +34,7 @@ class chechOutIndex():
 
 class saleMergedWithTargetCol():
     branch = 0
-    Registrar = 1
+    seller_name = 1
     Received = 2
     shiftWork = 3
     exclusivePercent= 4
@@ -44,7 +45,7 @@ class saleMergedWithTargetCol():
 class invoicesMergeCol():
     branch=chechOutCol.branch
     # saleid= tjCol.saleId
-    Registrar = chechOutCol.Registrar
+    seller_name = chechOutCol.seller_name
     shiftWork = chechOutCol.shiftWork
     Received = chechOutCol.Received
     exclusiveReceived = chechOutCol.exclusiveReceived
@@ -63,8 +64,8 @@ def getIndexInvoicesMerge(df):
             thisClass.nonExclusiveReceived = thisIndex # type: ignore
         elif col == thisClass.Received:
             thisClass.Received = thisIndex # type: ignore
-        elif col == thisClass.Registrar:
-            thisClass.Registrar = thisIndex # type: ignore
+        elif col == thisClass.seller_name:
+            thisClass.seller_name = thisIndex # type: ignore
         elif col == thisClass.shiftWork:
             thisClass.shiftWork = thisIndex # type: ignore
     return thisClass
@@ -92,8 +93,8 @@ def getIndexInvoicesMerge(df):
 #             thisClass.nonExclusiveReceived = thisIndex # type: ignore
 #         elif col == thisClass.Received:
 #             thisClass.Received = thisIndex # type: ignore
-#         elif col == thisClass.Registrar:
-#             thisClass.Registrar = thisIndex # type: ignore
+#         elif col == thisClass.seller_name:
+#             thisClass.seller_name = thisIndex # type: ignore
 #         elif col == thisClass.shiftWork:
 #             thisClass.shiftWork = thisIndex # type: ignore
 #     return thisClass
@@ -104,24 +105,24 @@ def calculateSaleEachSaler(dfData):
     tjIndex = getIndexTj(dfData)
     lsDatas =[]
     while len(dfData):
-        Registrar_id = dfData.iat[0,tjIndex.Registrar_id]
-        dfRegistrar = dfData.loc[dfData[tjCol.Registrar_id]==Registrar_id]
-        Registrar = dfRegistrar.iat[0,tjIndex.Registrar]
-        Cash = int(dfRegistrar[tjCol.Cash].sum())
-        earnest = int(dfRegistrar[tjCol.earnest].sum())
-        tasvieBaMarjooe = int(dfRegistrar[tjCol.tasvieBaMarjooe].sum())
-        Deposit = int(dfRegistrar[tjCol.Deposit].sum())
-        transitional = int(dfRegistrar[tjCol.transitional].sum())
-        check = int(dfRegistrar[tjCol.check].sum())
-        to_other_person = int(dfRegistrar[tjCol.to_other_person].sum())
+        seller_id = dfData.iat[0,tjIndex.seller_id]
+        dfseller_name = dfData.loc[dfData[tjCol.seller_id]==seller_id]
+        seller_name = dfseller_name.iat[0,tjIndex.seller_name]
+        Cash = int(dfseller_name[tjCol.Cash].sum())
+        earnest = int(dfseller_name[tjCol.earnest].sum())
+        tasvieBaMarjooe = int(dfseller_name[tjCol.tasvieBaMarjooe].sum())
+        Deposit = int(dfseller_name[tjCol.Deposit].sum())
+        transitional = int(dfseller_name[tjCol.transitional].sum())
+        check = int(dfseller_name[tjCol.check].sum())
+        to_other_person = int(dfseller_name[tjCol.to_other_person].sum())
         Received = Cash+earnest+tasvieBaMarjooe+Deposit+transitional+check+to_other_person
         
         
-        lsDatas.append({tjCol.Registrar:Registrar,tjCol.Registrar_id:Registrar_id,
+        lsDatas.append({tjCol.seller_name:seller_name,tjCol.seller_id:seller_id,
                         tjCol.Received:Received
                         })
                     
-        dfData = dfData.loc[dfData[tjCol.Registrar_id]!=Registrar_id]
+        dfData = dfData.loc[dfData[tjCol.seller_id]!=seller_id]
     dfData = pd.DataFrame(lsDatas)
     return dfData
     # dfData.to_excel("فروش تمامی مشاوران.xlsx",index=False)
@@ -184,7 +185,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         fileTypes= myDataType_names.hesabro
         # fileTypes= myDataType_names.cumulativeSales
         # df_cumulativeSales = loadData(fileTypes,folderName)
-        # df_cumulativeSales= df_cumulativeSales[[tjCol.history,tjCol.branch,tjCol.Registrar,tjCol.Cash,tjCol.mobile,
+        # df_cumulativeSales= df_cumulativeSales[[tjCol.factor_date,tjCol.branch,tjCol.seller_name,tjCol.Cash,tjCol.mobile,
         
         #                                         tjCol.earnest,tjCol.Deposit,tjCol.tasvieBaMarjooe,
         #                                         tjCol.transitional,tjCol.saleId,tjCol.saleTime,tjCol.idBranch]]
@@ -226,8 +227,8 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # endDate = "1402/12/26"
         # endDate = "1401/12/28"
         # فیلتر فایل تجمیعی فروش در تاریخ انتخابی
-        dfInvoices =df_cumulativeSales.loc[df_cumulativeSales[tjCol.history]>=startDate]
-        dfInvoices = dfInvoices.loc[dfInvoices[tjCol.history]<=endDate]
+        dfInvoices =df_cumulativeSales.loc[df_cumulativeSales[tjCol.factor_date]>=startDate]
+        dfInvoices = dfInvoices.loc[dfInvoices[tjCol.factor_date]<=endDate]
         xlsxFileNum += 1
         thisFileName = f'فاکتورهای {startDate.replace("/","-")} تا {endDate.replace("/", "-")}.xlsx'
         thisFileName = f"{xlsxFileNum}- {thisFileName}"
@@ -268,9 +269,9 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # tjIndex = getIndexTj(df_detailedSales)
         # اندیس گزاری برای ستون های فایل فروش
         # frIndex = getIndexFr(df_detailedSales)
-        # year = df_detailedSales.iloc[0,tjIndex.history][:4]
+        # year = df_detailedSales.iloc[0,tjIndex.factor_date][:4]
         # انتخاب سال از اولین ردیف دیتای فروش
-        # year = df_detailedSales.iloc[0,frIndex.history][:4] # type: ignore
+        # year = df_detailedSales.iloc[0,frIndex.factor_date][:4] # type: ignore
         # year = input(_make_farsi_text("- لطفا سال مربوط به حقوق را وارد نمایید : "))
         # انتخاب ماه
         # monthName = f'{year}{monthsSelector.month[monthNum]["name"]}'
@@ -298,7 +299,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # prtLines(4)
         # print(_make_farsi_text("برنامه در حال اصلاح ثبت کننده های فاکتور ها می باشد لطفا منتظر بمانید"))
         # # اصلاح ثبت کننده های کالا ها در فایل فروش با استفاده از ثبت کننده فایل تجمیعی 
-        # dfInvoices = RgsChk.RegistrarEditter(df_detials=df_detailedSales,dfInvoices=df_cumulativeSales)
+        # dfInvoices = RgsChk.seller_nameEditter(df_detials=df_detailedSales,dfInvoices=df_cumulativeSales)
         # df = RgsChk.test(df_cumulativeSales)
         # df.to_excel("test tj.xlsx",index=False)
         # ساخت فایل ریز دریافتی ها از فایل های انتخاب شده بدون در نظر گرفتن ماه انتخاب شده
@@ -309,12 +310,12 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # df = RgsChk.test(dfInvoices)
         # df.to_excel(f"ریز دریافتی های هر مشاور در {monthName}ماه.xlsx",index=False)
         # فیلتر فایل فروش در بازه ماه انتخابی
-        # df_detailedSales= df_detailedSales.loc[df_detailedSales[frCol.history]>=startDate]
-        # df_detailedSales= df_detailedSales.loc[df_detailedSales[frCol.history]<=endDate]
+        # df_detailedSales= df_detailedSales.loc[df_detailedSales[frCol.factor_date]>=startDate]
+        # df_detailedSales= df_detailedSales.loc[df_detailedSales[frCol.factor_date]<=endDate]
 
         # فیلتر فایل مرجوعی در بازه ماه انتخابی
-        # dfReturns = dfReturns.loc[dfReturns[tjCol.history]>=startDate]
-        # dfReturns = dfReturns.loc[dfReturns[tjCol.history]<=endDate]
+        # dfReturns = dfReturns.loc[dfReturns[tjCol.factor_date]>=startDate]
+        # dfReturns = dfReturns.loc[dfReturns[tjCol.factor_date]<=endDate]
 
         # prtLines(3)
         # os.chdir(thisPath)
@@ -335,8 +336,8 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         dfPmInvoices = dfInvoices.loc[dfInvoices[tjCol.saleTime]>condition.saleTime]
         # dfPmDetailedSales = df_detailedSales.loc[df_detailedSales[frCol.saleTime]>condition.saleTime]
         
-        dfCheckoutAm=mrsf.makeRegistrarSaleFile(dfAmInvoices,condition.saleAm)#,df_detailedSales,dfExclusiveBite
-        dfCheckoutPm=mrsf.makeRegistrarSaleFile(dfPmInvoices,condition.salePm)#,df_detailedSales,dfExclusiveBite
+        dfCheckoutAm=mrsf.make_seller_SaleFile(dfAmInvoices,condition.saleAm)#,df_detailedSales,dfExclusiveBite
+        dfCheckoutPm=mrsf.make_seller_SaleFile(dfPmInvoices,condition.salePm)#,df_detailedSales,dfExclusiveBite
         thisFileName = "فروش شیفت عصر.xlsx"
         xlsxFileNum = make_file(dfCheckoutPm,thisFileName,xlsxFileNum)
         # dfCheckoutPm.to_excel(,index=False)
@@ -346,7 +347,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         lsCheckOut = []
         lsCheckOut.append(dfCheckoutAm)
         lsCheckOut.append(dfCheckoutPm)
-        # df_ans = makeRegistrarSaleFile(df_exclusive,df_nonExclusive,df_targets,dfInvoices)
+        # df_ans = makeseller_nameSaleFile(df_exclusive,df_nonExclusive,df_targets,dfInvoices)
         
         dfCheckout = pd.concat(lsCheckOut)
         
@@ -364,7 +365,10 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # df_emp_sale.to_excel(,index=False)
 
         
-        
+        df_compare_salers = csot.compare_salers_with_targets(dfCheckout,df_targets)
+        # xlsxFileNum += 1
+        thisFileName = f"فروشندگان برتر هانی مون {folderName}.xlsx"
+        xlsxFileNum = make_file(df_compare_salers, thisFileName, xlsxFileNum)
         
         # prtLines(4)
         # print(_make_farsi_text("ادغام فروش مشاوران در هر شعبه و شیفت با تارگت همان شعبه و شیفت"))

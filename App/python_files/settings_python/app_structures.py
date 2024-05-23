@@ -30,7 +30,7 @@ class tjCol():
     Received = "دریافتی"
     saleTime = "زمان فروش"  
     branch="عنوان شرکت"
-    idBranch = "کد شرکت"
+    branch_id = "کد شرکت"
     gender="جنسیت"
     mobile="موبایل"
     transitional= "انتقالی"
@@ -43,8 +43,8 @@ class tjCol():
     charge = "مبلغ شارژ"
     saler = "فروشنده"
     saleAget = "عامل فروش"
-    Registrar="ثبت کننده"
-    Registrar_id = "کدثبت کننده"
+    seller_name="ثبت کننده"
+    seller_id = "کدثبت کننده"
     buyer="خريدار"
     PurchaseAmount = "ارزیابی"
     PurchaseAmountLbl = "مبلغ خرید"
@@ -53,7 +53,7 @@ class tjCol():
     Discount = "تخفيف"
     TotalOne = "جمع واحد"
     quantity = "مقدار"
-    history = "تاريخ"
+    factor_date = "تاريخ"
     saleId = "شماره"
     work = "شغل"
     education = "تحصیلات"
@@ -75,8 +75,8 @@ def getIndexTj(df):
             tjIndex.average = thisIndex # type: ignore 
         elif tjIndex.branch == col:
             tjIndex.branch = thisIndex # type: ignore 
-        elif tjIndex.idBranch == col:
-            tjIndex.idBranch = thisIndex # type: ignore 
+        elif tjIndex.branch_id == col:
+            tjIndex.branch_id = thisIndex # type: ignore 
         elif tjIndex.gender == col:
             tjIndex.gender = thisIndex # type: ignore 
         elif tjIndex.mobile == col:
@@ -101,10 +101,10 @@ def getIndexTj(df):
             tjIndex.saler = thisIndex # type: ignore 
         elif tjIndex.saleAget==col:
             tjIndex.saleAget = thisIndex # type: ignore 
-        elif tjIndex.Registrar==col:
-            tjIndex.Registrar = thisIndex # type: ignore 
-        elif tjIndex.Registrar_id == col: # type: ignore
-            tjIndex.Registrar_id = thisIndex # type: ignore
+        elif tjIndex.seller_name==col:
+            tjIndex.seller_name = thisIndex # type: ignore 
+        elif tjIndex.seller_id == col: # type: ignore
+            tjIndex.seller_id = thisIndex # type: ignore
         elif tjIndex.buyer==col:
             tjIndex.buyer = thisIndex # type: ignore 
         elif tjIndex.PurchaseAmount==col:
@@ -121,8 +121,8 @@ def getIndexTj(df):
             tjIndex.TotalOne = thisIndex # type: ignore 
         elif tjIndex.quantity==col:
             tjIndex.quantity = thisIndex # type: ignore 
-        elif tjIndex.history==col:
-            tjIndex.history = thisIndex # type: ignore 
+        elif tjIndex.factor_date==col:
+            tjIndex.factor_date = thisIndex # type: ignore 
         elif tjIndex.saleId==col:
             tjIndex.saleId = thisIndex # type: ignore 
         elif tjIndex.saleTime == col:
@@ -149,7 +149,7 @@ class myDataType_names():
     contacts = "ساخت فایل مخاطب"
     compareBase = "تعیین عطرهای مشخص برای مقایسه"
     compareWith = "فایل هایی که بررسی میزان فروش آنها مقایسه میشود"
-    returnedMerchandise = "مرجوعی های کالا"
+    returnedproduct_name = "مرجوعی های کالا"
     targets = "تارگت ها"
     orders = "تهیه کالا"
     buys = "خریدها"
@@ -172,7 +172,7 @@ class dataTypeAddresses():
     contacts = "/source/Contacts/"
     compareBase = "/source/merchandize selector/base"
     compareWith = "/source/merchandize selector/with"
-    returnedMerchandise = "/فایلهای خام/مرجوعی/"
+    returnedproduct_name = "/فایلهای خام/مرجوعی/"
     targets = "/فایلهای خام/تارگت ها/"
     orders = "/فایلهای خام/تهیه کالا/"
     buys = "/فایلهای خام/خریدها/"
@@ -189,14 +189,14 @@ class condition():
 ############################################################################################
 class frCol():#version 1401.1 b ghabl chon az 1401.2 soton ha jabja shodeand dar hamyar
     saleId = "شماره"
-    idCode= "کد کالا"
-    history = "تاريخ"
+    product_id= "کد کالا"
+    factor_date = "تاريخ"
     branch = "عنوان شرکت"
     category = "عنوان طبقه"
     group = "عنوان گروه"
     groupType = "نوع گروه"
     quantity = "مقدار"
-    merchandise = "عنوان کالا"
+    product_name = "عنوان کالا"
     AmountOne = "مبلغ واحد"
     Discount = "تخفيف"
     TotalOne = "جمع واحد"
@@ -204,15 +204,15 @@ class frCol():#version 1401.1 b ghabl chon az 1401.2 soton ha jabja shodeand dar
     PurchaseAmount="ارزیابی"
     PurchaseAmountLbl="مبلغ خرید"
     buyer = "خريدار"
-    Registrar = "ثبت کننده"
-    Registrar_id = tjCol.Registrar_id
+    seller_name = "ثبت کننده"
+    seller_id = tjCol.seller_id
     saler = "فروشنده"
     idBuyer = "کد خریدار"
     gender = "جنسیت"
     birthday = "تاریخ تولد"
     mobile = "موبایل"
     saleTime= "زمان فروش"
-    idBranch = tjCol.idBranch
+    branch_id = tjCol.branch_id
 
 
 
@@ -223,14 +223,14 @@ def getIndexFr(df):
         thisIndex+=1
         if frIndex.saleId == col:
             frIndex.saleId = thisIndex # type: ignore 
-        if frIndex.idBranch == col:
-            frIndex.idBranch = thisIndex #type: ignore
-        if frIndex.Registrar_id == col:
-            frIndex.Registrar_id = thisIndex # type: ignore
-        elif frIndex.idCode == col:
-            frIndex.idCode = thisIndex # type: ignore 
-        elif frIndex.history == col:
-            frIndex.history = thisIndex # type: ignore 
+        if frIndex.branch_id == col:
+            frIndex.branch_id = thisIndex #type: ignore
+        if frIndex.seller_id == col:
+            frIndex.seller_id = thisIndex # type: ignore
+        elif frIndex.product_id == col:
+            frIndex.product_id = thisIndex # type: ignore 
+        elif frIndex.factor_date == col:
+            frIndex.factor_date = thisIndex # type: ignore 
         elif frIndex.branch == col:
             frIndex.branch = thisIndex # type: ignore 
         elif frIndex.category == col:
@@ -241,8 +241,8 @@ def getIndexFr(df):
             frIndex.groupType = thisIndex # type: ignore 
         elif frIndex.quantity == col:
             frIndex.quantity = thisIndex # type: ignore 
-        elif frIndex.merchandise == col:
-            frIndex.merchandise = thisIndex # type: ignore 
+        elif frIndex.product_name == col:
+            frIndex.product_name = thisIndex # type: ignore 
         elif frIndex.AmountOne == col:
             frIndex.AmountOne = thisIndex # type: ignore 
         elif frIndex.Discount == col:
@@ -256,8 +256,8 @@ def getIndexFr(df):
             frIndex.PurchaseAmountLbl = thisIndex # type: ignore 
         elif frIndex.buyer == col:
             frIndex.buyer = thisIndex # type: ignore 
-        elif frIndex.Registrar == col:
-            frIndex.Registrar = thisIndex # type: ignore 
+        elif frIndex.seller_name == col:
+            frIndex.seller_name = thisIndex # type: ignore 
         elif frIndex.saler == col:
             frIndex.saler = thisIndex # type: ignore 
         elif frIndex.idBuyer == col:
@@ -383,8 +383,8 @@ def loadData(filesType,destination):
         currentPath = mainPath + dataTypeAddresses.cumulativeSales
     elif filesType == myDataType_names.hesabro:
         currentPath = mainPath + dataTypeAddresses.hesabro
-    elif filesType == myDataType_names.returnedMerchandise:
-        currentPath = mainPath + dataTypeAddresses.returnedMerchandise
+    elif filesType == myDataType_names.returnedproduct_name:
+        currentPath = mainPath + dataTypeAddresses.returnedproduct_name
     elif filesType == myDataType_names.user_details:
         currentPath = mainPath + dataTypeAddresses.user_details
     elif filesType == myDataType_names.detailedSales:
@@ -431,14 +431,14 @@ def loadData(filesType,destination):
     if filesType==myDataType_names.detailedSales:
         df_all= df_all.loc[df_all[frCol.quantity]>0]
         df_all = df_all.loc[df_all[frCol.saleId] !=0]
-        df_all = df_all.loc[df_all[frCol.history] !=0]
-        df_all = df_all.loc[df_all[frCol.merchandise] !=0]
+        df_all = df_all.loc[df_all[frCol.factor_date] !=0]
+        df_all = df_all.loc[df_all[frCol.product_name] !=0]
         # setIndexFr(df_all)
         
     elif filesType == myDataType_names.cumulativeSales:
         # df_all=df_all.loc[df_all[tjCol.quantity]>0]
         df_all = df_all.loc[df_all[tjCol.saleId] !=0]
-        df_all = df_all.loc[df_all[tjCol.history] !=0]
+        df_all = df_all.loc[df_all[tjCol.factor_date] !=0]
         # tjIndex = (df_all)
 
 

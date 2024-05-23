@@ -9,9 +9,9 @@ from python_files.settings_python.app_structures import _make_farsi_text,tjCol
 
 class thisCols():
     branch = tjCol.branch
-    idBranch = tjCol.idBranch
-    Registrar = tjCol.Registrar
-    Registrar_id = tjCol.Registrar_id
+    branch_id = tjCol.branch_id
+    seller_name = tjCol.seller_name
+    seller_id = tjCol.seller_id
     Received = tjCol.Received
     shiftWork = tjCol.saleTime
 
@@ -22,12 +22,12 @@ def getIndexThisCols(df):
         thisItter += 1
         if thisClass.branch == col:
             thisClass.branch = thisItter  # type: ignore
-        elif thisClass.idBranch == col:
-            thisClass.idBranch = thisItter # type: ignore
-        elif thisClass.Registrar == col:
-            thisClass.Registrar = thisItter # type: ignore
-        elif thisClass.Registrar_id == col:
-            thisClass.Registrar_id = thisItter # type: ignore
+        elif thisClass.branch_id == col:
+            thisClass.branch_id = thisItter # type: ignore
+        elif thisClass.seller_name == col:
+            thisClass.seller_name = thisItter # type: ignore
+        elif thisClass.seller_id == col:
+            thisClass.seller_id = thisItter # type: ignore
         elif thisClass.Received == col:
             thisClass.Received = thisItter # type: ignore
         elif thisClass.shiftWork == col:
@@ -40,13 +40,13 @@ def sale_employes(dfData):
     this_index = getIndexThisCols(dfData)  
     ls_data = []
     while len(dfData):
-        Registrar_id = dfData.iat[0,this_index.Registrar_id]
-        dfRegistrar = dfData.loc[dfData[thisCols.Registrar_id]== Registrar_id]
-        dfData = dfData.loc[dfData[thisCols.Registrar_id] != Registrar_id]
-        Received = int(dfRegistrar[thisCols.Received].sum())
-        Registrar = dfRegistrar.iat[0, this_index.Registrar]
-        ls_data.append({thisCols.Registrar_id:Registrar_id, 
-                        thisCols.Registrar : Registrar, thisCols.Received:Received
+        seller_id = dfData.iat[0,this_index.seller_id]
+        dfseller_name = dfData.loc[dfData[thisCols.seller_id]== seller_id]
+        dfData = dfData.loc[dfData[thisCols.seller_id] != seller_id]
+        Received = int(dfseller_name[thisCols.Received].sum())
+        seller_name = dfseller_name.iat[0, this_index.seller_name]
+        ls_data.append({thisCols.seller_id:seller_id, 
+                        thisCols.seller_name : seller_name, thisCols.Received:Received
                         })
     df_ans = pd.DataFrame(ls_data)
     return df_ans
