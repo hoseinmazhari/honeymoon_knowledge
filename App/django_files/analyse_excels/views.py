@@ -84,7 +84,8 @@ def download_file(request):
         # answer = answer[staticIndex:]
         # print(answer)
         file = open("temp.txt","r+", encoding="utf-8") 
-       
+        #change from here
+        
         answer= (file.read())
         # answer = answer.replace("?????", "/")
         # answer = answer.replace("%%%%%%", ":")
@@ -149,13 +150,16 @@ def salary_hesabro(request):
                         asts.salary_requires.startDate: startDate,
                         asts.salary_requires.endDate: endDate}
                 answer = task_selector(atk.task_name.salary,args_)
-                print("run")
-                file = open("temp.txt","w", encoding="utf-8")
-                file.write(answer)
-                file.close()
-                # answer = answer.replace("\\", "?????")
-                # answer = answer.replace(":", "%%%%%%")
-                return redirect('download_file/')
+                import shutil
+                archived = shutil.make_archive("zipped file", 'zip', answer)
+                # answer= (archived.read())
+                # print("run")
+                # file = open("temp.txt","w", encoding="utf-8")
+                # file.write(answer)
+                # file.close()
+                # # answer = answer.replace("\\", "?????")
+                # # answer = answer.replace(":", "%%%%%%")
+                # return redirect('download_file/')
                     # return redirect('/@analyse_excels/salary/result/')
                     # return redirect('/@analyse_excels/result.html/?answer={}'.format(answer))
                     # return redirect('/@analyse_excels/result/{}/'.format(answer))

@@ -126,7 +126,7 @@ def calculateSaleEachSaler(dfData):
     dfData = pd.DataFrame(lsDatas)
     return dfData
     # dfData.to_excel("فروش تمامی مشاوران.xlsx",index=False)
-def make_file(df,thisFileName,xlsxFileNum,thisPath):
+def make_file(df,thisFileName,xlsxFileNum):
     xlsxFileNum += 1
     # thisFileName = f'جمع فروش هر مشاور.xlsx'
     thisFileName = f"{xlsxFileNum}- {thisFileName}"
@@ -136,7 +136,7 @@ def make_file(df,thisFileName,xlsxFileNum,thisPath):
     # file_name = 'MarksData.xlsx'
  
     # creating an ExcelWriter object
-    with pd.ExcelWriter(f"{thisPath}/{thisFileName}") as writer:
+    with pd.ExcelWriter(thisFileName) as writer:
         # writing to the 'Employee' sheet
         df.to_excel(writer, sheet_name='Sales', index=False)
     # df.to_excel(thisFileName,index = False)
@@ -159,21 +159,21 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         print(_make_farsi_text(folderName))
         thisPath = os.getcwd()
         thisPath = f"{thisPath}/{mediaName}"
-        # os.chdir(thisPath)
+        os.chdir(thisPath)
         prtLines(2)
         print(_make_farsi_text(": انتقال مسیر خروجی فایل های به"))
         print(thisPath)
         try:
-            os.mkdir(f"{thisPath}/{export_path}")
+            os.mkdir(export_path)
         except:
             pass
         thisPath = f"{thisPath}/{export_path}"
-        # os.chdir(thisPath)
+        os.chdir(thisPath)
         prtLines(2)
         print(_make_farsi_text(": انتقال مسیر خروجی فایل های به"))
         print(thisPath)
         try:
-            os.mkdir(f"{thisPath}/{folderName}")
+            os.mkdir(folderName)
         except:
             pass
         thisPath = f"{thisPath}/{folderName}"
@@ -193,7 +193,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         xlsxFileNum += 1
         thisFileName = f"فاکتورهای {fileTypes} پس از اصلاح نام ستون ها.xlsx"
         thisFileName = f"{xlsxFileNum}- {thisFileName}"
-        df_cumulativeSales.to_excel(f"{thisPath}/{thisFileName}",index = False)
+        df_cumulativeSales.to_excel(thisFileName,index = False)
         
         # dfInvoices.to_excel("dfInvoices.xlsx",index=False)
         # prtLines(1)
@@ -232,9 +232,9 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         xlsxFileNum += 1
         thisFileName = f'فاکتورهای {startDate.replace("/","-")} تا {endDate.replace("/", "-")}.xlsx'
         thisFileName = f"{xlsxFileNum}- {thisFileName}"
-        dfInvoices.to_excel(f"{thisPath}/{thisFileName}",index = False)
+        dfInvoices.to_excel(thisFileName,index = False)
         time.sleep(1)
-        dfInvoices = pd.read_excel(f"{thisPath}/{thisFileName}")
+        dfInvoices = pd.read_excel(thisFileName)
         prtLines(2)
         print(_make_farsi_text(f"{thisFileName} استخراج و ذخیره شد"))
         prtLines(2)
@@ -244,7 +244,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         xlsxFileNum += 1
         thisFileName = f'جمع فروش هر مشاور.xlsx'
         thisFileName = f"{xlsxFileNum}- {thisFileName}"
-        df_SaleEachSaler.to_excel(f"{thisPath}/{thisFileName}",index = False)
+        df_SaleEachSaler.to_excel(thisFileName,index = False)
         prtLines(2)
         print(_make_farsi_text(f"{thisFileName} استخراج و ذخیره شد"))
         prtLines(2)
@@ -339,10 +339,10 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         dfCheckoutAm=mrsf.make_seller_SaleFile(dfAmInvoices,condition.saleAm)#,df_detailedSales,dfExclusiveBite
         dfCheckoutPm=mrsf.make_seller_SaleFile(dfPmInvoices,condition.salePm)#,df_detailedSales,dfExclusiveBite
         thisFileName = "فروش شیفت عصر.xlsx"
-        xlsxFileNum = make_file(dfCheckoutPm,thisFileName,xlsxFileNum,thisPath)
+        xlsxFileNum = make_file(dfCheckoutPm,thisFileName,xlsxFileNum)
         # dfCheckoutPm.to_excel(,index=False)
         thisFileName = "فروش شیفت صبح.xlsx"
-        xlsxFileNum = make_file(dfCheckoutAm,thisFileName,xlsxFileNum,thisPath)
+        xlsxFileNum = make_file(dfCheckoutAm,thisFileName,xlsxFileNum)
         # dfCheckoutAm.to_excel(,index=False)
         lsCheckOut = []
         lsCheckOut.append(dfCheckoutAm)
@@ -353,7 +353,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         
         # xlsxFileNum += 1
         thisFileName = f"فروش هر مشاور در هر شعبه و شیفت.xlsx"
-        xlsxFileNum = make_file(dfCheckout, thisFileName, xlsxFileNum, thisPath)
+        xlsxFileNum = make_file(dfCheckout, thisFileName, xlsxFileNum)
         # thisFileName = f"{xlsxFileNum}- {thisFileName}"
         # dfCheckout.to_excel(thisFileName,index = False)
         
@@ -362,14 +362,14 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # df_emp_sale = sale_each_employe.sale_employes(dfCheckout)
         df_emp_sale = sale_each_employe.sale_sellers_in_each_branch(dfCheckout)
         thisFileName = "فروش هر مشاور در هر شعبه.xlsx"
-        xlsxFileNum = make_file(df_emp_sale, thisFileName, xlsxFileNum, thisPath)
+        xlsxFileNum = make_file(df_emp_sale, thisFileName, xlsxFileNum)
         # df_emp_sale.to_excel(,index=False)
 
         
         df_compare_salers = csot.compare_salers_with_targets(dfCheckout,df_targets)
         # xlsxFileNum += 1
         thisFileName = f"فروشندگان برتر هانی مون {folderName}.xlsx"
-        xlsxFileNum = make_file(df_compare_salers, thisFileName, xlsxFileNum, thisPath)
+        xlsxFileNum = make_file(df_compare_salers, thisFileName, xlsxFileNum)
         
         # prtLines(4)
         # print(_make_farsi_text("ادغام فروش مشاوران در هر شعبه و شیفت با تارگت همان شعبه و شیفت"))
@@ -377,7 +377,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         df_ConcatWithTargets= cswt.concatWithTargets(dfCheckout,df_targets)
         # xlsxFileNum += 1
         thisFileName = f"ادغام فروش با تارگت {folderName}.xlsx"
-        xlsxFileNum = make_file(df_ConcatWithTargets, thisFileName, xlsxFileNum,thisPath)
+        xlsxFileNum = make_file(df_ConcatWithTargets, thisFileName, xlsxFileNum)
         # thisFileName = f"{xlsxFileNum}- {thisFileName}"
         # df_ConcatWithTargets.to_excel(thisFileName,index = False)
         
@@ -386,7 +386,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         
         df_final = commission.commission(df_ConcatWithTargets,df_targets)
         thisFileName = f"فایل نهایی برای مشاوران اصلی در {startDate.replace('/','-')} تا {endDate.replace('/', '-')} ماه.xlsx"
-        xlsxFileNum = make_file(df_final, thisFileName, xlsxFileNum,thisPath)
+        xlsxFileNum = make_file(df_final, thisFileName, xlsxFileNum)
         # thisFileName = f"{xlsxFileNum}- {thisFileName}"
         # df_final.to_excel(thisFileName,index = False
         prtLines()
@@ -394,8 +394,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         thisPath = os.getcwd()
         os.chdir(appPath)
         # xlsxFileNum -= 1
-        # return f"{thisPath}/{xlsxFileNum}- {thisFileName}"
-        return thisPath
+        return f"{thisPath}/{xlsxFileNum}- {thisFileName}"
 
 # salary()
 

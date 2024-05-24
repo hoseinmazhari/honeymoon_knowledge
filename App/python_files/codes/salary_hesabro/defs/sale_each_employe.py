@@ -35,20 +35,41 @@ def getIndexThisCols(df):
     return thisClass
 
                      
-
-def sale_employes(dfData):
+def sale_sellers_in_each_branch(dfData):
     this_index = getIndexThisCols(dfData)  
     ls_data = []
     while len(dfData):
         seller_id = dfData.iat[0,this_index.seller_id]
-        dfseller_name = dfData.loc[dfData[thisCols.seller_id]== seller_id]
+        seller_name = dfData.iat[0, this_index.seller_name]
+        df_seller= dfData.loc[dfData[thisCols.seller_id]== seller_id]
         dfData = dfData.loc[dfData[thisCols.seller_id] != seller_id]
-        Received = int(dfseller_name[thisCols.Received].sum())
-        seller_name = dfseller_name.iat[0, this_index.seller_name]
-        ls_data.append({thisCols.seller_id:seller_id, 
-                        thisCols.seller_name : seller_name, thisCols.Received:Received
-                        })
+        while len(df_seller):
+            branch = df_seller.iat[0, this_index.branch]
+            dfBranch = df_seller.loc[df_seller[thisCols.branch] == branch]
+            df_seller = df_seller.loc[df_seller[thisCols.branch] != branch]
+            Received = int(dfBranch[thisCols.Received].sum())
+            
+            ls_data.append({thisCols.branch:branch,
+                            thisCols.seller_id:seller_id, 
+                            thisCols.seller_name : seller_name,
+                            thisCols.Received:Received
+                            })
     df_ans = pd.DataFrame(ls_data)
     return df_ans
+
+# def sale_employes(dfData):
+#     this_index = getIndexThisCols(dfData)  
+#     ls_data = []
+#     while len(dfData):
+#         seller_id = dfData.iat[0,this_index.seller_id]
+#         dfseller_name = dfData.loc[dfData[thisCols.seller_id]== seller_id]
+#         dfData = dfData.loc[dfData[thisCols.seller_id] != seller_id]
+#         Received = int(dfseller_name[thisCols.Received].sum())
+#         seller_name = dfseller_name.iat[0, this_index.seller_name]
+#         ls_data.append({thisCols.seller_id:seller_id, 
+#                         thisCols.seller_name : seller_name, thisCols.Received:Received
+#                         })
+#     df_ans = pd.DataFrame(ls_data)
+#     return df_ans
 
   

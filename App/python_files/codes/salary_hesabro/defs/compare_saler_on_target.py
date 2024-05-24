@@ -16,7 +16,7 @@ class Compare_sellers_with_targetsCols():
     seller_id = tjCol.seller_id
     Received = tjCol.Received
     goodTarget = targetCol.goodTarget
-    progress = "پیشرفت"
+    progress =  'نسبت دریافتی به تارگت خوب' # "پیشرفت"
 def get_index_Compare_sellers_with_targetsCols(df):
     thisClass = Compare_sellers_with_targetsCols()
     thisItter = -1
