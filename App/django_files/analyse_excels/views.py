@@ -86,11 +86,12 @@ def download_file(request):
         #change from here
     print(file_path)
     filename= (file_path.read())
-    if os.path.exists(file_path):
-        mime_type, _ = mimetypes.guess_type(file_path)
+    print(filename)
+    if os.path.exists(filename):
+        mime_type, _ = mimetypes.guess_type(filename)
         if mime_type is None:
             mime_type = 'application/octet-stream'
-        with open(file_path, 'rb') as file:
+        with open(filename, 'rb') as file:
             response = HttpResponse(file.read(), content_type=mime_type)
             response['Content-Disposition'] = f'attachment; filename="{filename}"'
             return response
@@ -173,14 +174,15 @@ def salary_hesabro(request):
                 ls_answer = task_selector(atk.task_name.salary,args_)
                 import shutil
                 filesPath = ls_answer[0]
-                filesPath = f"{filesPath}/media/"
+                # filesPath = f"{filesPath}/media/"
+                thisPath = os.getcwd()
                 print(filesPath)
                 fileName = ls_answer[1]
                 print("now we need to make zip file")
-                archived = shutil.make_archive(f"{fileName}", 'zip', filesPath)
+                archived = shutil.make_archive(f"{thisPath}/media/{fileName}", 'zip', filesPath)
                 print("zip file created")
                 file = open("temp.txt","w", encoding="utf-8")
-                file.write(f"{filesPath}/{fileName}.zip")
+                file.write(f"{thisPath}/media/{fileName}.zip")
                 file.close()
                 return redirect(f'download/')
                 # return render(request,'A/home.html')
