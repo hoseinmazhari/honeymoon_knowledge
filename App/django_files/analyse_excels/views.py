@@ -1,4 +1,8 @@
 import time
+import os
+import mimetypes
+from django.http import HttpResponse, Http404
+from django.conf import settings
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
 # from selenium import webdriver
@@ -75,7 +79,24 @@ def merge_base_factors(request):
     return render(request,"analyse_excels/merge_factors_hamyar_hesabro.html",result)
 # def rsp(response):
 #     return response
+
 def download_file(request):
+    # file_path = os.path.join(settings.MEDIA_ROOT, filename)
+    file_path = open("temp.txt","r+", encoding="utf-8") 
+        #change from here
+    print(file_path)
+    filename= (file_path.read())
+    if os.path.exists(file_path):
+        mime_type, _ = mimetypes.guess_type(file_path)
+        if mime_type is None:
+            mime_type = 'application/octet-stream'
+        with open(file_path, 'rb') as file:
+            response = HttpResponse(file.read(), content_type=mime_type)
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+    else:
+        raise Http404("File does not exist")
+def download_xls_file(request):
     # if request.method == 'POST':
     try:
         # print(answer)
@@ -149,14 +170,23 @@ def salary_hesabro(request):
                         asts.salary_requires.targets: df_targets,
                         asts.salary_requires.startDate: startDate,
                         asts.salary_requires.endDate: endDate}
-                answer = task_selector(atk.task_name.salary,args_)
+                ls_answer = task_selector(atk.task_name.salary,args_)
                 import shutil
-                archived = shutil.make_archive("zipped file", 'zip', answer)
+                filesPath = ls_answer[0]
+                filesPath = f"{filesPath}/media/"
+                print(filesPath)
+                fileName = ls_answer[1]
+                print("now we need to make zip file")
+                archived = shutil.make_archive(f"{fileName}", 'zip', filesPath)
+                print("zip file created")
+                file = open("temp.txt","w", encoding="utf-8")
+                file.write(f"{filesPath}/{fileName}.zip")
+                file.close()
+                return redirect(f'download/')
+                # return render(request,'A/home.html')
                 # answer= (archived.read())
                 # print("run")
-                # file = open("temp.txt","w", encoding="utf-8")
-                # file.write(answer)
-                # file.close()
+                
                 # # answer = answer.replace("\\", "?????")
                 # # answer = answer.replace(":", "%%%%%%")
                 # return redirect('download_file/')

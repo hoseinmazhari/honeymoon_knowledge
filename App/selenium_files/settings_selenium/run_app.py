@@ -467,7 +467,8 @@ def task_selector(selected,args_= "",**kwargs):
             df_targets = args_[asts.salary_requires.targets]
             startDate = args_[asts.salary_requires.startDate]
             endDate = args_[asts.salary_requires.endDate]
-            answer = salary(df_invoices, df_targets, startDate, endDate)
+            filesPath,fileName = salary(df_invoices, df_targets, startDate, endDate)
+            answer = [filesPath, fileName]
             # df = pd.read_csv(args_,sep=",")
             
             # df.to_excel("this Is test.xlsx")

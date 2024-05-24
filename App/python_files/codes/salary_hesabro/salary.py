@@ -177,7 +177,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         except:
             pass
         thisPath = f"{thisPath}/{folderName}"
-        os.chdir(thisPath)
+        # os.chdir(thisPath)
         prtLines(2)
         print(_make_farsi_text(": انتقال مسیر خروجی فایل های به"))
         print(thisPath)
@@ -391,11 +391,11 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # df_final.to_excel(thisFileName,index = False
         prtLines()
         print(_make_farsi_text("عملیات محاسبه حقوق تکمیل شد"))
-        thisPath = os.getcwd()
-        os.chdir(appPath)
+        # thisPath = os.getcwd()
+        # os.chdir(appPath)
         # xlsxFileNum -= 1
         # return f"{thisPath}/{xlsxFileNum}- {thisFileName}"
-        return thisPath
+        return thisPath,folderName
 
 # salary()
 
