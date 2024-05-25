@@ -601,9 +601,22 @@ def get_sale_hesabro_payment_index(df):
             thisClass.saleTime = thisIndex # type: ignore   
     return thisClass
 ############################################################################################
-class send_birthday_toSheets_require():
-    invoices = "فاکتور ها"
-    branchs = ""
+class birthday_output_cols():
+    mobile = "موبایل"
+    name = "نام و نام خانوادگی"
+    birthday = "تاریخ تولد"
+def get_index_birthday_output_cols(df):
+    thisItter = -1
+    thisClass = birthday_output_cols()
+    for col in df.columns:
+        thisItter += 1
+        if col == thisClass.mobile:
+            thisClass.mobile = thisItter
+        elif col == thisClass.name:
+            thisClass.name = thisItter
+        elif col == thisClass.birthday:
+            thisClass.birthday = thisItter
+    return thisClass
 
 
 

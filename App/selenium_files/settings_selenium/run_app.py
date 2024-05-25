@@ -482,10 +482,11 @@ def task_selector(selected,args_= "",**kwargs):
         elif selected == tsk.task_name.update_birthday:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:
-                # dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
+                dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
                 
-                
-                # send_group_sms(dfData,tsk.task_name.update_birthday,args_)
+                for i in range(len(dfData)):
+                    
+                send_group_sms(dfData,tsk.task_name.update_birthday,args_)
                 try:
                     birthPath = os.getcwd()
                     reports = "reports"

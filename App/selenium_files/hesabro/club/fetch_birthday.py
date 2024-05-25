@@ -18,10 +18,11 @@ from selenium_files.settings_selenium.main_defs import write_in_element
 from selenium_files.settings_selenium import app_address
 # from tqdm import tqdm
 # from .test import dwn
-class birthday_output_cols():
-    mobile = "موبایل"
-    name = "نام و نام خانوادگی"
-    birthday = "تاریخ تولد"
+from python_files.settings_python.app_structures import birthday_output_cols
+# class birthday_output_cols():
+#     mobile = "موبایل"
+#     name = "نام و نام خانوادگی"
+#     birthday = "تاریخ تولد"
 def download_data(driver, title, this_delay): 
     try:
         is_true = False
