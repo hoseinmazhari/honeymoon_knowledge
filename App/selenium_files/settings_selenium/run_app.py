@@ -148,7 +148,9 @@ def run_hesabro():
             waiter = input("press any key and enter: ")
             Browser.save_cookies(mybrowser,cookies_file_name)
             is_logged_in = True
-        
+            time.sleep(3)
+            Browser.change_url(main_url)
+            
         except:
             is_logged_in = False
     return driver , is_logged_in
@@ -484,7 +486,7 @@ def task_selector(selected,args_= "",**kwargs):
             if is_logged_in:
                 dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
                 
-                for i in range(len(dfData)):
+                # for i in range(len(dfData)):
                     
                 send_group_sms(dfData,tsk.task_name.update_birthday,args_)
                 try:
