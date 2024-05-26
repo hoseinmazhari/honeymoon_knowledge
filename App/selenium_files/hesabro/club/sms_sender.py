@@ -45,6 +45,24 @@ def send_sms(domain_ = 'http://aradpayamak.net', username_ = 'hanimoon', passwor
     else:
         print(f"Error: {response.status_code}")
         return 0
+def send_sms_from_df(dfData, tsk_name, args_):
+    from App.python_files.settings_python.app_structures import birthday_output_cols,get_index_birthday_output_cols
+    from App.python_files.settings_python import printProgress as prgs
+    thisClass = birthday_output_cols()
+    thisIndex = get_index_birthday_output_cols(dfData)
+    l = len(dfData)
+    while (len(dfData)):
+        prgs.printProgressBar(l-len(dfData),l,length=25)
+        mobile = dfData.iat[0, thisIndex.mobile]
+        name = dfData.iat[0, thisIndex.name]
+        birthday = dfData.iat[0, thisIndex.birthday]
+        lsData = [{thisClass.mobile: mobile, 
+                    thisClass.name:name, thisClass.birthday:birthday}]
+        this_df = pd.DataFrame(lsData)
+        send_group_sms(this_df,tsk_name, args_)        
+        dfData = dfData.loc[dfData[thisClass.mobile] != mobile]
+
+
 is_name = "@نام_و_نام_خانوادگی"
 def send_group_sms(dfData,kind = task_name.update_birthday,msg="تست"):
     # ls= []

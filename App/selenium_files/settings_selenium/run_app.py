@@ -485,26 +485,25 @@ def task_selector(selected,args_= "",**kwargs):
             driver, is_logged_in = run_hesabro()
             if is_logged_in:
                 dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
-                
-                # for i in range(len(dfData)):
+                upb.send_sms_from_df(dfData, tsk.task_name.update_birthday,args_)
                     
-                send_group_sms(dfData,tsk.task_name.update_birthday,args_)
-                try:
-                    birthPath = os.getcwd()
-                    reports = "reports"
-                    os.mkdir(reports)
-                except:
-                    pass
-                # os.chdir(f"{birthPath}/{reports}")
+                # send_group_sms(dfData,tsk.task_name.update_birthday,args_)
+                # try:
+                #     birthPath = os.getcwd()
+                #     reports = "reports"
+                #     os.mkdir(reports)
+                # except:
+                #     pass
+                # # os.chdir(f"{birthPath}/{reports}")
 
-                # birthPath = os.getcwd()
-                birthPath = f"{birthPath}/{reports}"
-                birthdayDir = f"{birthPath}/birthday"
-                try:
-                    # birthdayDir = "birthday"
-                    os.mkdir(birthdayDir)
-                except:
-                    pass
+                # # birthPath = os.getcwd()
+                # birthPath = f"{birthPath}/{reports}"
+                # birthdayDir = f"{birthPath}/birthday"
+                # try:
+                #     # birthdayDir = "birthday"
+                #     os.mkdir(birthdayDir)
+                # except:
+                #     pass
                 # os.chdir(f"{birthPath}/{birthdayDir}")
                 # dfData.to_excel(f"{birthdayDir}/birthday in {djtj.getDateTimeForFileName()}.xlsx",index=False)
             # mybrowser = Browser()
