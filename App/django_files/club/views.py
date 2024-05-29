@@ -109,4 +109,4 @@ def Create_hesabro_customers_from_hamyar(request):
         # return redirect(("arad/"))
     # message ={"messages":"test"}
     
-    return render(request, 'club/Update_hesabro_customers_from_hamyar.html',{'form': form, "result":"stoped"})
+    return render(request, 'club/Create_hesabro_customers_from_hamyar.html',{'form': form, "result":"stoped"})

@@ -363,6 +363,14 @@ def task_selector(selected,args_= "",**kwargs):
         print()
         print(_make_farsi_text(selected))
         print()
+        if selected == tsk.task_name.Create_hesabro_customers_from_hamyar:
+            driver, is_logged_in = run_hesabro()
+            if is_logged_in:
+                title = tsk.task_name.Create_hesabro_customers_from_hamyar
+                dfData = args_
+                answer = uhcfh.run_Update_hesabro_customers_from_hamyar(driver, main_url, dfData)
+                # dfData.to_excel(f"{title}.xlsx", index= False)
+                print(answer)
         if selected == tsk.task_name.Update_hesabro_customers_from_hamyar:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:
