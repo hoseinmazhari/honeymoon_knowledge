@@ -13,7 +13,7 @@ from . import xpath_hesabro
 from .app_address import hesabro_domain,honeymoonatr_domain
 
 from selenium_files.hesabro.product import obsolete
-from selenium_files.hesabro.club import update_hesabro_customers_from_hamyar as uhcfh
+from selenium_files.hesabro.club import update_hesabro_customers_from_hamyar as uhcfh, create_hesabro_customers_from_hamyar as chcfh
 from .user_pass import get_index_user_pass
 # from . import xpath
 from . import app_address
@@ -368,7 +368,7 @@ def task_selector(selected,args_= "",**kwargs):
             if is_logged_in:
                 title = tsk.task_name.Create_hesabro_customers_from_hamyar
                 dfData = args_
-                answer = uhcfh.run_Update_hesabro_customers_from_hamyar(driver, main_url, dfData)
+                answer = chcfh.run_Create_hesabro_customers_from_hamyar(driver, main_url, dfData)
                 # dfData.to_excel(f"{title}.xlsx", index= False)
                 print(answer)
         if selected == tsk.task_name.Update_hesabro_customers_from_hamyar:

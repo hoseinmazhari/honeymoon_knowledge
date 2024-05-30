@@ -43,6 +43,7 @@ class shop():
             
 class customers():
     class create():
+        # kind = '//*[@id="customerform-type_id"]'
         kind = '//*[@id="customerform-type_id"]'
         gender = '//*[@id="customerform-sex"]'
         nationality = '//*[@id="customerform-national"]'
@@ -53,9 +54,12 @@ class customers():
         birthday = '//*[@id="customerform-birthday"]'
         email = '//*[@id="customerform-email"]'
         work = '/html/body/div[2]/div/div[2]/div[2]/form/div[1]/div/div[11]/div/span/span[1]/span/ul/li/input'
-        mobile = '//*[@id="customerform-mobile"]'
-        postal_code = '//*[@id="customerform-zipcode"]'
         
+        mobile = '//*[@id="customerform-mobile"]'
+        address_type = '//*[@id="customerform-address_type"]'
+        postal_code = '//*[@id="customerform-zipcode"]'
+        address = '//*[@id="customerform-address"]'
+        submit = '//*[@id="w0"]/div[2]/button'
 
 class product_view():
     class tabs():

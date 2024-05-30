@@ -63,40 +63,61 @@ def get_index_Create_hesabro_customers_from_hamyar_cols(df):
             thisClass.education = thisItter #type: ignore
     return thisClass
 
+
 def createCustomer(driver, customer, birthday, address, postalCode,
                     work, phone, codeMelli, gender, education, mobile):
     
     driver.get(urls_hesabro.customers.create)
-    element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.mobile))    )
+    element = driver.find_element(By.XPATH,xpath_hesabro.customers.create.kind)
+    # element = WebDriverWait(driver, 10).until(
+    #     EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.kind))    )
         # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
         #driver.execute_script("return arguments[0].scrollIntoView();", element)
+    
     element.click()
-    write_in_element(str(mobile), element)
-    time.sleep(0.2)
 
-    element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.alias_name))    )
-        # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
-        #driver.execute_script("return arguments[0].scrollIntoView();", element)
-    element.click()
-    write_in_element(str(customer), element)
-    time.sleep(0.2)
+    time.sleep(2)
 
-    element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.birthday))    )
-        # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
-        #driver.execute_script("return arguments[0].scrollIntoView();", element)
-    element.click()
-    write_in_element(str(birthday), element)
-    time.sleep(0.2)
+    element = element.find_elements(By.TAG_NAME,'option')
+    # element.s
+    element[1].click()
 
     element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.gender))    )
         # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
         #driver.execute_script("return arguments[0].scrollIntoView();", element)
+
     element.click()
-    write_in_element(str(gender), element)
+
+    time.sleep(0.4)
+
+    element = element.find_elements(By.TAG_NAME,'option')
+
+    if gender == 'مرد':
+        gender_item = 1
+    elif gender == 'زن':
+        gender_item = 2
+    else:
+        gender_item = 0
+
+    element[gender_item].click()
+
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.nationality))    )
+        # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
+        #driver.execute_script("return arguments[0].scrollIntoView();", element)
+    element.click()
+    time.sleep(0.4)
+    element = element.find_elements(By.TAG_NAME,'option')
+    
+    element[1].click()
+
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.name))    )
+        # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
+        #driver.execute_script("return arguments[0].scrollIntoView();", element)
+    element.click()
+    write_in_element(str("_"), element)
     time.sleep(0.2)
 
     element = WebDriverWait(driver, 10).until(
@@ -108,12 +129,13 @@ def createCustomer(driver, customer, birthday, address, postalCode,
     time.sleep(0.2)
 
     element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.name))    )
+        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.alias_name))    )
         # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
         #driver.execute_script("return arguments[0].scrollIntoView();", element)
     element.click()
-    write_in_element(str("_"), element)
+    write_in_element(str(customer), element)
     time.sleep(0.2)
+
 
     element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.national_id))    )
@@ -124,23 +146,76 @@ def createCustomer(driver, customer, birthday, address, postalCode,
     time.sleep(0.2)
 
     element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.postal_code))    )
+        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.birthday))    )
         # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
         #driver.execute_script("return arguments[0].scrollIntoView();", element)
     element.click()
-    write_in_element(str(postalCode), element)
+    write_in_element(str(birthday), element)
     time.sleep(0.2)
 
     element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.work))    )
         # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
         #driver.execute_script("return arguments[0].scrollIntoView();", element)
+    
     element.click()
     write_in_element(str(work), element)
+    element = driver.switch_to.active_element
+    element.click()
+    time.sleep(0.2)
+
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.mobile))    )
+        # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
+        #driver.execute_script("return arguments[0].scrollIntoView();", element)
+    element.click()
+    write_in_element(str(mobile), element)
     time.sleep(0.2)
 
     
 
+    
+    
+    
+
+    
+
+    if len(postalCode) or len(address):
+        element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.address_type))    )
+        # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
+        #driver.execute_script("return arguments[0].scrollIntoView();", element)
+        element.click()
+        element = element.find_elements(By.TAG_NAME,'option')
+    
+        element[4].click()
+
+
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.postal_code))    )
+            # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
+            #driver.execute_script("return arguments[0].scrollIntoView();", element)
+        element.click()
+        write_in_element(str(postalCode), element)
+        time.sleep(0.2)
+
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.address))    )
+            # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
+            #driver.execute_script("return arguments[0].scrollIntoView();", element)
+        element.click()
+        write_in_element(str(address), element)
+        time.sleep(0.2)
+
+    
+    
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.submit))    )
+        # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
+        #driver.execute_script("return arguments[0].scrollIntoView();", element)
+    element.click()
+    time.sleep(2)
+    return True
 
 
 
@@ -193,7 +268,8 @@ def run_Create_hesabro_customers_from_hamyar(driver, main_url, dfData):
         #     hamyar_condition =False
         action_True = createCustomer(driver, customer, birthday, address, postalCode,
                                      work, phone, codeMelli, gender, education, mobile)
-        action_True = coin_setter(mobile, driver, main_url, coin, hamyar_condition)
+        if action_True:
+            action_True = coin_setter(mobile, driver, main_url, coin, hamyar_condition)
         
         # dfData = dfData.loc[dfData["mobile"]!=mobile]
         if action_True == False:
@@ -206,7 +282,7 @@ def run_Create_hesabro_customers_from_hamyar(driver, main_url, dfData):
             df = pd.DataFrame(_ls_deactive_users)
             thisPath = os.getcwd()
             
-            df.to_excel(f"{thisPath}/media/deative_users {thisTime}.xlsx")
+            df.to_excel(f"{thisPath}/media/New_Deactive_users {thisTime}.xlsx")
             # false_count += 1
         else:
             
@@ -218,7 +294,7 @@ def run_Create_hesabro_customers_from_hamyar(driver, main_url, dfData):
             df = pd.DataFrame(_ls_active_users)
             thisPath = os.getcwd()
             
-            df.to_excel(f"{thisPath}/media/Active_users {thisTime}.xlsx")
+            df.to_excel(f"{thisPath}/media/New_Active_users {thisTime}.xlsx")
 
         # item = random.randint(1,len(urls['random']))
         # rnd_page = get_rnd_page(item)
@@ -229,7 +305,7 @@ def run_Create_hesabro_customers_from_hamyar(driver, main_url, dfData):
         #     time.sleep(3)
         if save_counter>10:
             save_counter = 0
-            dfData.to_excel(f"{thisPath}/media/newCharge.xlsx",index=False)
+            dfData.to_excel(f"{thisPath}/media/new_mod_Charge.xlsx",index=False)
         # time.sleep(random.randint(3,6))
         
         # thisPath = os.getcwd()
