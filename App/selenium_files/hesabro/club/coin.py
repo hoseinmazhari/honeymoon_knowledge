@@ -318,7 +318,9 @@ def coin_setter(mobile, driver, main_url, coin, hamyar_condition):
         # #######print(f"is searched = {is_search_fieldMobile}")
         # _input = _input.find_element(by="xpath",value=".//span[@class='input.select2-search select2-search--dropdown',@aria-control='select2-shortcutCustomerName-results']")
         _mobile_input = driver.switch_to.active_element
-        
+        mobile = str(mobile)
+        if mobile[0]!= "0":
+            mobile = f"0{mobile}"
         write_in_element(mobile,_mobile_input)
         _mobile_input.send_keys(Keys.ENTER)
         time.sleep(3.5)

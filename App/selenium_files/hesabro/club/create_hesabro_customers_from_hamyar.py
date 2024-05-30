@@ -7,7 +7,7 @@ from selenium_files.settings_selenium import xpath_hesabro
 from selenium_files.settings_selenium.browser import Browser
 from selenium_files.settings_selenium.main_defs import write_in_element, change_chk
 # ,write_in_element
-
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 import time
 from selenium_files.settings_selenium.app_address import urls_hesabro
@@ -68,14 +68,21 @@ def createCustomer(driver, customer, birthday, address, postalCode,
                     work, phone, codeMelli, gender, education, mobile):
     
     driver.get(urls_hesabro.customers.create)
-    element = driver.find_element(By.XPATH,xpath_hesabro.customers.create.kind)
+    time.sleep(3)
+    # element = driver.find_element(By.XPATH,xpath_hesabro.customers.create.kind)
     # element = WebDriverWait(driver, 10).until(
     #     EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.kind))    )
         # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
         #driver.execute_script("return arguments[0].scrollIntoView();", element)
     
+    # element.click()
+    # element = driver.find_element_by_id('customerform-type_id')
+    element = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, 'customerform-type_id'))
+    )
     element.click()
-
+    select = Select(element)
+    select.select_by_visible_text('عادی')
     time.sleep(2)
 
     element = element.find_elements(By.TAG_NAME,'option')
@@ -136,7 +143,9 @@ def createCustomer(driver, customer, birthday, address, postalCode,
     write_in_element(str(customer), element)
     time.sleep(0.2)
 
-
+    codeMelli = str(codeMelli)
+    if codeMelli == "0":
+        codeMelli = ""
     element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.national_id))    )
         # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
@@ -160,10 +169,13 @@ def createCustomer(driver, customer, birthday, address, postalCode,
     
     element.click()
     write_in_element(str(work), element)
+    time.sleep(.3)
     element = driver.switch_to.active_element
     element.click()
     time.sleep(0.2)
-
+    mobile = str(mobile)
+    if mobile[0] != "0":
+        mobile = f"0{mobile}"
     element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.mobile))    )
         # EC.presence_of_element_located((By.XPATH, f"{get_xpath('user_detail','coin')}"))    )
@@ -179,7 +191,12 @@ def createCustomer(driver, customer, birthday, address, postalCode,
     
 
     
-
+    postalCode = str(postalCode)
+    if postalCode == "0":
+        postalCode = ""
+    address = str(address)
+    if address == "0":
+        address = ""
     if len(postalCode) or len(address):
         element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, xpath_hesabro.customers.create.address_type))    )
