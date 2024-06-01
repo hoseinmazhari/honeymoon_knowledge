@@ -26,7 +26,8 @@ from ..hesabro.club import fetch_birthdays_data as fbsd
 from ..hesabro.club import fetch_birthday as upb
 from ..hesabro.club import fetch_report_data as frd
 from ..hesabro.club import fetch_coin_report_data as fcrd
-from ..hesabro.club.sms_sender import send_group_sms
+# from ..hesabro.club.sms_sender import send_group_sms,send_sms_from_df
+from selenium_files.hesabro.club.sms_sender import send_group_sms, send_sms_from_df
 from ..honeymoonatr import update_products as upsh
 # from ...python_files.codes.salary_hesabro import salary
 from  python_files.codes.salary_hesabro.salary import salary
@@ -493,7 +494,7 @@ def task_selector(selected,args_= "",**kwargs):
             driver, is_logged_in = run_hesabro()
             if is_logged_in:
                 dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
-                upb.send_sms_from_df(dfData, tsk.task_name.update_birthday,args_)
+                send_sms_from_df(dfData, tsk.task_name.update_birthday,args_)
                     
                 # send_group_sms(dfData,tsk.task_name.update_birthday,args_)
                 # try:
@@ -538,7 +539,7 @@ def task_selector(selected,args_= "",**kwargs):
             ls.append({mobile:"09139960164", name: "حسین مظهری", birthday:"1365/06/29"})
             dfData = pd.DataFrame(ls)
             # dfData.to_excel("data.xlsx",index=False)
-            send_group_sms(dfData,tsk.task_name.update_birthday,args_)
+            send_sms_from_df(dfData,tsk.task_name.update_birthday,args_)
             # time.sleep(60)
             # driver.close()
         elif selected == tsk.task_name.get_report_from_hesabro_link:

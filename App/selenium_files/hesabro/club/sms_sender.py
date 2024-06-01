@@ -3,6 +3,10 @@ import pandas as pd
 import time
 from .fetch_birthday import birthday_output_cols as boc_class
 from selenium_files.settings_selenium.app_tasks import task_name 
+
+from python_files.settings_python.app_structures import birthday_output_cols,get_index_birthday_output_cols
+from python_files.settings_python import printProgress as prgs
+
 def get_index_boc(df):
     this_itter = -1
     this_class = boc_class()
@@ -45,9 +49,10 @@ def send_sms(domain_ = 'http://aradpayamak.net', username_ = 'hanimoon', passwor
     else:
         print(f"Error: {response.status_code}")
         return 0
+    
+
 def send_sms_from_df(dfData, tsk_name, args_):
-    from App.python_files.settings_python.app_structures import birthday_output_cols,get_index_birthday_output_cols
-    from App.python_files.settings_python import printProgress as prgs
+    
     thisClass = birthday_output_cols()
     thisIndex = get_index_birthday_output_cols(dfData)
     l = len(dfData)
@@ -61,6 +66,7 @@ def send_sms_from_df(dfData, tsk_name, args_):
         this_df = pd.DataFrame(lsData)
         send_group_sms(this_df,tsk_name, args_)        
         dfData = dfData.loc[dfData[thisClass.mobile] != mobile]
+
 
 
 is_name = "@نام_و_نام_خانوادگی"
