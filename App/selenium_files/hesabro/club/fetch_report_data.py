@@ -15,6 +15,7 @@ from selenium.webdriver.common.keys import Keys
 # from .merchandise import search_fieldProduct
 from selenium_files.settings_selenium.main_defs import write_in_element
 from selenium_files.settings_selenium import app_address
+# from selenium_files.settings_selenium.run_app import run_hesabro
 # from tqdm import tqdm
 # from .test import dwn
 class report_output_cols():
@@ -49,6 +50,7 @@ def get_index_report_output_cols(df):
             thisClass.id = thisItter
     return thisClass
 def download_data(driver, title, this_delay): 
+    this_address = driver.current_url
     try:
         is_true = False
         # name = []
@@ -97,8 +99,12 @@ def download_data(driver, title, this_delay):
                 print(counter_page)
                 print("-------------------------")
                 
-                
-                
+                # if counter_page % 1 == 0 :
+                if True:
+
+                    # counter_page = 1
+                    thisData = pd.DataFrame(lsData)
+                    thisData.to_excel(f"{title}bk_p50.xlsx",index=False)
                 
                 element =driver.find_element(By.XPATH,xph.create_reportcustomer.dataReport.next_p)
                 counter_page += 1
@@ -112,10 +118,8 @@ def download_data(driver, title, this_delay):
                     is_true = True
                     # driver.close()
                 # time.sleep(6)
-                if counter_page%1==0:
-                    # counter_page = 1
-                    thisData = pd.DataFrame(lsData)
-                    thisData.to_excel(f"{title}bk_p50.xlsx",index=False)
+                
+               
             except Exception as e:
                 # print(e)
                 repeat_count += 1
@@ -134,15 +138,15 @@ def download_data(driver, title, this_delay):
                 step2 = thisReport[pageIndexEnd:]
                 this_address = f"{step1}{page_index}{step2}"
                 driver.close()
-                from ...settings.run_app import run_hesabro
-                driver, is_logged_in = run_hesabro()
                 
-                driver.get(this_address)
-                this_delay = 3
-                while driver.current_url != this_address: # جهت اطمینان از باز شدن صفحه ی درخواست شده در گزینه 1 از حلقه استفاده شده است
-                    driver.get(this_address)
-                    time.sleep(this_delay)
-                    this_delay += 1
+                # driver, is_logged_in = run_hesabro()
+                
+                # driver.get(this_address)
+                # this_delay = 3
+                # while driver.current_url != this_address: # جهت اطمینان از باز شدن صفحه ی درخواست شده در گزینه 1 از حلقه استفاده شده است
+                #     driver.get(this_address)
+                #     time.sleep(this_delay)
+                #     this_delay += 1
                 # data = pd.DataFrame(lsData)
                 # data.to_excel(f"{title}.xlsx",index=False)
                 # is_true = True
@@ -153,7 +157,7 @@ def download_data(driver, title, this_delay):
             #     is_true = False
         data = pd.DataFrame(lsData)
         data.to_excel(f"{title}.xlsx",index=False)
-        return data
+        return data, this_address
             # element = WebDriverWait(driver, 10).until(
             #     EC.presence_of_element_located((By.XPATH, xph.create_reportcustomer.download)))
     except Exception as e:

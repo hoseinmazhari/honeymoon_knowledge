@@ -547,7 +547,10 @@ def task_selector(selected,args_= "",**kwargs):
             print("this select")
             if is_logged_in:
                 dfData = frd.get_report_data(driver,tsk.task_name.get_report_from_hesabro_link,args_)
-            dfData.to_excel("report_data.xlsx",index=False)
+            try:
+                dfData.to_excel("report_data.xlsx",index=False)
+            except:
+                pass
         elif selected == tsk.task_name.get_coin_report_from_hesabro_link:
             driver, is_logged_in = run_hesabro()
             print("hesabro is running")
