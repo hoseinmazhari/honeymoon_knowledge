@@ -92,12 +92,13 @@ class product_view():
                 btn_submit = '/html/body/div[2]/div/div[2]/form/div/div[2]/button' #"//button[@type='submit']"
                 # btn_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button'
                 # btn_add_unitScale = 'add-property btn btn-success btn-xs'
-                div_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]'
+                # div_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]'
+                div_add_unitScale = "/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div/div/div/div[1]/button"
                 btn_add_unitScale = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button/i'
                 div_scaleContainer = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]'
                 # /html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button
                 unit_selector = '//*[@id="propertiesform-0-property_id"]'
-                unit_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/select/option[2]'
+                unit_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/select/option[1]'
                 # unit_item = '/div/div[1]/div/select/option[2]'
                 scale_selector = '//*[@id="propertiesform-0-child_id"]'
                 scale_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[2]/div/select/'

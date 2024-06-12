@@ -148,7 +148,7 @@ def change_product_attr(driver, scales, scale, act_chk):
                         EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product_view.tabs.details.update_page.unit_selector}")))
                     time.sleep(1)
                     element.click()
-                    time.sleep(2.3)
+                    time.sleep(1)
                 # except:
                 #     is_true =False
                 # try:
@@ -157,10 +157,8 @@ def change_product_attr(driver, scales, scale, act_chk):
                     element= WebDriverWait(driver, 10).until(
                         EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product_view.tabs.details.update_page.unit_item}")))
                     time.sleep(1)
-                    element.send_keys(Keys.DOWN)
-                    # element.click()
-                    element.send_keys(Keys.RETURN)
-                    time.sleep(2.2)
+                    element.click()
+                    time.sleep(1)
                 # except:
                 #     is_true =False
                 # try:
