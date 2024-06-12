@@ -136,7 +136,7 @@ def change_product_attr(driver, scales, scale, act_chk):
                     #     EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product.update_form.btn_add_unitScale}")))
                     # time.sleep(1)
                     # element.click()
-                    time.sleep(4)
+                    time.sleep(3)
                     
                 # except:
                 #     for u in range(10):
@@ -156,10 +156,15 @@ def change_product_attr(driver, scales, scale, act_chk):
                     # element[2].click()
                     element= WebDriverWait(driver, 10).until(
                         EC.presence_of_element_located((By.XPATH, f"{xpath_hesabro.product_view.tabs.details.update_page.unit_item}")))
-                    time.sleep(1)
-                    element.send_keys(Keys.DOWN)
-                    # element.click()
-                    element.send_keys(Keys.RETURN)
+                    # time.sleep(1)
+                    # element = driver.switch_to.active_element
+                    # for jj in range(3):
+
+                    #     # element.send_keys(Keys.DOWN)
+                    #     element.send_keys(Keys.DOWN)
+                    #     time.sleep(1.3)
+                    element.click()
+                    # element.send_keys(Keys.RETURN)
                     time.sleep(2.2)
                 # except:
                 #     is_true =False
@@ -172,6 +177,8 @@ def change_product_attr(driver, scales, scale, act_chk):
                 # except:
                 #     is_true =False
                 # try:
+                    # /html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div/div/div/div[2]/div/div[2]/div/div[2]/div/select/option[4]
+                    # /html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div/div/div/div[2]/div/div[2]/div/div[2]/div/select/option[5]
                     item = f"{xpath_hesabro.product_view.tabs.details.update_page.scale_item}option[{scales.index(scale)+2}]"
                     element = WebDriverWait(driver, 10).until(
                         EC.presence_of_element_located((By.XPATH, f"{item}")))
