@@ -98,10 +98,12 @@ class product_view():
                 div_scaleContainer = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]'
                 # /html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[1]/button
                 unit_selector = '//*[@id="propertiesform-0-property_id"]'
-                unit_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/select/option[1]'
+                unit_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div/div/div/div[2]/div/div[2]/div/div[1]/div/select/option[2]'
+                # unit_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/di]v/div[2]/div/div[2]/div/div[1]/div/select/option[1]'
                 # unit_item = '/div/div[1]/div/select/option[2]'
                 scale_selector = '//*[@id="propertiesform-0-child_id"]'
-                scale_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[2]/div/select/'
+                # scale_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div[2]/div/div/div[2]/div/div[2]/div/div[2]/div/select/'
+                scale_item = '/html/body/div[2]/div/div[2]/form/div/div[1]/div[4]/div/div/div/div[2]/div/div[2]/div/div[2]/div/select/'
 
         class uniq_Barcode():
             link = '/html/body/div[2]/div/div[2]/div[2]/div[1]/div/div[1]/ul/li[3]/a'
