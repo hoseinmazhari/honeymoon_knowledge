@@ -9,7 +9,7 @@ class Storeroom(models.Model):
 class Factor_type(models.Model):
     title = models.CharField(max_length=255)
 class Mobiles(models.Model):
-    mobile = models.CharField(max_length=255)
+    mobile = models.CharField(max_length=11)
     mobile_is_authenticated = models.BooleanField(default=False)
 # class Address_type(models.Model):
     
@@ -29,7 +29,7 @@ class Address(models.Model):
     address = models.TextField(verbose_name = 'آدرس')
     postal_code = models.CharField(max_length=11, verbose_name = 'کد پستی')
     city = models.CharField(max_length=255, null=True)
-    ostan = models.CharField(max_length=255,null=True)
+    state = models.CharField(max_length=255,null=True)
     country = models.CharField(max_length=2555, null=True)
 
 class Work(models.Model):
@@ -46,23 +46,23 @@ class Customer(models.Model):
     # nick_name = models.CharField(max_length=255)
     # mobile = models.ForeignKey(Mobiles,on_delete=models.CASCADE)
     # address = models.ForeignKey(Address, on_delete=models.PROTECT)
-    customer_kinds = [
+    CUSTOMER_KIND = [
     ("N","عادی"),
     ("C","شرکت ها")
     ]
-    customer_genders = [
+    CUSTOMER_GENDER = [
         ("M", "مرد"),
         ("F", "زن")
     ]
-    customer_nationality = [
+    CUSTOMER_NATIONALITY = [
         ("I", "ایرانی"),
         ("N", "خارجی")
     ]
-    
-    kind = models.CharField(max_length=1,choices=customer_kinds, verbose_name= 'نوع')
-    gender = models.CharField(max_length=1,choices=customer_genders, verbose_name= 'جنسیت')
-    nationality = models.CharField(max_length=1,choices=customer_nationality, verbose_name = 'ملیت')
-    name = models.CharField(max_length=255, verbose_name = 'نام')
+
+    kind = models.CharField(max_length=1,choices=CUSTOMER_KIND, verbose_name= 'نوع')
+    gender = models.CharField(max_length=1,choices=CUSTOMER_GENDER, verbose_name= 'جنسیت')
+    nationality = models.CharField(max_length=1,choices=CUSTOMER_NATIONALITY, verbose_name = 'ملیت')
+    first_name = models.CharField(max_length=255, verbose_name = 'نام')
     last_name = models.CharField(max_length=255, verbose_name = 'نام خانوادگی')
     nick_name = models.CharField(max_length=255, verbose_name = 'نام نمایشی')
     birthday = models.CharField(max_length=10, verbose_name = 'تاریخ تولد')
@@ -73,8 +73,8 @@ class Customer(models.Model):
     is_deleted = models.BooleanField(default=False)
     # mobile_authenticate = models.IntegerField(verbose_name = 'کد احراز هویت')
     # address_type = models.CharField(max_length=1,choices=customer_address_type, verbose_name = 'نوع آدرس')
-    
-    address = models.TextField( verbose_name = 'آدرس')
+    address = models.ForeignKey(Address,on_delete=models.PROTECT)
+    # address = models.TextField( verbose_name = 'آدرس')
     des = models.TextField( verbose_name = 'توضیحات')
     rules = models.ForeignKey(Rules)
     def __str__(self):
