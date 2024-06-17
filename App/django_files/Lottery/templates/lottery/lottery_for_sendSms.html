@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>ارسال پیامک برای  ارسال مجدد بارکد قرعه کشی</title>
+    
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.js"></script> -->
+    
+    
+</head>
+<body dir="rtl">
+    {% block content %}
+    <h1>صفحه اطلاع رسانی ارسال اشتباه  بارکد ها</h1>
+    
+    <li>
+        <h3>در این صفحه امکان اطلاع رسانی به مشتریانی که بارکد اشتباه ارسال کرده اند وجود دارد</h3>
+    </li>
+    <ul>
+    <li>
+        <h4>
+            دقت داشته باشید شما باید دو فایل را از قبل آماده و به نرم افزار ایمپورت کنید. یکی لیست بارکد های صحیح و دیگری لیست بارکدهای اشتباه
+            که از سامانه پیامک ملی دریافت شده اند میباشند.
+        </h4>
+    </li>
+    
+    <li>
+        <h4>جهت اجرای ارسال اطلاع رسانی ها روی دکمه زیر کلیک نمایید</h4>
+    </li>
+    </ul>
+    <div class="container" hx-boost>
+        <section hx-target="this">
+            <form class="buttons has-addons">
+                {% csrf_token %} 
+                {% if result == "stoped" %}
+                    
+                    <!-- <input type="text" formmethod="post",name="sms_text",value = "متن دلخواه خود را وارد نمایید"> -->
+                    <label for="w3review">متن پیامک را وارد نمایید:</label>
+                    <p style="font-size:48px">
+                        <button hx-post="/updateTextarea" hx-trigger="click" hx-target="#sms_text">افزودن متن</button>
+                        <button>&#128512;</button>
+                        <button>&#128516;</button>
+                        <button>&#128525;</button>
+                        <button type="button" onclick="(getElementById('sms_text01').value = getElementById('sms_text01').focus())">&#128151;</button>
+                        
+                           
+                        </p>
+                        
+<textarea id="sms_text01" name="sms_text" rows="4" cols="50">
+هانی مون به اطلاع می رساند
+بارکدی که برای قرعه کشی 100 میلیون ریالی به سامانه
+50004000100105
+ارسال نموده اید.تایید نشده است
+خواهشمندست بارکد را با فرمت استاندارد, طبق ویدیوی لینک زیر ارسال نمایید
+
+b2n.ir/h2mp
+
+با تشکر
+</textarea>
+                     
+                    <button type="submit" formmethod="post" name="act" value="run">اجرا</button>
+                {% else %}
+                    <button type="submit" formmethod="post"  name="act" value="stop">توقف</button>
+                {% endif %}
+            </form>
+        </section>
+        
+        
+    </div>
+
+        
+    
+    {% endblock %}
+    
+</body>
+</html>

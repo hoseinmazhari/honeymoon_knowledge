@@ -95,5 +95,6 @@ def send_group_sms(dfData,kind = task_name.update_birthday,msg="تست"):
                         
                         send_sms(text_=this_msg,to_=this_mobile)
                         time.sleep(0.1)
+    
 # send_sms()
 # send_group_sms("test")

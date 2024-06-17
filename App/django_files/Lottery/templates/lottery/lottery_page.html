@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="fa">
+<head>
+   
+        
+</head>
+<body dir="rtl">
+    {% block content %}
+    <h1>صفحه مدیریت قرعه کشی ها</h1><br>
+    <ul>
+        <li>
+            <a href="{% url 'lottery_app:send_sms_to_invalid_response' %}">ارسال پیامک به مشتریانی که کد صحیح ارسال نکرده اند</a>
+            
+        </li>
+        
+        <!-- <br> -->
+        <!-- <li>
+            <a href="{% url 'birthday_app:update_birthday_call_brs' %}"> بروزرسانی دیتابیس تولدی ها </a>
+            
+        </li> -->
+        <!-- <br> -->
+        
+    </ul>
+    
+    {% endblock %}
+    
+</body>
+</html>

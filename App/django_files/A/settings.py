@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'get_coin_report',
     'analyse_excels',
     'club',
+    'Lottery'
     # "django.contrib.staticfiles",
     
     # 'django_celery_results',

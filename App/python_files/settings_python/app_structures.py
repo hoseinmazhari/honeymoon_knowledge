@@ -306,10 +306,10 @@ def fillNullZero(df_all):
         print(_make_farsi_text("برنامه در حال اصلاح دیتاهای ثبت نشده میباشد"))
        
 
-        df_all=df_all.fillna(0, inplace = True)
+        df_all.fillna(0, inplace = True)
         # print("tolid file avalieh khorooji")
         # df_all.to_excel("all data-1398-1400.xlsx" , index = False)
-        print("miss Data sabt shodand")
+        print(_make_farsi_text("فیلدهای با مقدار تهی با مقدار ۰ پر شدند"))
 
 def loadFiles(currentPath):
     df_all = pd.DataFrame()
@@ -621,6 +621,26 @@ def get_index_birthday_output_cols(df):
 
 
 ############################################################################################
+class lottery_requires():
+    correct_barcodes = "بارکدهای ارسال شده ی صحیح"
+    incorrect_barcodes = 'بارکدهای ارسال شده ی ناقص'
+    sms_text = "متن پیامک"
+class Lottery_Cols():
+    barcode = "پاسخ"
+    mobile = 'شماره موبایل'
+    sent_time = 'زمان ارسال'
+def get_index_Lottery_Cols(df):
+    thisItter = -1
+    thisClass = Lottery_Cols()
+    for col in df.columns:
+        thisItter += 1
+        if col == thisClass.barcode:
+            thisClass.barcode = thisItter
+        elif  col  == thisClass.mobile:
+            thisClass.mobile = thisItter
+        elif col == thisClass.sent_time:
+            thisClass.sent_time = thisItter
+    return thisClass
 ############################################################################################
 ############################################################################################
 ############################################################################################

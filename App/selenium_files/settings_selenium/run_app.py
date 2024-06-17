@@ -364,6 +364,15 @@ def task_selector(selected,args_= "",**kwargs):
         print()
         print(_make_farsi_text(selected))
         print()
+        if selected == tsk.task_name.lottery_barcodes:
+            df_correct_barcode = args_[asts.lottery_requires.correct_barcodes]
+            df_incorrcet_barcode = args_[asts.lottery_requires.incorrect_barcodes]
+            sms_text = args_[asts.lottery_requires.sms_text]
+            from python_files.codes.club.lottery import Lottery
+            df_incorrect_barcode = Lottery.incorrect_remover_from_corrects(df_correct_barcode=df_correct_barcode,\
+                                                    df_incorrect_barcode=df_incorrcet_barcode)
+        
+        
         if selected == tsk.task_name.Create_hesabro_customers_from_hamyar:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:

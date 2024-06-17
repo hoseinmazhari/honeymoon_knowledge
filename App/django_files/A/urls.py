@@ -27,6 +27,7 @@ urlpatterns = [
     path('@hm/honeymoonatr/',include('honeymoonatr.urls'),name='honeymoonatr'),
     path('@hm/analyse_excels/',include('analyse_excels.urls'),name='analyse_excels'),
     path('@hm/club/',include('club.urls'),name='club'),
+    path('@hm/Lottery/',include('Lottery.urls'),name='Lottery'),
     # path('@hm/analyse_excels/result/',include('analyse_excels.urls'),name='sub_analyse_excels'),
     path('',views.home,name = 'home'),
     # path("__debug__/", include("debug_toolbar.urls")),
