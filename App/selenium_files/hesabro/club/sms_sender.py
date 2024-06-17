@@ -4,7 +4,8 @@ import time
 from .fetch_birthday import birthday_output_cols as boc_class
 from selenium_files.settings_selenium.app_tasks import task_name 
 
-from python_files.settings_python.app_structures import birthday_output_cols,get_index_birthday_output_cols
+from python_files.settings_python.app_structures import birthday_output_cols,\
+    get_index_birthday_output_cols,Lottery_Cols,get_index_Lottery_Cols
 from python_files.settings_python import printProgress as prgs
 
 def get_index_boc(df):
@@ -41,7 +42,7 @@ def send_sms(domain_ = 'http://aradpayamak.net', username_ = 'hanimoon', passwor
     # بررسی کد وضعیت HTTP
     if response.status_code == 200:
         # تجزیه و تحلیل پاسخ JSON (اگر وب سرویس JSON بازگشت دهد)
-        # result = response.json()
+        # result = resgponse.json()
         # print(result)
         # return result
         pass
@@ -51,36 +52,50 @@ def send_sms(domain_ = 'http://aradpayamak.net', username_ = 'hanimoon', passwor
         return 0
     
 
-def send_sms_from_df(dfData, tsk_name, args_):
-    
-    thisClass = birthday_output_cols()
-    thisIndex = get_index_birthday_output_cols(dfData)
-    l = len(dfData)
-    while (len(dfData)):
-        prgs.printProgressBar(l-len(dfData),l,length=25)
-        mobile = dfData.iat[0, thisIndex.mobile]
-        name = dfData.iat[0, thisIndex.name]
-        birthday = dfData.iat[0, thisIndex.birthday]
-        lsData = [{thisClass.mobile: mobile, 
-                    thisClass.name:name, thisClass.birthday:birthday}]
-        this_df = pd.DataFrame(lsData)
-        send_group_sms(this_df,tsk_name, args_)        
-        dfData = dfData.loc[dfData[thisClass.mobile] != mobile]
+def send_sms_from_df(dfData,kind, args_):
+    if kind == task_name.update_birthday:
+        thisCols = birthday_output_cols()
+        thisIndex = get_index_birthday_output_cols(dfData)
+        l = len(dfData)
+        while (len(dfData)):
+            prgs.printProgressBar(l-len(dfData),l,length=25)
+            mobile = dfData.iat[0, thisIndex.mobile]
+            name = dfData.iat[0, thisIndex.name]
+            birthday = dfData.iat[0, thisIndex.birthday]
+            lsData = [{thisCols.mobile: mobile, 
+                        thisCols.name:name, thisCols.birthday:birthday}]
+            this_df = pd.DataFrame(lsData)
+            send_group_sms(this_df,kind, args_)        
+            dfData = dfData.loc[dfData[thisCols.mobile] != mobile]
+    elif task_name.lottery_barcodes:
+        thisIndex = get_index_Lottery_Cols(dfData)
+        thisCols = Lottery_Cols()
+        l = len(dfData)
+        while (len(dfData)):
+            prgs.printProgressBar(l-len(dfData),l,length=25)
+            mobile = dfData.iat[0, thisIndex.mobile]
+            # name = dfData.iat[0, thisIndex.name]
+            # birthday = dfData.iat[0, thisIndex.birthday]
+            lsData = [{thisCols.mobile: mobile}]
+            this_df = pd.DataFrame(lsData)
+            send_group_sms(this_df,kind, args_)        
+            dfData = dfData.loc[dfData[thisCols.mobile] != mobile]
 
 
 
-is_name = "@نام_و_نام_خانوادگی"
-def send_group_sms(dfData,kind = task_name.update_birthday,msg="تست"):
+
+def send_group_sms(dfData,kind ,msg="تست"):
     # ls= []
     # ls.append({"name":"hosein","mobile":"09139960164"})
    
     # dfData = pd.DataFrame(ls)
     if kind == task_name.update_birthday:
-        this_indexs = get_index_boc(dfData)
+        is_name = "@نام_و_نام_خانوادگی"
+        thisIndex = get_index_boc(dfData)
         
         while len(dfData):
             
-            this_mobile = (dfData.iat[0,this_indexs.mobile])
+            this_mobile = (dfData.iat[0,thisIndex.mobile])
             df_sms = dfData.loc[dfData[boc_class.mobile]==this_mobile]
             dfData = dfData.loc[dfData[boc_class.mobile]!=this_mobile]
             this_mobile = str(int(this_mobile))
@@ -88,12 +103,34 @@ def send_group_sms(dfData,kind = task_name.update_birthday,msg="تست"):
                 if len(this_mobile)==10 and this_mobile[0]=="9":
                     
 
-                    name = str(df_sms.iat[0,this_indexs.name])
+                    name = str(df_sms.iat[0,thisIndex.name])
                     if len(name):    
-                        this_msg = msg.replace(is_name,name)
+                        msg = msg.replace(is_name,name)
                         
                         
-                        send_sms(text_=this_msg,to_=this_mobile)
+                        send_sms(text_=msg, to_=this_mobile)
+                        time.sleep(0.1)
+    elif task_name.lottery_barcodes:
+        # is_name = "@نام_و_نام_خانوادگی"
+        # thisIndex = get_index_boc(dfData)
+        thisIndex = get_index_Lottery_Cols(dfData)
+        thisCols = Lottery_Cols()
+        while len(dfData):
+            
+            this_mobile = (dfData.iat[0,thisIndex.mobile])
+            df_sms = dfData.loc[dfData[thisCols.mobile]==this_mobile]
+            dfData = dfData.loc[dfData[thisCols.mobile]!=this_mobile]
+            this_mobile = str(int(this_mobile))
+            if len(df_sms):
+                if len(this_mobile)==10 and this_mobile[0]=="9":
+                    
+
+                    # name = str(df_sms.iat[0,thisIndex.name])
+                    # if len(name):    
+                        # this_msg = msg.replace(is_name,name)
+                        
+
+                        send_sms(text_=msg, to_=this_mobile)
                         time.sleep(0.1)
     
 # send_sms()
