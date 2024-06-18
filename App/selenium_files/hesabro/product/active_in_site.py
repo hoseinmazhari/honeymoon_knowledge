@@ -16,6 +16,7 @@ from python_files.settings_python import DateJuToJa as djtj #....
 # from ...settings import xpath
 
 class active_inSiteCols():
+    # is_proccess_true = "اعمال موفق تغییرات"
     product_name = "product_name"
     oldName = "oldName"
     page_title = "page_title"
@@ -25,24 +26,26 @@ class active_inSiteCols():
 
 def get_index_active_inSite(df):
     thisItter = -1
-    thisClass = active_inSiteCols()
+    thisCols = active_inSiteCols()
     for col in df.columns:
         thisItter += 1
-        if col == thisClass.product_name:
-            thisClass.product_name = thisItter # type: ignore
-        elif col == thisClass.oldName:
-            thisClass.oldName = thisItter
-        elif col == thisClass.page_title:
-            thisClass.page_title = thisItter
-        elif col == thisClass.slug:
-            thisClass.slug = thisItter # type: ignore
-        elif col == thisClass.des:
-           thisClass.des = thisItter # type: ignore
-        elif col == thisClass.act:
-            thisClass.act = thisItter # type: ignore
-        # elif col == thisClass.buy_price:
-        #     thisClass.buy_price = thisItter # type: ignore
-    return thisClass
+        if col == thisCols.product_name:
+            thisCols.product_name = thisItter # type: ignore
+        # elif col == thisCols.is_proccess_true:
+        #     thisCols.is_proccess_true = thisItter
+        elif col == thisCols.oldName:
+            thisCols.oldName = thisItter
+        elif col == thisCols.page_title:
+            thisCols.page_title = thisItter
+        elif col == thisCols.slug:
+            thisCols.slug = thisItter # type: ignore
+        elif col == thisCols.des:
+           thisCols.des = thisItter # type: ignore
+        elif col == thisCols.act:
+            thisCols.act = thisItter # type: ignore
+        # elif col == thisCols.buy_price:
+        #     thisCols.buy_price = thisItter # type: ignore
+    return thisCols
 def change_product_attr(driver, scales, scale, act_chk):
             try:
                 element = WebDriverWait(driver, 10).until(
@@ -222,6 +225,7 @@ def change_product_attr(driver, scales, scale, act_chk):
 def _run_active_product_in_site(driver,main_url,thisData): 
     # if act== "exit_product":
     is_true = True
+    ls_invalid = []
     scales = [10,  20, 30, 50, 100, 15]
     # scales = [30, 50, 100, 15]
     pre = "نیش"
@@ -273,13 +277,15 @@ def _run_active_product_in_site(driver,main_url,thisData):
             if driver.current_url != main_url:
                 is_exist_product = True
             if tryCount >= 2:
+                ls_invalid.append({"product":product_name,"is_search":False})
+                is_true = False
                 break
                 # while driver.current_url!=main_url:
         if is_exist_product:   
             
             change_product_attr(driver, scales, scale, act_chk)
-            
-    return is_true
+    dfInvalid = pd.DataFrame(ls_invalid)
+    return is_true, dfInvalid
             # is_search_fieldProduct = search_fieldProduct(driver)
             # _product_input = driver.switch_to.active_element
         
@@ -412,6 +418,7 @@ def run_active_products_inSite(driver,main_url,dfData):
     # dfData = pd.read_excel("..//dist/order point/order point.xlsx")
     thisIndex = get_index_active_inSite(dfData)
     ThisCols = active_inSiteCols()
+    ls_invalid = []
     while len(dfData):
         thisData = active_inSiteCols()
         thisData.product_name = dfData.iat[0, thisIndex.product_name]
@@ -421,12 +428,15 @@ def run_active_products_inSite(driver,main_url,dfData):
         thisData.act = dfData.iat[0, thisIndex.act]
         thisData.oldName = dfData.iat[0, thisIndex.oldName]
 
-        is_True = _run_active_product_in_site(driver,main_url,thisData)
-        
+        is_True,df_invalid = _run_active_product_in_site(driver,main_url,thisData)
+        ls_invalid.append(df_invalid)
+        # if len(df_invalid)!= 
         is_act = _run_active_shop(driver,p_ul,thisData)
         dfData = dfData.loc[dfData[ThisCols.product_name] != thisData.product_name]
         print(os.getcwd())
         dfData.to_excel("مانده های فعال سازی در سایت.xlsx",index=False)
+    dfData = pd.concat(ls_invalid)
+    dfData.to_excel("محصولاتی که در کادر جستجو در فعال سازی برای سایت انتخاب نشدند.xlsx",index=False)
         # if is_True:
         #     dfData = dfData.loc[dfData[ThisCols.product_name] != thisData.product_name]
         #     dfData.to_excel(f"ثبت نشده های فرایند فعال سازی در سایت مای هانی مون {todayIs}.xlsx",index= False)

@@ -6,6 +6,7 @@ import os,sys,pandas as pd
 export_path = 'exported'
 staticName = 'static'
 mediaName = 'media'
+
 def prtLines(count=3):
     for i in range(count):
         print()
