@@ -503,9 +503,10 @@ def task_selector(selected,args_= "",**kwargs):
         elif selected == tsk.task_name.update_birthday:
             driver, is_logged_in = run_hesabro()
             if is_logged_in:
-                dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
-                send_sms_from_df(dfData, tsk.task_name.update_birthday,args_)
-                    
+                if True:
+                    dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
+                    send_sms_from_df(dfData, tsk.task_name.update_birthday,args_)
+                        
                 # send_group_sms(dfData,tsk.task_name.update_birthday,args_)
                 # try:
                 #     birthPath = os.getcwd()
@@ -536,6 +537,7 @@ def task_selector(selected,args_= "",**kwargs):
             # msg = "#نام و نام خانوادگی عزیز سلام\nتولدت مبارک\n20% تخفیف نقدی تا 10 روز برای شما در تمامی شعب هانی مون"
             # _msg = args_
             # args_ = "test\n لغو 11"
+
             mobile = "موبایل"
             name = "نام و نام خانوادگی"
             birthday = "تاریخ تولد"

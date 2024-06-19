@@ -81,10 +81,10 @@ def change_product_attr(driver, scale_index, act_chk):
                 store_price = (element.get_attribute("value"))
                 # 24,390,000
                 # print(store_price)
-                store_price = store_price.replace(",", "")
-                site_price = str(int(store_price)//2)
+                # store_price = store_price.replace(",", "")
+                # site_price = str(int(store_price)//2)
                 # site_price = store_price
-
+                site_price = store_price
             except:
                 is_true = False
             try:
@@ -105,7 +105,10 @@ def change_product_attr(driver, scale_index, act_chk):
                 clear_txt(element)
                 time.sleep(1)
                 clear_txt(element)
-                # write_in_element("",element)
+                store_price = store_price.replace(",", "")
+                off_price = str(int(store_price)//2)
+                write_in_element(off_price,element)
+                
             except:
                 is_true = False
             try:

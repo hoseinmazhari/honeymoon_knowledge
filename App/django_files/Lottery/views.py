@@ -8,7 +8,7 @@ from .forms import ExcelUploadForm
 # Create your views here.
 def send_sms_to_invalid_response(request):
     form = ExcelUploadForm()
-    result = {"result":"stoped"}
+    result = {"result":"stoped", "form": form}
     if request.method == 'POST':
         data = request.POST
         action = data.get("act")

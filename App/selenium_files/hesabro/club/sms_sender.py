@@ -92,24 +92,19 @@ def send_group_sms(dfData,kind ,msg="تست"):
     if kind == task_name.update_birthday:
         is_name = "@نام_و_نام_خانوادگی"
         thisIndex = get_index_boc(dfData)
-        
         while len(dfData):
-            
             this_mobile = (dfData.iat[0,thisIndex.mobile])
             df_sms = dfData.loc[dfData[boc_class.mobile]==this_mobile]
             dfData = dfData.loc[dfData[boc_class.mobile]!=this_mobile]
             this_mobile = str(int(this_mobile))
             if len(df_sms):
                 if len(this_mobile)==10 and this_mobile[0]=="9":
-                    
-
                     name = str(df_sms.iat[0,thisIndex.name])
                     if len(name):    
                         msg = msg.replace(is_name,name)
-                        
-                        
                         send_sms(text_=msg, to_=this_mobile)
                         time.sleep(0.1)
+
     elif task_name.lottery_barcodes:
         # is_name = "@نام_و_نام_خانوادگی"
         # thisIndex = get_index_boc(dfData)

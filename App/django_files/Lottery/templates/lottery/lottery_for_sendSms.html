@@ -36,6 +36,10 @@
             <form class="buttons has-addons">
                 {% csrf_token %} 
                 {% if result == "stoped" %}
+                    <br>
+                    <br>
+                    {{ form }}
+                    <br><br><br>
                     
                     <!-- <input type="text" formmethod="post",name="sms_text",value = "متن دلخواه خود را وارد نمایید"> -->
                     <label for="w3review">متن پیامک را وارد نمایید:</label>
