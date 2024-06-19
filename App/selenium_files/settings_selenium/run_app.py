@@ -373,6 +373,7 @@ def task_selector(selected,args_= "",**kwargs):
                                                     df_incorrect_barcode=df_incorrect_barcode)
             # Lottery.send_sms(df_incorrect_barcode,sms_text)
             send_sms_from_df(df_incorrect_barcode,selected, sms_text)
+            # df_incorrect_barcode.to_excel("incorrects_barcodes0330.xlsx",index=False)
         
         if selected == tsk.task_name.Create_hesabro_customers_from_hamyar:
             driver, is_logged_in = run_hesabro()

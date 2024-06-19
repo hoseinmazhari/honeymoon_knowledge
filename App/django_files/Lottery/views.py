@@ -9,16 +9,20 @@ from .forms import ExcelUploadForm
 def send_sms_to_invalid_response(request):
     form = ExcelUploadForm()
     result = {"result":"stoped", "form": form}
+    # result = {"result":"stoped"}
     if request.method == 'POST':
         data = request.POST
         action = data.get("act")
+        print(action)
         sms_text = data.get("sms_text")
         if action == "run":
             form = ExcelUploadForm(request.POST, request.FILES)
             # driver = webdriver.Firefox()
             # if timeCheck():
+            print("set files to form")
             if form.is_valid():
             # if True:
+                print("form is valid")
                 result = {"result":"running"}
                 correct_barcodes = request.FILES['correct_barcodes']
                 incorrect_barcodes = request.FILES['incorrect_barcodes']

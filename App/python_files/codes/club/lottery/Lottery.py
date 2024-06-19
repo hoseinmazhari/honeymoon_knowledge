@@ -8,19 +8,19 @@ from python_files.settings_python.app_structures import export_path, mediaName,\
     _make_farsi_text, prtLines, getDateTimeForFileName, getIndexTj,myDataType_names, \
     tjCol, condition, loadData, yearDetail, monthCol, monthsSelector,Lottery_Cols,get_index_Lottery_Cols
 from python_files.settings_python import printProgress as prgs
-def send_sms_from_df(dfData,sms_text):
-    thisIndex = get_index_Lottery_Cols(dfData)
-    thisCols = Lottery_Cols()
-    l = len(dfData)
-    while (len(dfData)):
-        prgs.printProgressBar(l-len(dfData),l,length=25)
-        mobile = dfData.iat[0, thisIndex.mobile]
-        # name = dfData.iat[0, thisIndex.name]
-        # birthday = dfData.iat[0, thisIndex.birthday]
-        lsData = [{thisCols.mobile: mobile}]
-        this_df = pd.DataFrame(lsData)
-        send_group_sms(this_df,tsk_name, args_)        
-        dfData = dfData.loc[dfData[thisCols.mobile] != mobile]
+# def send_sms_from_df(dfData,sms_text):
+#     thisIndex = get_index_Lottery_Cols(dfData)
+#     thisCols = Lottery_Cols()
+#     l = len(dfData)
+#     while (len(dfData)):
+#         prgs.printProgressBar(l-len(dfData),l,length=25)
+#         mobile = dfData.iat[0, thisIndex.mobile]
+#         # name = dfData.iat[0, thisIndex.name]
+#         # birthday = dfData.iat[0, thisIndex.birthday]
+#         lsData = [{thisCols.mobile: mobile}]
+#         this_df = pd.DataFrame(lsData)
+#         send_group_sms(this_df,tsk_name, args_)        
+#         dfData = dfData.loc[dfData[thisCols.mobile] != mobile]
 
 
 
@@ -81,10 +81,13 @@ def incorrect_remover_from_corrects(df_correct_barcode, df_incorrect_barcode):
         print(thisPath)
         thisIndex = get_index_Lottery_Cols(df_correct_barcode)
         thisCols = Lottery_Cols()
+        l = len(df_correct_barcode)
         while len(df_correct_barcode):
-             mobile = df_correct_barcode.iat[0, thisIndex.mobile]
-             if len(df_incorrect_barcode.loc[df_incorrect_barcode[thisCols.mobile]==mobile]):
-                  df_incorrect_barcode = df_incorrect_barcode.loc[df_incorrect_barcode[thisCols.mobile] != mobile]
+            prgs.printProgressBar(l-len(df_correct_barcode),l,length=25)
+            mobile = df_correct_barcode.iat[0, thisIndex.mobile]
+            df_correct_barcode = df_correct_barcode.loc[df_correct_barcode[thisCols.mobile] != mobile]
+            if len(df_incorrect_barcode.loc[df_incorrect_barcode[thisCols.mobile]==mobile]):
+                df_incorrect_barcode = df_incorrect_barcode.loc[df_incorrect_barcode[thisCols.mobile] != mobile]
         if len(df_incorrect_barcode):
             xlsxFileNum += 1
             thisFileName = "مشتریانی که بارکد صحیح را هیچ وقت صحیح ارسال نکرده اند.xlsx"

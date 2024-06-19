@@ -19,6 +19,7 @@ class active_inSiteCols():
     # is_proccess_true = "اعمال موفق تغییرات"
     id = "آیدی"
     scale_index = "اندیس حجم"
+    scale = "حجم"
     act = "وضعیت"
     # oldName = "oldName"
     # page_title = "page_title"
@@ -33,6 +34,8 @@ def get_index_active_inSite(df):
         thisItter += 1
         if col == thisCols.id:
             thisCols.id = thisItter # type: ignore
+        elif col == thisCols.scale:
+            thisCols.scale = thisItter
         elif col == thisCols.scale_index:
             thisCols.scale_index = thisItter
         elif col == thisCols.act:
@@ -52,7 +55,11 @@ def get_index_active_inSite(df):
         # # elif col == thisCols.buy_price:
         #     thisCols.buy_price = thisItter # type: ignore
     return thisCols
-def change_product_attr(driver, scale_index, act_chk):
+def change_product_attr(driver, thisData, act_chk):
+            # scale_index = thisData.scale_index
+            scale = thisData.scale
+            scale_items = [10, 20, 30, 50, 100, 15, 12]
+            scale_index = scale_items.index(scale)
             # time.sleep(6)
             # try:
             #     element = WebDriverWait(driver, 10).until(
@@ -105,9 +112,9 @@ def change_product_attr(driver, scale_index, act_chk):
                 clear_txt(element)
                 time.sleep(1)
                 clear_txt(element)
-                store_price = store_price.replace(",", "")
-                off_price = str(int(store_price)//2)
-                write_in_element(off_price,element)
+                # store_price = store_price.replace(",", "")
+                # off_price = str(int(store_price)//2)
+                # write_in_element(off_price,element)
                 
             except:
                 is_true = False
@@ -486,9 +493,10 @@ def run_active_products_inSite(driver,main_url,dfData):
         # thisData.oldName = dfData.iat[0, thisIndex.oldName]
         thisData.id = dfData.iat[0, thisIndex.id]
         thisData.act = dfData.iat[0, thisIndex.act]
-        thisData.scale_index = int(dfData.iat[0, thisIndex.scale_index])
+        # thisData.scale_index = int(dfData.iat[0, thisIndex.scale_index])
+        thisData.scale = int(dfData.iat[0, thisIndex.scale])
         driver.get(f"{urls_hesabro.product.product_update}{thisData.id}")
-        change_product_attr(driver=driver,scale_index=thisData.scale_index,act_chk=thisData.act)
+        change_product_attr(driver=driver,thisData=thisData,act_chk=thisData.act)
         # is_True,df_invalid = _run_active_product_in_site(driver,main_url,thisData)
         # ls_invalid.append(df_invalid)
         # if len(df_invalid)!= 
@@ -499,6 +507,9 @@ def run_active_products_inSite(driver,main_url,dfData):
         dfData = dfData.loc[dfData[ThisCols.id] != thisData.id]
         # print(os.getcwd())
         dfData.to_excel("مانده های فعال سازی در سایت.xlsx",index=False)
+    print("DONE")
+    print("ALL PRODUCTS SUCCESSFULLY EDITED.")
+
     # dfData = pd.concat(ls_invalid)
     # dfData.to_excel("محصولاتی که در کادر جستجو در فعال سازی برای سایت انتخاب نشدند.xlsx",index=False)
         # if is_True:

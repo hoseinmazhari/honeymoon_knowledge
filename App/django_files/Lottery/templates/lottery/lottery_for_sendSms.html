@@ -33,7 +33,8 @@
     </ul>
     <div class="container" hx-boost>
         <section hx-target="this">
-            <form class="buttons has-addons">
+            <!-- <form class="buttons has-addons"> -->
+            <form class="buttons has-addons" method="post" enctype="multipart/form-data">
                 {% csrf_token %} 
                 {% if result == "stoped" %}
                     <br>
