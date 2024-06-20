@@ -93,7 +93,7 @@ def incorrect_remover_from_corrects(df_correct_barcode, df_incorrect_barcode):
             thisFileName = "مشتریانی که بارکد صحیح را هیچ وقت صحیح ارسال نکرده اند.xlsx"
             xlsxFileNum = make_file(df_incorrect_barcode,thisFileName,xlsxFileNum,thisPath)
             # dfCheckoutPm.to_excel(,index=False)
-            return df_incorrect_barcode,thisPath,folderName
+            return df_incorrect_barcode
 
 # salary()
 
