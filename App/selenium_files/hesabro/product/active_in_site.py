@@ -14,7 +14,7 @@ from selenium_files.settings_selenium.main_defs import search_fieldProduct_navba
 from selenium_files.settings_selenium.main_defs import write_in_element, change_chk,clear_txt #...
 from python_files.settings_python import DateJuToJa as djtj #....
 # from ...settings import xpath
-from selenium_files.settings_selenium.app_address import urls_hesabro
+from selenium_files.settings_selenium.app_address import Urls_hesabro
 class active_inSiteCols():
     # is_proccess_true = "اعمال موفق تغییرات"
     id = "آیدی"
@@ -495,7 +495,7 @@ def run_active_products_inSite(driver,main_url,dfData):
         thisData.act = dfData.iat[0, thisIndex.act]
         # thisData.scale_index = int(dfData.iat[0, thisIndex.scale_index])
         thisData.scale = int(dfData.iat[0, thisIndex.scale])
-        driver.get(f"{urls_hesabro.product.product_update}{thisData.id}")
+        driver.get(f"{Urls_hesabro.Product.product_update}{thisData.id}")
         change_product_attr(driver=driver,thisData=thisData,act_chk=thisData.act)
         # is_True,df_invalid = _run_active_product_in_site(driver,main_url,thisData)
         # ls_invalid.append(df_invalid)

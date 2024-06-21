@@ -1,6 +1,6 @@
 # from xpath import get_xpath
 from selenium_files.settings_selenium import xpath_hesabro
-from selenium_files.settings_selenium.app_address import urls_hesabro
+from selenium_files.settings_selenium.app_address import Urls_hesabro
 # from browser import Browser,write_in_element
 from selenium_files.settings_selenium.main_defs import write_in_element, clear_txt
 from selenium.webdriver.common.keys import Keys
@@ -335,7 +335,7 @@ def coin_setter(mobile, driver, main_url, coin, hamyar_condition):
 
             Initial_charge = "شارژ اولیه"
             # coin_address = get_address("user_detail","coin",this_id)
-            coin_address = f"{urls_hesabro.user_detail.coin}{this_id}"
+            coin_address = f"{Urls_hesabro.User_detail.coin}{this_id}"
             driver.get(coin_address)
             time.sleep(2.5)
             #######print("strat get coin address")

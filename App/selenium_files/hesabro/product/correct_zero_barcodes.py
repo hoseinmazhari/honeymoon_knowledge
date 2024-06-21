@@ -10,7 +10,7 @@ import time
 import pandas as pd
 import os
 from selenium.webdriver.common.keys import Keys
-from selenium_files.settings_selenium.app_address import urls_hesabro
+from selenium_files.settings_selenium.app_address import Urls_hesabro
 # from .merchandise import 
 # from selenium_files.settings_selenium.main_defs import    
 from selenium_files.settings_selenium.main_defs import write_in_element,search_fieldProduct_navbar,clear_txt, select_product_inSearchFeild
@@ -46,7 +46,7 @@ def update_product_correct_prices_barcodes(driver,main_url,id,correct_barcodes):
         # _product_input = driver.switch_to.active_element
         
         # select_product_inSearchFeild(driver, main_url, id, _product_input)
-        this_product = f'{urls_hesabro.product.product_view_detail}{id}'
+        this_product = f'{Urls_hesabro.Product.product_view_detail}{id}'
         driver.get(this_product)
         time.sleep(2.4)
         # write_in_element(id,_product_input)

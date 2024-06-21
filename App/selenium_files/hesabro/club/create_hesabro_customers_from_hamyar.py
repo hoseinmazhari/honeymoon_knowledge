@@ -10,7 +10,7 @@ from selenium_files.settings_selenium.main_defs import write_in_element, change_
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 import time
-from selenium_files.settings_selenium.app_address import urls_hesabro
+from selenium_files.settings_selenium.app_address import Urls_hesabro
 from selenium_files.settings_selenium.xpath_hesabro import product_view
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -67,7 +67,7 @@ def get_index_Create_hesabro_customers_from_hamyar_cols(df):
 def createCustomer(driver, customer, birthday, address, postalCode,
                     work, phone, codeMelli, gender, education, mobile):
     
-    driver.get(urls_hesabro.customers.create)
+    driver.get(Urls_hesabro.Customers.create)
     time.sleep(3)
     # element = driver.find_element(By.XPATH,xpath_hesabro.customers.create.kind)
     # element = WebDriverWait(driver, 10).until(

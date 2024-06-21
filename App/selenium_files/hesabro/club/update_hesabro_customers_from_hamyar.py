@@ -10,7 +10,7 @@ from selenium_files.settings_selenium.main_defs import write_in_element, change_
 
 from selenium.webdriver.common.keys import Keys
 import time
-from selenium_files.settings_selenium.app_address import urls_hesabro
+from selenium_files.settings_selenium.app_address import Urls_hesabro
 from selenium_files.settings_selenium.xpath_hesabro import product_view
 from selenium import webdriver
 from selenium.webdriver.common.by import By

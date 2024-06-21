@@ -7,7 +7,7 @@ from selenium_files.settings_selenium.main_defs import write_in_element, clear_t
 
 from selenium.webdriver.common.keys import Keys
 import time
-from selenium_files.settings_selenium.app_address import urls_hesabro
+from selenium_files.settings_selenium.app_address import Urls_hesabro
 from selenium_files.settings_selenium.xpath_hesabro import product_view
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -53,7 +53,7 @@ def set_order_point(driver,dfData):
         order_point = dfData.iat[0, thisIndex.order_point]
         product_id = dfData.iat[0, thisIndex.product_id]
         dfData = dfData.loc[dfData[thisCols.product_id] != product_id]
-        driver.get(f"{urls_hesabro.product.product_update}{product_id}")
+        driver.get(f"{Urls_hesabro.Product.product_update}{product_id}")
         time.sleep(3)
         # try:
         if True:
