@@ -87,10 +87,13 @@ def update_customers_specifications(driver):
 
     this_delay = 2
     ls_data = []
-    df_pageData, driver = (download_page(driver, title, this_delay))
+    df_pageData, driver = (download_page(driver))
     
     is_finish = False
+    thisItter = 0
     while  is_finish == False:
+        thisItter += 1
+        print(thisItter)
         while len(df_pageData):
             thisIndex = get_index_report_output_cols(df_pageData)
             thisCols = report_output_cols()
@@ -121,7 +124,10 @@ def update_customers_specifications(driver):
         # if is_continu==False:
         #     break
     dfData = pd.DataFrame(ls_data)
-    return dfData
+    dfData = pd.concat(dfData, df_customers_specifications)
+
+    dfData.to_excel(File_locations.Data_base.Club.Customers.Specifications.db_address,index=False)
+    # return dfData
 
 # def append_data(df_pageData):
     

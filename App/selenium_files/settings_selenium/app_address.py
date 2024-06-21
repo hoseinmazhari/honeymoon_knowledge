@@ -19,7 +19,7 @@ class Urls_hesabro():
     class Club():
         class Customers():
             class Specifications(): #مشخصات مشتریان
-                link = f"{hesabro_domain}{'report-customer/view?id=70'}"
+                link = f"{hesabro_domain}/{'report-customer/view?id=70'}"
                 
     
     class Factor():
