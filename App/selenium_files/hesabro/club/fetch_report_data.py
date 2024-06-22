@@ -15,7 +15,7 @@ from selenium.webdriver.common.keys import Keys
 # from .merchandise import search_fieldProduct
 from selenium_files.settings_selenium.main_defs import write_in_element
 from selenium_files.settings_selenium import app_address
-from selenium_files.settings_selenium.app_structures \
+from python_files.settings_python.app_structures \
     import get_index_report_output_cols,report_output_cols
 # from selenium_files.settings_selenium.run_app import run_hesabro
 # from tqdm import tqdm

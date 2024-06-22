@@ -1,40 +1,37 @@
 
 
 import os, sys, time, random, pandas as pd
-from .browser import Browser
 
-from .main_defs import write_in_element
 from selenium.webdriver.common.keys import Keys
 
-# from .xpath import get_xpath
 from . import xpath_hesabro
-# import app_address
-# from .app_address import hesabro_domain,get_rnd_page,urls,arad_payamek_domain,honeymoonatr_domain
-from .app_address import hesabro_domain,honeymoonatr_domain
+from . import app_address
+from . import app_tasks as tsk
 
+from .app_address import hesabro_domain,honeymoonatr_domain
+from .browser import Browser
+from .main_defs import write_in_element
+from .user_pass import get_index_user_pass
+
+from selenium_files.hesabro.product.order_points import set_order_point
 from selenium_files.hesabro.product import obsolete
 from selenium_files.hesabro.club import update_hesabro_customers_from_hamyar as uhcfh, create_hesabro_customers_from_hamyar as chcfh
-from .user_pass import get_index_user_pass
-# from . import xpath
-from . import app_address
-from ..hesabro.product.order_points import set_order_point
-# from ..hesabro.product.order_points_allBrs import set_order_point_allBrs
-from . import app_tasks as tsk
 from selenium_files.hesabro.product import active_in_site 
 from selenium_files.hesabro.product import correct_zero_barcodes
-from ..hesabro.club import fetch_birthdays_data as fbsd
-from ..hesabro.club import fetch_birthday as upb
-from ..hesabro.club import fetch_report_data as frd
-from ..hesabro.club import fetch_coin_report_data as fcrd
-# from ..hesabro.club.sms_sender import send_group_sms,send_sms_from_df
+from selenium_files.hesabro.product.update_variaty_of_products import run_update_variaty_of_products as ruvop
+from selenium_files.hesabro.club import fetch_birthdays_data as fbsd
+from selenium_files.hesabro.club import fetch_birthday as upb
+from selenium_files.hesabro.club import fetch_report_data as frd
+from selenium_files.hesabro.club import fetch_coin_report_data as fcrd
 from selenium_files.hesabro.club.sms_sender import send_group_sms, send_sms_from_df
-from ..honeymoonatr import update_products as upsh
-# from ...python_files.codes.salary_hesabro import salary
+from selenium_files.honeymoonatr import update_products as upsh
+
 from  python_files.codes.salary_hesabro.salary import salary
 from python_files.settings_python import app_structures as asts
 from python_files.settings_python.app_structures import _make_farsi_text
 from python_files.settings_python import printProgress as prgs
 from python_files.settings_python import DateJuToJa as djtj
+
 def get_user_pass(this_domain):
     df_user_pass = pd.read_excel("..//selenium_files/data/user_pass/user_pass.xlsx")
     df_user_pass.to_excel("test.xlsx", index=False)
@@ -373,9 +370,9 @@ def task_selector(selected,args_= "",**kwargs):
         if selected == tsk.task_name.update_variety_of_products:
             driver, is_logged_in = run_hesabro() 
             if is_logged_in:
-                title = tsk.task_name.active_in_site
+                title = selected
                 dfData = args_
-                answer = active_in_site.run_active_products_inSite(driver,main_url,dfData)
+                answer = ruvop(driver,main_url,dfData)
                 # dfData.to_excel(f"{title}.xlsx", index= False)
                 print(answer)
         if selected == tsk.task_name.lottery_barcodes:

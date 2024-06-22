@@ -643,6 +643,96 @@ def get_index_Lottery_Cols(df):
             thisClass.sent_time = thisItter
     return thisClass
 ############################################################################################
+
+class report_output_cols():
+    row = "ردیف"
+    mobile = "موبایل"
+    name = "نام و نام خانوادگی"
+    birthday = "تاریخ تولد"
+    gender = "جنسیت"
+    email = "ایمیل"
+    trusted = "تایید شده"
+    passport_id = "کدملی-پاسپورت"
+    id = "آیدی"
+    
+def get_index_report_output_cols(df):
+    thisClass = report_output_cols()
+    thisItter = -1
+    for col in df.columns:
+        thisItter += 1
+        if col== thisClass.birthday:
+            thisClass.birthday = thisItter
+        elif col == thisClass.row:
+            thisClass.row = thisItter
+        elif col == thisClass.mobile:
+            thisClass.mobile = thisItter
+        elif col == thisClass.name:
+            thisClass.name = thisItter
+        elif col == thisClass.gender:
+            thisClass.gender = thisItter
+        elif col == thisClass.email:
+            thisClass.email = thisItter
+        elif col == thisClass.trusted:
+            thisClass.trusted = thisItter
+        elif col == thisClass.passport_id:
+            thisClass.passport_id = thisItter
+        elif col == thisClass.id:
+            thisClass.id = thisItter
+    return thisClass
+
 ############################################################################################
+class variaty_of_products_cols():
+    # is_proccess_true = "اعمال موفق تغییرات"
+    # oldName = "oldName"
+    # page_title = "page_title"
+    # slug = "slug"
+    # des = "des"
+    # act = "act"
+    id = "آیدی"
+    scale = "حجم"
+    act = "فعال در سایت"
+    buy_price = "قیمت روز خرید"
+    site_price = "قیمت سایت"
+    off_price = "قیمت با تخفیف"
+    main_price = "اصلی کالا"
+    store_price = "قیمت فروشگاه"
+
+def get_index_variaty_of_products(df):
+    thisItter = -1
+    thisCols = variaty_of_products_cols()
+    for col in df.columns:
+        thisItter += 1
+        if col == thisCols.id:
+            thisCols.id = thisItter # type: ignore
+        elif col == thisCols.scale:
+            thisCols.scale = thisItter
+        elif col == thisCols.act:
+            thisCols.act = thisItter
+        elif col == thisCols.site_price:
+            thisCols.site_price = thisItter
+        elif col == thisCols.off_price:
+            thisCols.off_price = thisItter
+        elif col == thisCols.main_price:
+            thisCols.main_price = thisItter
+        elif col == thisCols.store_price:
+            thisCols.store_price = thisItter
+        elif col == thisCols.buy_price:
+            thisCols.buy_price = thisItter
+                    # elif col == thisCols.is_proccess_true:
+        #     thisCols.is_proccess_true = thisItter
+        # elif col == thisCols.oldName:
+        #     thisCols.oldName = thisItter
+        # elif col == thisCols.page_title:
+        #     thisCols.page_title = thisItter
+        # elif col == thisCols.slug:
+        #     thisCols.slug = thisItter # type: ignore
+        # elif col == thisCols.des:
+        #    thisCols.des = thisItter # type: ignore
+        # elif col == thisCols.act:
+        #     thisCols.act = thisItter # type: ignore
+        # # elif col == thisCols.buy_price:
+        #     thisCols.buy_price = thisItter # type: ignore
+    return thisCols
+
 ############################################################################################
 ############################################################################################
