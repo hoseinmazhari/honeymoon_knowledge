@@ -9,9 +9,9 @@ app = Celery('A')
 app.conf.broker_connection_retry_on_startup = True
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
-app.conf.beat_schedule={
-    "update_birthday_task":{
-        "task": "club.tasks.run_update_customers_specifications",
-        "schedule":300
-    }
-}
+# app.conf.beat_schedule={
+#     "update_birthday_task":{
+#         "task": "club.tasks.run_update_customers_specifications",
+#         "schedule":300
+#     }
+# }

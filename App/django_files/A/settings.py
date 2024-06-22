@@ -38,11 +38,12 @@ INSTALLED_APPS = [
     'get_coin_report',
     'analyse_excels',
     'club',
-    'Lottery'
+    'Lottery',
     # "django.contrib.staticfiles",
     
     # 'django_celery_results',
-    # 'django_celery_beat',
+    'django_celery_beat',
+    'celery',
     
 ]
 
@@ -145,9 +146,17 @@ MEDIA_URL = '/media/'
 import os
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TASK_SERIALIZER = 'json'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TASK_SERIALIZER = 'json'
 # CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_TIMEZONE = TIME_ZONE
+CELERY_BEAT_SCHEDULE = {
+    "update_birthday_task":{
+        "task": "club.tasks.run_update_customers_specifications",
+        "schedule":900,
+        # "args": ['hello world']
+    }
+}

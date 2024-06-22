@@ -364,6 +364,20 @@ def task_selector(selected,args_= "",**kwargs):
         print()
         print(_make_farsi_text(selected))
         print()
+        # selected = "test"
+        # if selected == "test":
+        #     driver, is_logged_in = run_hesabro()
+        #     from selenium_files.hesabro.club.update_customers_specifications import update_customers_specifications
+        #     if is_logged_in:
+        #         update_customers_specifications(driver)
+        if selected == tsk.task_name.update_variety_of_products:
+            driver, is_logged_in = run_hesabro() 
+            if is_logged_in:
+                title = tsk.task_name.active_in_site
+                dfData = args_
+                answer = active_in_site.run_active_products_inSite(driver,main_url,dfData)
+                # dfData.to_excel(f"{title}.xlsx", index= False)
+                print(answer)
         if selected == tsk.task_name.lottery_barcodes:
             df_correct_barcode = args_[asts.lottery_requires.correct_barcodes]
             df_incorrect_barcode = args_[asts.lottery_requires.incorrect_barcodes]

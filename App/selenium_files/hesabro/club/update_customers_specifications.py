@@ -10,8 +10,9 @@ from selenium_files.settings_selenium.app_address import Urls_hesabro,File_locat
 from selenium_files.settings_selenium.app_structures \
     import get_index_report_output_cols,report_output_cols
 def download_page(driver): 
-    # this_address = driver.current_url
-    try:
+    this_address = driver.current_url
+    # try:
+    if True:
         # is_true = False
         # name = []
         # mobile = []
@@ -51,13 +52,22 @@ def download_page(driver):
                 # for more pretty act]ions in ui , ux this code writed to next_p
                 
                 # time.sleep(0.6)
-            element =driver.find_element(By.XPATH,xph.create_reportcustomer.dataReport.next_p)
-            time.sleep(2.5)
+            
             # element = WebDriverWait(driver, 10).until(
             #     EC.presence_of_element_located((By.XPATH, xph.create_reportcustomer.download)))
-    except Exception as e:
-        print(e)
+    # except Exception as e:
+    #     print(e)
         # is_true = False
+    this_counter = 0
+    while driver.current_url == this_address:
+        element =driver.find_element(By.XPATH,xph.create_reportcustomer.dataReport.next_p)
+        element.click()
+        time.sleep(2.5)
+        this_counter += 1
+        print(f'this step for next page {this_counter}')
+
+        if this_counter>10:
+            break
 
     return pd.DataFrame(lsData),  driver
 def update_customers_specifications(driver): 
@@ -107,9 +117,9 @@ def update_customers_specifications(driver):
             passport_id = df_pageData.iat[0, thisIndex.passport_id]
             trusted = df_pageData.iat[0, thisIndex.trusted]
             df_pageData = df_pageData.loc[df_pageData[thisCols.mobile]!=mobile]
-            if len(dfData.loc[dfData[thisCols.mobile] == mobile]):
-                is_finish = True
-            else:
+            if len(dfData.loc[dfData[thisCols.mobile] != str(int(mobile))]):
+                
+            
                 ls_data.append({thisCols.row:row, thisCols.id: id,
                                 thisCols.mobile:mobile,thisCols.name: name,
                                 thisCols.gender: gender, thisCols.birthday:\
@@ -118,6 +128,9 @@ def update_customers_specifications(driver):
                                 thisCols.passport_id: passport_id, thisCols.trusted:\
                                 trusted
                                 })
+            else:
+                is_finish = True
+
         df_pageData, driver = (download_page(driver))
 
         # ls_data.append(data)

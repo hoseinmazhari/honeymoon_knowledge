@@ -8,6 +8,7 @@ urlpatterns = [
     path('active_in_site/',views.active_in_site,name="active_in_site"),
     path('correct_zero_prices_barcodes/',views.correct_zero_prices_barcodes,name="correct_zero_prices_barcodes"),
     path('obsolete/',views.obsolete,name="obsolete"),
+    path('update/', views.update_variaty_of_products,name='update_variaty')
     
     
     
