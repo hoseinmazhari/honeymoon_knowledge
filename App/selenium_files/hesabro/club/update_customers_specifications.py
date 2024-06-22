@@ -79,6 +79,7 @@ def update_customers_specifications(driver):
     db_address = File_locations.Data_base.Club.Customers.Specifications.db_address
     this_path = os.getcwd()
     df_customers_specifications = pd.read_excel(f"{this_path}/{db_address}")
+    print(len(df_customers_specifications))
     dfData = df_customers_specifications.copy()
     driver.get(this_address)
     this_delay = 3
@@ -98,16 +99,17 @@ def update_customers_specifications(driver):
     this_delay = 2
     ls_data = []
     df_pageData, driver = (download_page(driver))
-    
+    thisIndex = get_index_report_output_cols(df_pageData)
+    thisCols = report_output_cols()
     is_finish = False
     thisItter = 0
     while  is_finish == False:
         thisItter += 1
-        print(thisItter)
+        print("page number is: ",thisItter)
         while len(df_pageData):
-            thisIndex = get_index_report_output_cols(df_pageData)
-            thisCols = report_output_cols()
-            mobile = df_pageData.iat[0, thisIndex.mobile]
+            
+            mobile = (df_pageData.iat[0, thisIndex.mobile])
+            print(mobile)
             row = df_pageData.iat[0, thisIndex.row]
             id = df_pageData.iat[0, thisIndex.id]
             birthday = df_pageData.iat[0, thisIndex.birthday]
@@ -117,7 +119,10 @@ def update_customers_specifications(driver):
             passport_id = df_pageData.iat[0, thisIndex.passport_id]
             trusted = df_pageData.iat[0, thisIndex.trusted]
             df_pageData = df_pageData.loc[df_pageData[thisCols.mobile]!=mobile]
-            if len(dfData.loc[dfData[thisCols.mobile] != str(int(mobile))]):
+            print(thisCols.mobile)
+            dfTest = (dfData.loc[dfData[thisCols.mobile] == int(mobile)])
+            print("len dfTest is:", len(dfTest))
+            if len(dfTest)==0:
                 
             
                 ls_data.append({thisCols.row:row, thisCols.id: id,
@@ -137,7 +142,7 @@ def update_customers_specifications(driver):
         # if is_continu==False:
         #     break
     dfData = pd.DataFrame(ls_data)
-    dfData = pd.concat(dfData, df_customers_specifications)
+    dfData = pd.concat([dfData, df_customers_specifications])
 
     dfData.to_excel(File_locations.Data_base.Club.Customers.Specifications.db_address,index=False)
     # return dfData

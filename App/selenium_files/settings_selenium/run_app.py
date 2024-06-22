@@ -363,10 +363,10 @@ def task_selector(selected,args_= "",**kwargs):
         print()
         # selected = "test"
         # if selected == "test":
-        #     driver, is_logged_in = run_hesabro()
-        #     from selenium_files.hesabro.club.update_customers_specifications import update_customers_specifications
-        #     if is_logged_in:
-        #         update_customers_specifications(driver)
+        #     # driver, is_logged_in = run_hesabro()
+        #     from django_files.club.tasks import run_update_customers_specifications
+        #     # if is_logged_in:
+        #     run_update_customers_specifications()
         if selected == tsk.task_name.update_variety_of_products:
             driver, is_logged_in = run_hesabro() 
             if is_logged_in:
