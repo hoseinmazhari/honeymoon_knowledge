@@ -16,4 +16,5 @@ def run_update_customers_specifications():
 def run_send_daily_birthday_message():
     print("send birthday daily started...")
     time.sleep(10)    
+    
     print("send  birthday daily now is complete.")
