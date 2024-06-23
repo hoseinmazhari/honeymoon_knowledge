@@ -10,6 +10,8 @@ class navbar():
     branch_item_selector = '/html/body/div[2]/header/nav/div[2]/ul[1]/li[3]/div/a'
     
     class searchbar():
+        serial_input = '//*[@id="productuniquesearch-serial"]'
+
         mobile = "//span[@id='select2-shortcutCustomerName-container']"
         merchandise ="//span[@id='select2-shortcutChecks-container']//span[1]"
         # merchandise_list_box = '//*[@id="select2-shortcutChecks-results"]'
@@ -170,6 +172,10 @@ class user_detail():
             link = "//a[text()='سکه های مشتری']"
             table = "//table"
             table_tr = "//tr"
+
+class Check_barcodes():
+   
+    exit_item = "/html/body/div[2]/div/div[2]/div[2]/div/div[2]/div/div[2]/div/table/tbody/tr[1]/td[12]/a"
 #     'user_detail':{
 #         'coin':
 #         'coin_table': "//table",

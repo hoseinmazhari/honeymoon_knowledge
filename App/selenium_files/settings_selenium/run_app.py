@@ -361,12 +361,18 @@ def task_selector(selected,args_= "",**kwargs):
         print()
         print(_make_farsi_text(selected))
         print()
-        # selected = "test"
-        # if selected == "test":
-        #     # driver, is_logged_in = run_hesabro()
-        #     from django_files.club.tasks import run_update_customers_specifications
-        #     # if is_logged_in:
-        #     run_update_customers_specifications()
+        selected = "test"
+        if selected == "test":
+            driver, is_logged_in = run_hesabro()
+            # from django_files.club.tasks import run_update_customers_specifications
+            from django.conf import settings
+            thisPath = settings.BASE_DIR
+            this_file = f"{thisPath}/barcode.xlsx"
+            dfData = pd.read_excel(this_file)
+            if is_logged_in:
+                from selenium_files.hesabro.product import Check_barcodes
+                Check_barcodes.run_check(driver,dfData)
+            
         if selected == tsk.task_name.update_variety_of_products:
             driver, is_logged_in = run_hesabro() 
             if is_logged_in:

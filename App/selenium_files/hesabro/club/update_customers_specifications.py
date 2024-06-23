@@ -1,5 +1,5 @@
 import os,time,pandas as pd
-
+from django.conf import settings
 from selenium_files.settings_selenium import xpath_hesabro as xph
 
 from selenium.webdriver.common.by import By
@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium_files.settings_selenium.app_address import Urls_hesabro,File_locations
-from selenium_files.settings_selenium.app_structures \
+from python_files.settings_python.app_structures \
     import get_index_report_output_cols,report_output_cols
 def download_page(driver): 
     this_address = driver.current_url
@@ -70,6 +70,7 @@ def download_page(driver):
             break
 
     return pd.DataFrame(lsData),  driver
+
 def update_customers_specifications(driver): 
     #  1- تغییر آدرس مرورگر به صفححه ایجاد گزاشات
     # this_address = app_address.urls["birthday"]["create_rpt"]
@@ -77,8 +78,8 @@ def update_customers_specifications(driver):
     # this_address = "https://hesabro.ir/@hm/report-customer/view?id=100&page=469&per-page=50"
     this_address = Urls_hesabro.Club.Customers.Specifications.link
     db_address = File_locations.Data_base.Club.Customers.Specifications.db_address
-    this_path = os.getcwd()
-    df_customers_specifications = pd.read_excel(f"{this_path}/{db_address}")
+    this_file = f"{settings.BASE_DIR}/{db_address}"
+    df_customers_specifications = pd.read_excel(this_file)
     print(len(df_customers_specifications))
     dfData = df_customers_specifications.copy()
     driver.get(this_address)
@@ -120,31 +121,34 @@ def update_customers_specifications(driver):
             trusted = df_pageData.iat[0, thisIndex.trusted]
             df_pageData = df_pageData.loc[df_pageData[thisCols.mobile]!=mobile]
             print(thisCols.mobile)
-            dfTest = (dfData.loc[dfData[thisCols.mobile] == int(mobile)])
-            print("len dfTest is:", len(dfTest))
-            if len(dfTest)==0:
+            if int(mobile) != 0 :
+
+                dfTest = (dfData.loc[dfData[thisCols.mobile] == int(mobile)])
+                print("len dfTest is:", len(dfTest))
+                if len(dfTest)==0:
+                    
                 
-            
-                ls_data.append({thisCols.row:row, thisCols.id: id,
-                                thisCols.mobile:mobile,thisCols.name: name,
-                                thisCols.gender: gender, thisCols.birthday:\
-                                birthday,
-                                thisCols.email: email,
-                                thisCols.passport_id: passport_id, thisCols.trusted:\
-                                trusted
-                                })
-            else:
-                is_finish = True
+                    ls_data.append({thisCols.row:row, thisCols.id: id,
+                                    thisCols.mobile:mobile,thisCols.name: name,
+                                    thisCols.gender: gender, thisCols.birthday:\
+                                    birthday,
+                                    thisCols.email: email,
+                                    thisCols.passport_id: passport_id, thisCols.trusted:\
+                                    trusted
+                                    })
+                else:
+                    is_finish = True
 
         df_pageData, driver = (download_page(driver))
 
         # ls_data.append(data)
         # if is_continu==False:
-        #     break
+        #     breakcustomers_specifications.xlsx
     dfData = pd.DataFrame(ls_data)
+    df_customers_specifications = pd.read_excel(this_file)
     dfData = pd.concat([dfData, df_customers_specifications])
-
-    dfData.to_excel(File_locations.Data_base.Club.Customers.Specifications.db_address,index=False)
+    
+    dfData.to_excel(this_file,index=False)
     # return dfData
 
 # def append_data(df_pageData):

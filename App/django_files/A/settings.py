@@ -156,7 +156,12 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERY_BEAT_SCHEDULE = {
     "update_birthday_task":{
         "task": "club.tasks.run_update_customers_specifications",
-        "schedule":3600,
+        "schedule":1200,
         # "args": ['hello world']
+    },
+    "send_daily_birthday":{
+        "task": "club.tasks.run_send_daily_birthday_message",
+        "schedule":20,
+        # "args":['']
     }
 }
