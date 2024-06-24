@@ -2,6 +2,7 @@
 
 
 from pathlib import Path
+from celery.schedules import crontab
 # import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -159,9 +160,14 @@ CELERY_BEAT_SCHEDULE = {
         "schedule":1200,
         # "args": ['hello world']
     },
-    "send_daily_birthday":{
-        "task": "club.tasks.run_send_daily_birthday_message",
-        "schedule":20,
+    # "send_daily_birthday":{
+    #     "task": "club.tasks.run_send_daily_birthday_message",
+    #     "schedule":20,
+    #     # "args":['']
+    # },
+    "test_send_daily_birthday":{
+        "task": "club.tasks.check_send_birthday",
+        "schedule":crontab(minute=0,hour=10),
         # "args":['']
     }
 }
