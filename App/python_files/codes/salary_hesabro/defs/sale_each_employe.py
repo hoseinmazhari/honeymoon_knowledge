@@ -4,39 +4,43 @@ import os, sys, pandas as pd
 # sys.path.insert(1, parent)
 from . import target 
 from .target import targetCol
-from python_files.settings_python.app_structures import _make_farsi_text,tjCol
+from python_files.settings_python.app_structures import _make_farsi_text,tjCol,getIndexTj
 # from main import * 
 
-class thisCols():
-    branch = tjCol.branch
-    branch_id = tjCol.branch_id
-    seller_name = tjCol.seller_name
-    seller_id = tjCol.seller_id
-    Received = tjCol.Received
-    shiftWork = tjCol.saleTime
+# class Sale_sellers_in_each_branch_cols():
+#     branch = tjCol.branch
+#     branch_id = tjCol.branch_id
+#     seller_name = tjCol.seller_name
+#     seller_id = tjCol.seller_id
+#     received_with_checkout = tjCol.received_with_checkout
+#     received_without_checkout = tjCol.received_without_checkout
+#     shiftWork = tjCol.saleTime
 
-def getIndexThisCols(df):
-    thisClass = thisCols()
-    thisItter = -1
-    for col in df.columns:
-        thisItter += 1
-        if thisClass.branch == col:
-            thisClass.branch = thisItter  # type: ignore
-        elif thisClass.branch_id == col:
-            thisClass.branch_id = thisItter # type: ignore
-        elif thisClass.seller_name == col:
-            thisClass.seller_name = thisItter # type: ignore
-        elif thisClass.seller_id == col:
-            thisClass.seller_id = thisItter # type: ignore
-        elif thisClass.Received == col:
-            thisClass.Received = thisItter # type: ignore
-        elif thisClass.shiftWork == col:
-            thisClass.shiftWork = thisItter # type: ignore
-    return thisClass
+# def getIndexThisCols(df):
+#     thisCols = Sale_sellers_in_each_branch_cols()
+#     thisItter = -1
+#     for col in df.columns:
+#         thisItter += 1
+#         if thisCols.branch == col:
+#             thisCols.branch = thisItter  # type: ignore
+#         elif thisCols.branch_id == col:
+#             thisCols.branch_id = thisItter # type: ignore
+#         elif thisCols.seller_name == col:
+#             thisCols.seller_name = thisItter # type: ignore
+#         elif thisCols.seller_id == col:
+#             thisCols.seller_id = thisItter # type: ignore
+#         elif thisCols.received_without_checkout == col:
+#             thisCols.received_without_checkout = thisItter # type: ignore
+#         elif thisCols.received_with_checkout:
+#             thisCols.received_with_checkout = thisItter
+#         elif thisCols.shiftWork == col:
+#             thisCols.shiftWork = thisItter # type: ignore
+#     return thisCols
 
                      
 def sale_sellers_in_each_branch(dfData):
-    this_index = getIndexThisCols(dfData)  
+    this_index = getIndexTj(dfData)  
+    thisCols = tjCol()
     ls_data = []
     while len(dfData):
         seller_id = dfData.iat[0,this_index.seller_id]
@@ -45,14 +49,18 @@ def sale_sellers_in_each_branch(dfData):
         dfData = dfData.loc[dfData[thisCols.seller_id] != seller_id]
         while len(df_seller):
             branch = df_seller.iat[0, this_index.branch]
-            dfBranch = df_seller.loc[df_seller[thisCols.branch] == branch]
-            df_seller = df_seller.loc[df_seller[thisCols.branch] != branch]
-            Received = int(dfBranch[thisCols.Received].sum())
+            branch_id = df_seller.iat[0, this_index.branch_id]
+            dfBranch = df_seller.loc[df_seller[thisCols.branch_id] == branch_id]
+            df_seller = df_seller.loc[df_seller[thisCols.branch_id] != branch_id]
+            receive_with_checkout = int(dfBranch[thisCols.receive_with_checkout].sum())
+            receive_without_checkout = int(dfBranch[thisCols.receive_without_checkout].sum())
             
             ls_data.append({thisCols.branch:branch,
+                            thisCols.branch_id: branch_id,
                             thisCols.seller_id:seller_id, 
                             thisCols.seller_name : seller_name,
-                            thisCols.Received:Received
+                            thisCols.receive_with_checkout: receive_with_checkout,
+                            thisCols.receive_without_checkout:receive_without_checkout
                             })
     df_ans = pd.DataFrame(ls_data)
     return df_ans

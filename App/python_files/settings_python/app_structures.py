@@ -35,8 +35,8 @@ class tjCol():
     gender="جنسیت"
     mobile="موبایل"
     transitional= "انتقالی"
-    Deposit = "واریزی"
-    tasvieBaMarjooe="تسویه با مرجوعي"
+    cart = "واریزی"
+    checkout="تسویه با مرجوعي"
     earnest="پیش دریافت"
     Cash = "نقدی"
     chargeUse = "مصرف شارژ"
@@ -62,83 +62,86 @@ class tjCol():
     check = "چک"
     discount_code = "کد تخفیف"
     birthday = "تاریخ تولد"
-
+    received_with_checkout = "دریافتی با تسویه با مرجوعی"
+    received_without_checkout = "دریافتی بدون تسویه با مرجوعی"
 def getIndexTj(df):
-    tjIndex = tjCol()
+    thisCols = tjCol()
     thisIndex=-1
     for col in df.columns:        
         thisIndex+=1
-        if tjIndex.name == col:
-            tjIndex.name = thisIndex # type: ignore 
-        elif tjIndex.count == col:
-            tjIndex.count = thisIndex # type: ignore 
-        elif tjIndex.average == col:
-            tjIndex.average = thisIndex # type: ignore 
-        elif tjIndex.branch == col:
-            tjIndex.branch = thisIndex # type: ignore 
-        elif tjIndex.branch_id == col:
-            tjIndex.branch_id = thisIndex # type: ignore 
-        elif tjIndex.gender == col:
-            tjIndex.gender = thisIndex # type: ignore 
-        elif tjIndex.mobile == col:
-            tjIndex.mobile = thisIndex # type: ignore 
-        elif tjIndex.transitional==col:
-            tjIndex.transitional = thisIndex # type: ignore 
-        elif tjIndex.Deposit==col:
-            tjIndex.Deposit = thisIndex # type: ignore 
-        elif tjIndex.tasvieBaMarjooe==col:
-            tjIndex.tasvieBaMarjooe = thisIndex # type: ignore 
-        elif tjIndex.earnest==col:
-            tjIndex.earnest = thisIndex # type: ignore 
-        elif tjIndex.Cash==col:
-            tjIndex.Cash = thisIndex # type: ignore 
-        elif tjIndex.chargeUse==col:
-            tjIndex.chargeUse = thisIndex # type: ignore 
-        elif tjIndex.saleAgentCharge==col:
-            tjIndex.saleAgentCharge = thisIndex # type: ignore 
-        elif tjIndex.charge==col:
-            tjIndex.charge = thisIndex # type: ignore 
-        elif tjIndex.saler==col:
-            tjIndex.saler = thisIndex # type: ignore 
-        elif tjIndex.saleAget==col:
-            tjIndex.saleAget = thisIndex # type: ignore 
-        elif tjIndex.seller_name==col:
-            tjIndex.seller_name = thisIndex # type: ignore 
-        elif tjIndex.seller_id == col: # type: ignore
-            tjIndex.seller_id = thisIndex # type: ignore
-        elif tjIndex.buyer==col:
-            tjIndex.buyer = thisIndex # type: ignore 
-        elif tjIndex.PurchaseAmount==col:
-            tjIndex.PurchaseAmount = thisIndex # type: ignore 
-        elif tjIndex.PurchaseAmountLbl==col:
-            tjIndex.PurchaseAmountLbl = thisIndex # type: ignore 
-        elif tjIndex.Remaining==col:
-            tjIndex.Remaining = thisIndex # type: ignore 
-        elif tjIndex.mablagh==col:
-            tjIndex.mablagh = thisIndex # type: ignore 
-        elif tjIndex.Discount==col:
-            tjIndex.Discount = thisIndex # type: ignore  # type: ignore 
-        elif tjIndex.TotalOne==col:
-            tjIndex.TotalOne = thisIndex # type: ignore 
-        elif tjIndex.quantity==col:
-            tjIndex.quantity = thisIndex # type: ignore 
-        elif tjIndex.factor_date==col:
-            tjIndex.factor_date = thisIndex # type: ignore 
-        elif tjIndex.saleId==col:
-            tjIndex.saleId = thisIndex # type: ignore 
-        elif tjIndex.saleTime == col:
-            tjIndex.saleTime = thisIndex # type: ignore 
-        elif tjIndex.Received == col:
-            tjIndex.Received = thisIndex# type: ignore 
-        elif tjIndex.work == col:
-            tjIndex.work = thisIndex #type: ignore
-        elif tjIndex.education == col:
-            tjIndex.education = thisIndex # type: ignore
-        elif tjIndex.check == col:
-            tjIndex.check = thisIndex # type: ignore
-        elif tjIndex.birthday == col:
-            tjIndex.birthday = thisIndex # type: ignore
-    return tjIndex
+        if thisCols.name == col:
+            thisCols.name = thisIndex # type: ignore 
+        elif thisCols.count == col:
+            thisCols.count = thisIndex # type: ignore 
+        elif thisCols.average == col:
+            thisCols.average = thisIndex # type: ignore 
+        elif thisCols.branch == col:
+            thisCols.branch = thisIndex # type: ignore 
+        elif thisCols.branch_id == col:
+            thisCols.branch_id = thisIndex # type: ignore 
+        elif thisCols.gender == col:
+            thisCols.gender = thisIndex # type: ignore 
+        elif thisCols.mobile == col:
+            thisCols.mobile = thisIndex # type: ignore 
+        elif thisCols.transitional==col:
+            thisCols.transitional = thisIndex # type: ignore 
+        elif thisCols.cart==col:
+            thisCols.cart = thisIndex # type: ignore 
+        elif thisCols.checkout==col:
+            thisCols.checkout = thisIndex # type: ignore 
+        elif thisCols.earnest==col:
+            thisCols.earnest = thisIndex # type: ignore 
+        elif thisCols.Cash==col:
+            thisCols.Cash = thisIndex # type: ignore 
+        elif thisCols.chargeUse==col:
+            thisCols.chargeUse = thisIndex # type: ignore 
+        elif thisCols.saleAgentCharge==col:
+            thisCols.saleAgentCharge = thisIndex # type: ignore 
+        elif thisCols.charge==col:
+            thisCols.charge = thisIndex # type: ignore 
+        elif thisCols.saler==col:
+            thisCols.saler = thisIndex # type: ignore 
+        elif thisCols.saleAget==col:
+            thisCols.saleAget = thisIndex # type: ignore 
+        elif thisCols.seller_name==col:
+            thisCols.seller_name = thisIndex # type: ignore 
+        elif thisCols.seller_id == col: # type: ignore
+            thisCols.seller_id = thisIndex # type: ignore
+        elif thisCols.buyer==col:
+            thisCols.buyer = thisIndex # type: ignore 
+        elif thisCols.PurchaseAmount==col:
+            thisCols.PurchaseAmount = thisIndex # type: ignore 
+        elif thisCols.PurchaseAmountLbl==col:
+            thisCols.PurchaseAmountLbl = thisIndex # type: ignore 
+        elif thisCols.Remaining==col:
+            thisCols.Remaining = thisIndex # type: ignore 
+        elif thisCols.mablagh==col:
+            thisCols.mablagh = thisIndex # type: ignore 
+        elif thisCols.Discount==col:
+            thisCols.Discount = thisIndex # type: ignore  # type: ignore 
+        elif thisCols.TotalOne==col:
+            thisCols.TotalOne = thisIndex # type: ignore 
+        elif thisCols.quantity==col:
+            thisCols.quantity = thisIndex # type: ignore 
+        elif thisCols.factor_date==col:
+            thisCols.factor_date = thisIndex # type: ignore 
+        elif thisCols.saleId==col:
+            thisCols.saleId = thisIndex # type: ignore 
+        elif thisCols.saleTime == col:
+            thisCols.saleTime = thisIndex # type: ignore 
+        elif thisCols.Received == col:
+            thisCols.Received = thisIndex# type: ignore 
+        elif thisCols.work == col:
+            thisCols.work = thisIndex #type: ignore
+        elif thisCols.education == col:
+            thisCols.education = thisIndex # type: ignore
+        elif thisCols.check == col:
+            thisCols.check = thisIndex # type: ignore
+        elif thisCols.birthday == col:
+            thisCols.birthday = thisIndex # type: ignore
+        elif thisCols.received_with_checkout == col:
+            thisCols.received_with_checkout = thisIndex
+    return thisCols
 ############################################################################################
 class myDataType_names():
     cumulativeSales = "تجمیعی فروش"
@@ -218,66 +221,66 @@ class frCol():#version 1401.1 b ghabl chon az 1401.2 soton ha jabja shodeand dar
 
 
 def getIndexFr(df):
-    frIndex = frCol()
+    thisCols = frCol()
     thisIndex=-1
     for col in df.columns:        
         thisIndex+=1
-        if frIndex.saleId == col:
-            frIndex.saleId = thisIndex # type: ignore 
-        if frIndex.branch_id == col:
-            frIndex.branch_id = thisIndex #type: ignore
-        if frIndex.seller_id == col:
-            frIndex.seller_id = thisIndex # type: ignore
-        elif frIndex.product_id == col:
-            frIndex.product_id = thisIndex # type: ignore 
-        elif frIndex.factor_date == col:
-            frIndex.factor_date = thisIndex # type: ignore 
-        elif frIndex.branch == col:
-            frIndex.branch = thisIndex # type: ignore 
-        elif frIndex.category == col:
-            frIndex.category = thisIndex # type: ignore 
-        elif frIndex.group == col:
-            frIndex.group = thisIndex # type: ignore 
-        elif frIndex.groupType == col:
-            frIndex.groupType = thisIndex # type: ignore 
-        elif frIndex.quantity == col:
-            frIndex.quantity = thisIndex # type: ignore 
-        elif frIndex.product_name == col:
-            frIndex.product_name = thisIndex # type: ignore 
-        elif frIndex.AmountOne == col:
-            frIndex.AmountOne = thisIndex # type: ignore 
-        elif frIndex.Discount == col:
-            frIndex.Discount = thisIndex # type: ignore 
-        elif frIndex.TotalOne == col:
-            frIndex.TotalOne = thisIndex # type: ignore 
-        elif frIndex.summation == col:
-            frIndex.summation = thisIndex # type: ignore 
-        elif frIndex.PurchaseAmount == col:
-            frIndex.PurchaseAmount = thisIndex # type: ignore 
-            frIndex.PurchaseAmountLbl = thisIndex # type: ignore 
-        elif frIndex.buyer == col:
-            frIndex.buyer = thisIndex # type: ignore 
-        elif frIndex.seller_name == col:
-            frIndex.seller_name = thisIndex # type: ignore 
-        elif frIndex.saler == col:
-            frIndex.saler = thisIndex # type: ignore 
-        elif frIndex.idBuyer == col:
-            frIndex.idBuyer = thisIndex # type: ignore 
-        elif frIndex.gender == col:
-            frIndex.gender = thisIndex # type: ignore 
-        elif frIndex.birthday == col:
-            frIndex.birthday = thisIndex # type: ignore 
-        elif frIndex.mobile == col:
-            frIndex.mobile = thisIndex # type: ignore 
-        elif frIndex.saleTime == col:
-            frIndex.saleTime = thisIndex # type: ignore 
-    return frIndex
+        if thisCols.saleId == col:
+            thisCols.saleId = thisIndex # type: ignore 
+        if thisCols.branch_id == col:
+            thisCols.branch_id = thisIndex #type: ignore
+        if thisCols.seller_id == col:
+            thisCols.seller_id = thisIndex # type: ignore
+        elif thisCols.product_id == col:
+            thisCols.product_id = thisIndex # type: ignore 
+        elif thisCols.factor_date == col:
+            thisCols.factor_date = thisIndex # type: ignore 
+        elif thisCols.branch == col:
+            thisCols.branch = thisIndex # type: ignore 
+        elif thisCols.category == col:
+            thisCols.category = thisIndex # type: ignore 
+        elif thisCols.group == col:
+            thisCols.group = thisIndex # type: ignore 
+        elif thisCols.groupType == col:
+            thisCols.groupType = thisIndex # type: ignore 
+        elif thisCols.quantity == col:
+            thisCols.quantity = thisIndex # type: ignore 
+        elif thisCols.product_name == col:
+            thisCols.product_name = thisIndex # type: ignore 
+        elif thisCols.AmountOne == col:
+            thisCols.AmountOne = thisIndex # type: ignore 
+        elif thisCols.Discount == col:
+            thisCols.Discount = thisIndex # type: ignore 
+        elif thisCols.TotalOne == col:
+            thisCols.TotalOne = thisIndex # type: ignore 
+        elif thisCols.summation == col:
+            thisCols.summation = thisIndex # type: ignore 
+        elif thisCols.PurchaseAmount == col:
+            thisCols.PurchaseAmount = thisIndex # type: ignore 
+            thisCols.PurchaseAmountLbl = thisIndex # type: ignore 
+        elif thisCols.buyer == col:
+            thisCols.buyer = thisIndex # type: ignore 
+        elif thisCols.seller_name == col:
+            thisCols.seller_name = thisIndex # type: ignore 
+        elif thisCols.saler == col:
+            thisCols.saler = thisIndex # type: ignore 
+        elif thisCols.idBuyer == col:
+            thisCols.idBuyer = thisIndex # type: ignore 
+        elif thisCols.gender == col:
+            thisCols.gender = thisIndex # type: ignore 
+        elif thisCols.birthday == col:
+            thisCols.birthday = thisIndex # type: ignore 
+        elif thisCols.mobile == col:
+            thisCols.mobile = thisIndex # type: ignore 
+        elif thisCols.saleTime == col:
+            thisCols.saleTime = thisIndex # type: ignore 
+    return thisCols
 
 ############################################################################################
 
 class monthCol():
     month = "ماه"
-    Deposit = tjCol.Deposit
+    cart = tjCol.cart
     Cash = tjCol.Cash
     earnest = tjCol.earnest
     transitional= tjCol.transitional
@@ -287,18 +290,18 @@ class monthCol():
     name = month
 class yearDetail():
     month = {
-                "01":{monthCol.month:"فروردین", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "02":{monthCol.month:"اردیبهشت", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "03":{monthCol.month:"خرداد", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "04":{monthCol.month:"تیر", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "05":{monthCol.month:"مرداد", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "06":{monthCol.month:"شهریور", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "07":{monthCol.month:"مهر", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "08":{monthCol.month:"آبان", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "09":{monthCol.month:"آذر", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "10":{monthCol.month:"دی", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "11":{monthCol.month:"بهمن", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
-                "12":{monthCol.month:"اسفند", monthCol.Deposit:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""}
+                "01":{monthCol.month:"فروردین", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "02":{monthCol.month:"اردیبهشت", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "03":{monthCol.month:"خرداد", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "04":{monthCol.month:"تیر", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "05":{monthCol.month:"مرداد", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "06":{monthCol.month:"شهریور", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "07":{monthCol.month:"مهر", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "08":{monthCol.month:"آبان", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "09":{monthCol.month:"آذر", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "10":{monthCol.month:"دی", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "11":{monthCol.month:"بهمن", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""},
+                "12":{monthCol.month:"اسفند", monthCol.cart:0, monthCol.Cash:0, monthCol.earnest : 0 , monthCol.transitional : 0 , monthCol.Received : 0 , monthCol.start  :  "" , monthCol.end : ""}
             }
 ############################################################################################
 def fillNullZero(df_all):
@@ -735,4 +738,62 @@ def get_index_variaty_of_products(df):
     return thisCols
 
 ############################################################################################
+def receive_calculator_withoutCheckout(dfData):
+    try:
+        cart =int(dfData[tjCol.cart].sum())                    
+    except:
+        cart=0
+    try:
+        Cash = int(dfData[tjCol.Cash].sum())
+    except:
+        Cash=0
+    try:
+        earnest = int(dfData[tjCol.earnest].sum())
+    except:
+        earnest=0
+    try:
+        transitional = int(dfData[tjCol.transitional].sum())
+    except:
+        transitional = 0
+    try:
+        check = int(dfData[tjCol.check].sum())
+    except:
+        check = 0
+    try:
+        to_otherPerson = int(dfData[tjCol.to_other_person].sum())
+    except:
+        to_otherPerson = 0
+    
+    return int(cart + Cash + earnest + transitional+ check+ to_otherPerson)   
+def receive_calculator_withCheckout(dfData):
+    try:
+        checkout =int(dfData[tjCol.checkout].sum())                    
+    except:
+        checkout=0
+    try:
+        cart =int(dfData[tjCol.cart].sum())                    
+    except:
+        cart=0
+    try:
+        Cash = int(dfData[tjCol.Cash].sum())
+    except:
+        Cash=0
+    try:
+        earnest = int(dfData[tjCol.earnest].sum())
+    except:
+        earnest=0
+    try:
+        transitional = int(dfData[tjCol.transitional].sum())
+    except:
+        transitional = 0
+    try:
+        check = int(dfData[tjCol.check].sum())
+    except:
+        check = 0
+    try:
+        to_otherPerson = int(dfData[tjCol.to_other_person].sum())
+    except:
+        to_otherPerson = 0
+    
+    return int(cart + Cash + earnest + transitional+ check+ to_otherPerson + checkout)   
 ############################################################################################

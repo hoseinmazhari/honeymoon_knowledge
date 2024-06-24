@@ -14,9 +14,12 @@ class Compare_sellers_with_targetsCols():
     branch_id = tjCol.branch_id
     seller_name = tjCol.seller_name
     seller_id = tjCol.seller_id
-    Received = tjCol.Received
+    # Received = tjCol.Received
+    received_with_checkout = tjCol.received_with_checkout
+    received_without_checkout = tjCol.received_without_checkout
     goodTarget = targetCol.goodTarget
-    progress =  'نسبت دریافتی به تارگت خوب' # "پیشرفت"
+    progress_with_checkout =  'نسبت دریافتی با تسویه با مرجوعی به تارگت خوب' # "پیشرفت"
+    progress_without_checkout = 'نسبت دریافتی بدون تسویه با مرجوعی به تارگت خوب' # "پیشرفت"
 def get_index_Compare_sellers_with_targetsCols(df):
     thisClass = Compare_sellers_with_targetsCols()
     thisItter = -1
@@ -30,15 +33,19 @@ def get_index_Compare_sellers_with_targetsCols(df):
             thisClass.seller_name = thisItter# type: ignore
         elif col == thisClass.seller_id:
             thisClass.seller_id = thisItter# type: ignore
-        elif col == thisClass.Received:
-            thisClass.Received = thisItter# type: ignore
+        elif col == thisClass.received_with_checkout:
+            thisClass.received_with_checkout = thisItter# type: ignore
+        elif col == thisClass.received_without_checkout:
+            thisClass.received_without_checkout = thisItter #type: ignore
         elif col == thisClass.goodTarget:
             thisClass.goodTarget = thisItter# type: ignore
-        elif col == thisClass.progress:
-            thisClass.progress = thisItter #type: ignore
+        elif col == thisClass.progress_with_checkout:
+            thisClass.progress_with_checkout = thisItter #type: ignore
+        elif col == thisClass.progress_without_checkout:
+            thisClass.progress_without_checkout = thisItter #type: ignore
     return thisClass
 def compare_salers_with_targets(dfData,df_targets):
-    df_employes=pd.DataFrame()
+    # df_employes=pd.DataFrame()
     ls_employes = []
     targetIndex = gitt.getIndexTarget(df_targets)
     l= len(dfData)
@@ -59,7 +66,7 @@ def compare_salers_with_targets(dfData,df_targets):
         while len(df_branch):
             saleTime = df_branch.iat[0,tjIndex.saleTime]
             # print(_make_farsi_text(saleTime))
-            df_thisTarget = df_targets.loc[df_targets[targetCol.branch]==branch]
+            df_thisTarget = df_targets.loc[df_targets[targetCol.branch_id]==branch_id]
             df_thisTarget = df_thisTarget.loc[df_thisTarget[targetCol.shiftWork]==saleTime]
             if len(df_thisTarget):
                 this_goodTarget = df_thisTarget.iat[0,targetIndex.goodTarget]
@@ -79,25 +86,36 @@ def compare_salers_with_targets(dfData,df_targets):
                     seller_branch_id = df_seller_goodTarget.iat[0, targetIndex.branch_id]
                     seller_goodTarget = df_seller_goodTarget.iat[0, targetIndex.goodTarget]
                         
-                    this_Received = dfsaleTime.iat[0,tjIndex.Received]
+                    this_received_with_checkout = dfsaleTime.iat[0,tjIndex.received_with_checkout]
+                    this_received_without_checkout = dfsaleTime.iat[0, tjIndex.received_without_ckeckout]
                     try:
-                        percent = this_goodTarget * 100 / seller_goodTarget -100
+                        percent_with_checkout = this_received_with_checkout * 100 / seller_goodTarget -100
                     except:
-                        percent = 0
+                        percent_with_checkout = 0
 
-                    Received = this_Received + this_Received * percent/100
+                    try:
+                        percent_without_checkout = this_received_without_checkout * 100 / seller_goodTarget -100
+                    except:
+                        percent_without_checkout = 0
+
+                    received_with_checkout = this_received_with_checkout + this_received_with_checkout * percent_with_checkout/100
+                    received_without_checkout = this_received_without_checkout + \
+                                this_received_without_checkout* percent_without_checkout/100
+                    # Received = this_Received + this_Received * percent/100
 
                     
                     thisClass = Compare_sellers_with_targetsCols()
                     ls_employes.append({thisClass.branch:seller_branch,thisClass.branch_id:seller_branch_id,thisClass.seller_name:seller_name,
                                         thisClass.seller_id:seller_id,
-                                        thisClass.Received:Received,
+                                        thisClass.received_without_checkout:received_without_checkout,
+                                        thisClass.received_with_checkout: received_with_checkout,
                                         thisClass.goodTarget: seller_goodTarget,
-                                        thisClass.progress: 0
+                                        thisClass.progress_without_checkout: 0,
+                                        thisClass.progress_with_checkout: 0
                             }) # type: ignore
                 dfsaleTime= dfsaleTime.loc[dfsaleTime[tjCol.seller_id]!=seller_id]
             df_branch = df_branch.loc[df_branch[tjCol.saleTime]!=saleTime]
-        dfData = dfData.loc[dfData[tjCol.branch]!=branch]
+        dfData = dfData.loc[dfData[tjCol.branch_id]!=branch_id]
     prgs.printProgressBar(l, l, prefix = 'Progress:', suffix = 'Complete', length = 25)
     df_employes = pd.DataFrame(ls_employes)
     # df_employes.to_excel("test.xlsx",index=False)
@@ -111,13 +129,19 @@ def compare_salers_with_targets(dfData,df_targets):
         branch_id = df_employes.iat[0, thisIndex.branch_id]
         goodTarget = df_employes.iat[0, thisIndex.goodTarget]
         df_seller = df_employes.loc[df_employes[thisClass.seller_id] == seller_id]
-        Received  = int(df_seller[thisClass.Received].sum())
-        progress = Received * 100 / goodTarget -100
-        ls_data.append({thisClass.branch:branch,thisClass.branch_id:branch_id,thisClass.seller_name:seller_name,
-                                        thisClass.seller_id:seller_id,
-                                        thisClass.Received:Received,
-                                        thisClass.goodTarget: goodTarget,
-                                        thisClass.progress: progress
+        received_with_checkout  = int(df_seller[thisClass.received_with_checkout].sum())
+        received_without_checkout = int(df_seller[thisClass.received_without_checkout].sum())
+        progress_with_checkout = received_with_checkout * 100 / goodTarget -100
+        progress_without_checkout = received_without_checkout * 100 /goodTarget - 100
+        ls_data.append({thisClass.branch:branch,thisClass.branch_id:branch_id,
+                                thisClass.seller_name:seller_name,
+                                thisClass.seller_id:seller_id,
+                                thisClass.goodTarget: goodTarget,
+                                thisClass.received_with_checkout:received_with_checkout,
+                                thisClass.progress_with_checkout: progress_with_checkout,
+                                
+                                thisClass.received_without_checkout:received_without_checkout,
+                                thisClass.progress_without_checkout:progress_without_checkout
                             }) # type: ignore
         df_employes = df_employes.loc[df_employes[thisClass.seller_id] != seller_id]
     dfData = pd.DataFrame(ls_data)

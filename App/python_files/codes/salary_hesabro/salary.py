@@ -1,13 +1,16 @@
 
 import os, sys, pandas as pd, datetime,time
 
-parent = os.path.abspath('.')
-sys.path.insert(1, parent)
-
+# parent = os.path.abspath('.')
+# sys.path.insert(1, parent)
+from django.conf import settings
 from .defs import sale_each_employe, concat_sale_with_target as cswt,commission
 # from codes.salary_new.defs import concat_sale_with_target as cswt
 # from codes.salary_new.defs import commission 
-from python_files.settings_python.app_structures import export_path, mediaName, _make_farsi_text, prtLines, getDateTimeForFileName, getIndexTj,myDataType_names, tjCol, condition, loadData, yearDetail, monthCol, monthsSelector
+from python_files.settings_python.app_structures  import \
+    export_path, mediaName, _make_farsi_text, prtLines, getDateTimeForFileName,\
+    getIndexTj,myDataType_names, tjCol, condition, loadData, yearDetail, \
+          monthCol, monthsSelector, receive_calculator_withoutCheckout, receive_calculator_withCheckout
 # from main import * 
 from ..merger.defs import cols_selector as csr
 # import merger.defs.cols_selector  as csr
@@ -106,20 +109,23 @@ def calculateSaleEachSaler(dfData):
     lsDatas =[]
     while len(dfData):
         seller_id = dfData.iat[0,tjIndex.seller_id]
-        dfseller_name = dfData.loc[dfData[tjCol.seller_id]==seller_id]
-        seller_name = dfseller_name.iat[0,tjIndex.seller_name]
-        Cash = int(dfseller_name[tjCol.Cash].sum())
-        earnest = int(dfseller_name[tjCol.earnest].sum())
-        tasvieBaMarjooe = int(dfseller_name[tjCol.tasvieBaMarjooe].sum())
-        Deposit = int(dfseller_name[tjCol.Deposit].sum())
-        transitional = int(dfseller_name[tjCol.transitional].sum())
-        check = int(dfseller_name[tjCol.check].sum())
-        to_other_person = int(dfseller_name[tjCol.to_other_person].sum())
-        Received = Cash+earnest+tasvieBaMarjooe+Deposit+transitional+check+to_other_person
+        df_saler = dfData.loc[dfData[tjCol.seller_id]==seller_id]
+        seller_name = df_saler.iat[0,tjIndex.seller_name]
+        received_with_checkout = receive_calculator_withCheckout(df_saler)
+        received_without_checkout = receive_calculator_withCheckout(df_saler)
+        # Cash = int(dfseller_name[tjCol.Cash].sum())
+        # earnest = int(dfseller_name[tjCol.earnest].sum())
+        # tasvieBaMarjooe = int(dfseller_name[tjCol.tasvieBaMarjooe].sum())
+        # Deposit = int(dfseller_name[tjCol.Deposit].sum())
+        # transitional = int(dfseller_name[tjCol.transitional].sum())
+        # check = int(dfseller_name[tjCol.check].sum())
+        # to_other_person = int(dfseller_name[tjCol.to_other_person].sum())
+        # Received = Cash+earnest+tasvieBaMarjooe+Deposit+transitional+check+to_other_person
         
         
         lsDatas.append({tjCol.seller_name:seller_name,tjCol.seller_id:seller_id,
-                        tjCol.Received:Received
+                        tjCol.received_with_checkout: received_with_checkout,
+                        tjCol.received_without_checkout : received_without_checkout
                         })
                     
         dfData = dfData.loc[dfData[tjCol.seller_id]!=seller_id]
@@ -157,7 +163,8 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         prtLines(2)
         print(_make_farsi_text("انتخاب شما: "))
         print(_make_farsi_text(folderName))
-        thisPath = os.getcwd()
+        # thisPath = os.getcwd()
+        thisPath = settings.BASE_DIR
         thisPath = f"{thisPath}/{mediaName}"
         # os.chdir(thisPath)
         prtLines(2)
@@ -336,37 +343,37 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         dfPmInvoices = dfInvoices.loc[dfInvoices[tjCol.saleTime]>condition.saleTime]
         # dfPmDetailedSales = df_detailedSales.loc[df_detailedSales[frCol.saleTime]>condition.saleTime]
         
-        dfCheckoutAm=mrsf.make_seller_SaleFile(dfAmInvoices,condition.saleAm)#,df_detailedSales,dfExclusiveBite
-        dfCheckoutPm=mrsf.make_seller_SaleFile(dfPmInvoices,condition.salePm)#,df_detailedSales,dfExclusiveBite
+        df_salesAm=mrsf.make_seller_SaleFile(dfAmInvoices,condition.saleAm)#,df_detailedSales,dfExclusiveBite
+        df_salesPm=mrsf.make_seller_SaleFile(dfPmInvoices,condition.salePm)#,df_detailedSales,dfExclusiveBite
         thisFileName = "فروش شیفت عصر.xlsx"
-        xlsxFileNum = make_file(dfCheckoutPm,thisFileName,xlsxFileNum,thisPath)
-        # dfCheckoutPm.to_excel(,index=False)
+        xlsxFileNum = make_file(df_salesPm,thisFileName,xlsxFileNum,thisPath)
+        # df_salesPm.to_excel(,index=False)
         thisFileName = "فروش شیفت صبح.xlsx"
-        xlsxFileNum = make_file(dfCheckoutAm,thisFileName,xlsxFileNum,thisPath)
-        # dfCheckoutAm.to_excel(,index=False)
-        lsCheckOut = []
-        lsCheckOut.append(dfCheckoutAm)
-        lsCheckOut.append(dfCheckoutPm)
+        xlsxFileNum = make_file(df_salesAm,thisFileName,xlsxFileNum,thisPath)
+        # df_salesAm.to_excel(,index=False)
+        ls_sales = []
+        ls_sales.append(df_salesAm)
+        ls_sales.append(df_salesPm)
         # df_ans = makeseller_nameSaleFile(df_exclusive,df_nonExclusive,df_targets,dfInvoices)
         
-        dfCheckout = pd.concat(lsCheckOut)
+        df_sales = pd.concat(ls_sales)
         
         # xlsxFileNum += 1
         thisFileName = f"فروش هر مشاور در هر شعبه و شیفت.xlsx"
-        xlsxFileNum = make_file(dfCheckout, thisFileName, xlsxFileNum, thisPath)
+        xlsxFileNum = make_file(df_sales, thisFileName, xlsxFileNum, thisPath)
         # thisFileName = f"{xlsxFileNum}- {thisFileName}"
-        # dfCheckout.to_excel(thisFileName,index = False)
+        # df_sales.to_excel(thisFileName,index = False)
         
         # از این قسمت فقط برای تولید فایل فروش هر مشاور استفاده می شود
         
-        # df_emp_sale = sale_each_employe.sale_employes(dfCheckout)
-        df_emp_sale = sale_each_employe.sale_sellers_in_each_branch(dfCheckout)
+        # df_emp_sale = sale_each_employe.sale_employes(df_sales)
+        df_emp_sale = sale_each_employe.sale_sellers_in_each_branch(df_sales)
         thisFileName = "فروش هر مشاور در هر شعبه.xlsx"
         xlsxFileNum = make_file(df_emp_sale, thisFileName, xlsxFileNum, thisPath)
         # df_emp_sale.to_excel(,index=False)
 
         
-        df_compare_salers = csot.compare_salers_with_targets(dfCheckout,df_targets)
+        df_compare_salers = csot.compare_salers_with_targets(df_sales,df_targets)
         # xlsxFileNum += 1
         thisFileName = f"فروشندگان برتر هانی مون {folderName}.xlsx"
         xlsxFileNum = make_file(df_compare_salers, thisFileName, xlsxFileNum, thisPath)
@@ -374,7 +381,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # prtLines(4)
         # print(_make_farsi_text("ادغام فروش مشاوران در هر شعبه و شیفت با تارگت همان شعبه و شیفت"))
         
-        df_ConcatWithTargets= cswt.concatWithTargets(dfCheckout,df_targets)
+        df_ConcatWithTargets= cswt.concatWithTargets(df_sales,df_targets)
         # xlsxFileNum += 1
         thisFileName = f"ادغام فروش با تارگت {folderName}.xlsx"
         xlsxFileNum = make_file(df_ConcatWithTargets, thisFileName, xlsxFileNum,thisPath)

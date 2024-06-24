@@ -361,8 +361,8 @@ def task_selector(selected,args_= "",**kwargs):
         print()
         print(_make_farsi_text(selected))
         print()
-        selected = "test"
-        if selected == "test":
+        # selected = "test"
+        if selected == "barcode":
             driver, is_logged_in = run_hesabro()
             # from django_files.club.tasks import run_update_customers_specifications
             from django.conf import settings
