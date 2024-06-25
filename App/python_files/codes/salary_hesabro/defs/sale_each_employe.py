@@ -52,15 +52,15 @@ def sale_sellers_in_each_branch(dfData):
             branch_id = df_seller.iat[0, this_index.branch_id]
             dfBranch = df_seller.loc[df_seller[thisCols.branch_id] == branch_id]
             df_seller = df_seller.loc[df_seller[thisCols.branch_id] != branch_id]
-            receive_with_checkout = int(dfBranch[thisCols.receive_with_checkout].sum())
-            receive_without_checkout = int(dfBranch[thisCols.receive_without_checkout].sum())
+            receive_with_checkout = int(dfBranch[thisCols.received_with_checkout].sum())
+            receive_without_checkout = int(dfBranch[thisCols.received_without_checkout].sum())
             
             ls_data.append({thisCols.branch:branch,
                             thisCols.branch_id: branch_id,
                             thisCols.seller_id:seller_id, 
                             thisCols.seller_name : seller_name,
-                            thisCols.receive_with_checkout: receive_with_checkout,
-                            thisCols.receive_without_checkout:receive_without_checkout
+                            thisCols.received_with_checkout: receive_with_checkout,
+                            thisCols.received_without_checkout:receive_without_checkout
                             })
     df_ans = pd.DataFrame(ls_data)
     return df_ans

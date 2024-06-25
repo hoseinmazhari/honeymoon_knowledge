@@ -10,7 +10,8 @@ from .defs import sale_each_employe, concat_sale_with_target as cswt,commission
 from python_files.settings_python.app_structures  import \
     export_path, mediaName, _make_farsi_text, prtLines, getDateTimeForFileName,\
     getIndexTj,myDataType_names, tjCol, condition, loadData, yearDetail, \
-          monthCol, monthsSelector, receive_calculator_withoutCheckout, receive_calculator_withCheckout
+    monthCol, monthsSelector, receive_calculator_withoutCheckout, \
+    receive_calculator_withCheckout
 # from main import * 
 from ..merger.defs import cols_selector as csr
 # import merger.defs.cols_selector  as csr
@@ -112,7 +113,7 @@ def calculateSaleEachSaler(dfData):
         df_saler = dfData.loc[dfData[tjCol.seller_id]==seller_id]
         seller_name = df_saler.iat[0,tjIndex.seller_name]
         received_with_checkout = receive_calculator_withCheckout(df_saler)
-        received_without_checkout = receive_calculator_withCheckout(df_saler)
+        received_without_checkout = receive_calculator_withoutCheckout(df_saler)
         # Cash = int(dfseller_name[tjCol.Cash].sum())
         # earnest = int(dfseller_name[tjCol.earnest].sum())
         # tasvieBaMarjooe = int(dfseller_name[tjCol.tasvieBaMarjooe].sum())
@@ -160,6 +161,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
         # start coding
         #
         folderName = f"{selectedOption}- حقوق مشاوران {getDateTimeForFileName()}"
+        folderName = f"{selectedOption}- حقوق مشاوران"
         prtLines(2)
         print(_make_farsi_text("انتخاب شما: "))
         print(_make_farsi_text(folderName))
@@ -391,7 +393,7 @@ def salary(df_cumulativeSales, df_targets, startDate, endDate):
 
         # xlsxFileNum += 1
         
-        df_final = commission.commission(df_ConcatWithTargets,df_targets)
+        df_final = commission.commission_calculator(df_ConcatWithTargets,df_targets)
         thisFileName = f"فایل نهایی برای مشاوران اصلی در {startDate.replace('/','-')} تا {endDate.replace('/', '-')} ماه.xlsx"
         xlsxFileNum = make_file(df_final, thisFileName, xlsxFileNum,thisPath)
         # thisFileName = f"{xlsxFileNum}- {thisFileName}"

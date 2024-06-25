@@ -141,6 +141,8 @@ def getIndexTj(df):
             thisCols.birthday = thisIndex # type: ignore
         elif thisCols.received_with_checkout == col:
             thisCols.received_with_checkout = thisIndex
+        elif thisCols.received_without_checkout == col:
+            thisCols.received_without_checkout = thisIndex
     return thisCols
 ############################################################################################
 class myDataType_names():
@@ -770,30 +772,6 @@ def receive_calculator_withCheckout(dfData):
         checkout =int(dfData[tjCol.checkout].sum())                    
     except:
         checkout=0
-    try:
-        cart =int(dfData[tjCol.cart].sum())                    
-    except:
-        cart=0
-    try:
-        Cash = int(dfData[tjCol.Cash].sum())
-    except:
-        Cash=0
-    try:
-        earnest = int(dfData[tjCol.earnest].sum())
-    except:
-        earnest=0
-    try:
-        transitional = int(dfData[tjCol.transitional].sum())
-    except:
-        transitional = 0
-    try:
-        check = int(dfData[tjCol.check].sum())
-    except:
-        check = 0
-    try:
-        to_otherPerson = int(dfData[tjCol.to_other_person].sum())
-    except:
-        to_otherPerson = 0
-    
-    return int(cart + Cash + earnest + transitional+ check+ to_otherPerson + checkout)   
+    receive = receive_calculator_withoutCheckout(dfData)
+    return int(receive + checkout)   
 ############################################################################################

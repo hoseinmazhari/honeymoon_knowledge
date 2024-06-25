@@ -22,8 +22,8 @@ class finalTargetCol():
     baseSalary = targetCol.baseSalary
     salary_with_checkout = "حقوق با تسویه مرجوعی"
     salary_without_checkout = "حقوق بدون تسویه با مرجوعی"
-    # goodTarget = targetCol.goodTarget
-    # perfectTarget = targetCol.perfectTarget
+    goodTarget = targetCol.goodTarget
+    perfectTarget = targetCol.perfectTarget
 def get_index_finalTarget(df):
     thisCols = finalTargetCol()
     thisItter = -1
@@ -53,12 +53,16 @@ def get_index_finalTarget(df):
             thisCols.salary_with_checkout = thisItter #type: ignore
         elif col == thisCols.salary_without_checkout:
             thisCols.salary_without_checkout = thisItter #type: ignore
+        elif col == thisCols.perfectTarget:
+            thisCols.perfectTarget = thisItter #type: ignore
+        elif col == thisCols.goodTarget:
+            thisCols.goodTarget = thisItter
     return thisCols
 
 
 
                       
-def commission(dfData,dfTarget):
+def commission_calculator(dfData,dfTarget):
     thisIndex = get_index_finalTarget(dfData)
     targetIndex = target.getIndexTarget(dfTarget)
     df_ans = pd.DataFrame()
@@ -70,7 +74,7 @@ def commission(dfData,dfTarget):
         received_with_checkout = int(dfseller_name[finalTargetCol.received_with_checkout].sum())
         received_without_checkout = int(dfseller_name[finalTargetCol.received_without_checkout].sum())
         commission_with_checkout = int(dfseller_name[finalTargetCol.commission_with_checkout].sum())
-        commission_without_checkout = int(dfseller_name[finalTargetCol.commission_without_checkout])
+        commission_without_checkout = int(dfseller_name[finalTargetCol.commission_without_checkout].sum())
         dfBaseSalary = dfTarget.loc[dfTarget[targetCol.adviser_id]==seller_id]
         if len(dfBaseSalary):
             baseSalary = dfBaseSalary.iat[0,targetIndex.baseSalary]

@@ -55,11 +55,13 @@ def concatWithTargets(dfData,df_targets):
                 
                
                 ls_employes.append({tjCol.branch:branch,tjCol.branch_id:branch_id,
+                                    tjCol.saleTime: saleTime,
                                     tjCol.seller_name:seller_name,tjCol.seller_id:seller_id,
                                     targetCol.commission_percent:commission_percent,
                                     tjCol.received_with_checkout: received_with_checkout,
+                                    targetCol.commission_with_checkout: commission_with_checkout,
                                     tjCol.received_without_checkout: received_without_checkout,
-                                    targetCol.commission_with_checkout:commission_with_checkout,                       
+                                    targetCol.commission_without_checkout:commission_without_checkout,                       
                         }) # type: ignore
                 dfsaleTime= dfsaleTime.loc[dfsaleTime[tjCol.seller_id]!=seller_id]
             df_branch = df_branch.loc[df_branch[tjCol.saleTime]!=saleTime]

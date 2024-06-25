@@ -79,7 +79,7 @@ def compare_salers_with_targets(dfData,df_targets):
                 seller_name = dfsaleTime.iat[0,tjIndex.seller_name]
                 # print(_make_farsi_text(seller_name))
                 seller_id = dfsaleTime.iat[0,tjIndex.seller_id]
-                df_seller_goodTarget = df_targets.loc[df_targets[targetCol.seller_id]==seller_id]
+                df_seller_goodTarget = df_targets.loc[df_targets[targetCol.adviser_id]==seller_id]
                 df_seller_goodTarget = df_seller_goodTarget.loc[df_seller_goodTarget[targetCol.goodTarget]!=0]
                 if len(df_seller_goodTarget):
                     seller_branch = df_seller_goodTarget.iat[0, targetIndex.branch]
@@ -87,7 +87,7 @@ def compare_salers_with_targets(dfData,df_targets):
                     seller_goodTarget = df_seller_goodTarget.iat[0, targetIndex.goodTarget]
                         
                     this_received_with_checkout = dfsaleTime.iat[0,tjIndex.received_with_checkout]
-                    this_received_without_checkout = dfsaleTime.iat[0, tjIndex.received_without_ckeckout]
+                    this_received_without_checkout = dfsaleTime.iat[0, tjIndex.received_without_checkout]
                     try:
                         percent_with_checkout = this_received_with_checkout * 100 / seller_goodTarget -100
                     except:
