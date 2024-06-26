@@ -167,7 +167,7 @@ CELERY_BEAT_SCHEDULE = {
     # },
     "test_send_daily_birthday":{
         "task": "club.tasks.check_send_birthday",
-        "schedule":crontab(minute=0,hour=10),
+        "schedule":crontab(minute=30,hour=10),
         # "args":['']
     }
 }

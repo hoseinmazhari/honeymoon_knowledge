@@ -1,1 +1,1 @@
-/django_project/honeymoon_knowledge/App/django_files/media/00000- حقوق مشاوران.zip
+/home/honeymoon/Documents/git/honeymoon_knowledge/App/django_files/media/00000- حقوق مشاوران.zip
