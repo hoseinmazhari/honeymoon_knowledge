@@ -13,6 +13,7 @@ def run_update_customers_specifications():
     # print("this select")
     if is_logged_in:
         update_customers_specifications(driver)
+    # driver.save_cookies()
     driver.close()
     # driver.quite()
     print("process 'update_customers_specifications' is complete")

@@ -147,7 +147,7 @@ def update_customers_specifications(driver):
     dfData = pd.DataFrame(ls_data)
     df_customers_specifications = pd.read_excel(this_file)
     dfData = pd.concat([dfData, df_customers_specifications])
-    
+    dfData.drop_duplicates(subset=thisCols.mobile,keep='first',inplace=True)
     dfData.to_excel(this_file,index=False)
     # return dfData
 
