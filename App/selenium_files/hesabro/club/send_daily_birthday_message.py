@@ -17,7 +17,7 @@ def run_send_daily_birthday_message():
     title = atsk.task_name.update_birthday
     thisCols = report_output_cols()
     today = djtj.todaydate()
-    today = today[-6:]
+    today = str(today[-6:])
     print(today)
     # time.sleep(5)   
     # now = datetime.now() 
@@ -37,6 +37,10 @@ def run_send_daily_birthday_message():
     today = today.replace("/","-")[1:]
     # today = today
     new_file = f"{settings.BASE_DIR}/{hesabro_db_address}/{today}.xlsx"
+    dfData.fillna({thisCols.birthday:"0000"}, inplace = True)
+    dfData = dfData.loc[dfData[thisCols.birthday]!=""]
+    dfData = dfData[dfData[thisCols.birthday].str.contains(str(today))]
+    new_file = f"{settings.BASE_DIR}/{hesabro_db_address}/new_current_birth.xlsx"
     dfData.to_excel(new_file,index=False)
     send_sms_from_df(dfData,title,sms_text)
     dfData = df_customers_specifications.loc[df_customers_specifications[thisCols.mobile]==9162078094]
