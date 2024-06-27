@@ -148,6 +148,13 @@ def update_customers_specifications(driver):
     df_customers_specifications = pd.read_excel(this_file)
     dfData = pd.concat([dfData, df_customers_specifications])
     dfData.drop_duplicates(subset=thisCols.mobile,keep='first',inplace=True)
+    dfData = dfData[[thisCols.id,thisCols.mobile,thisCols.name,
+                     thisCols.gender,thisCols.birthday,
+                     thisCols.passport_id,thisCols.email,thisCols.trusted]]
+    dfData.loc[:,thisCols.row] = [i+1 for i in range(len(dfData))]
+    dfData = dfData[[thisCols.row,thisCols.id,thisCols.mobile,thisCols.name,
+                     thisCols.gender,thisCols.birthday,
+                     thisCols.passport_id,thisCols.email,thisCols.trusted]]
     dfData.to_excel(this_file,index=False)
     # return dfData
 
