@@ -5,6 +5,7 @@ honeymoonatr_domain = "https://honeymoonatr.com"
 aradpayamak_domain = "http://aradpayamak.net"
 hesabro_db_address = 'db'
 
+
 class File_locations():
     cookies = "cookies"
     class Data_base():
@@ -12,7 +13,8 @@ class File_locations():
             class Customers():
                 class Specifications(): #مشخصات مشتریان
                     db_address = f'{hesabro_db_address}/customers_specifications.xlsx'
-    
+                class Birthdays():
+                    file_address = f"{hesabro_db_address}/birthdays"
 
     
 class Urls_hesabro():

@@ -1,7 +1,7 @@
 
 
 import os, sys, time, random, pandas as pd
-
+from django.conf import settings
 from selenium.webdriver.common.keys import Keys
 
 from . import xpath_hesabro
@@ -26,7 +26,7 @@ from selenium_files.hesabro.club import fetch_coin_report_data as fcrd
 from selenium_files.hesabro.club.sms_sender import send_group_sms, send_sms_from_df
 from selenium_files.honeymoonatr import update_products as upsh
 
-from  python_files.codes.salary_hesabro.salary import salary
+from python_files.codes.salary_hesabro.salary import salary
 from python_files.settings_python import app_structures as asts
 from python_files.settings_python.app_structures import _make_farsi_text
 from python_files.settings_python import printProgress as prgs
@@ -361,11 +361,13 @@ def task_selector(selected,args_= "",**kwargs):
         print()
         print(_make_farsi_text(selected))
         print()
-        # selected = "test"
+        selected = "test"
+        # if selected == "test":
+            
         if selected == "barcode":
             driver, is_logged_in = run_hesabro()
             # from django_files.club.tasks import run_update_customers_specifications
-            from django.conf import settings
+            
             thisPath = settings.BASE_DIR
             this_file = f"{thisPath}/barcode.xlsx"
             dfData = pd.read_excel(this_file)
@@ -433,73 +435,73 @@ def task_selector(selected,args_= "",**kwargs):
                 # dfData.to_excel(f"{title}.xlsx", index= False)
                 print(answer)
             # answer = update_birthday_for_call_brs(args_)
-        if selected == tsk.task_name.send_birthday_data_to_sheets:
-            df_invoices = args_[asts.send_birthday_toSheets_require.invoices]
-            monthNum = "01"
-            df_invoices = df_invoices[df_invoices[asts.tjCol.birthday].str.contains(f'/{monthNum}/', na=False)]
-            # branchs_sheets = args_[asts.send_birthday_toSheets_require.branchs]
-            # brs = branchs_sheets.keys()
-            tjIndex = asts.getIndexTj(df_invoices)
-            thisPath = os.getcwd()
-            os.chdir(f"{thisPath}/media/exported")
-            try:
-                os.mkdir(tsk.task_name.send_birthday_data_to_sheets)
-            except:
-                pass
-            thisPath = os.getcwd()
-            os.chdir(f"{thisPath}/{tsk.task_name.send_birthday_data_to_sheets}")
-            df_invoices = df_invoices[[asts.tjCol.branch,asts.tjCol.mobile,asts.tjCol.birthday]]#asts.tjCol.buyer,
-            # df_invoices.to_excel("alll.xlsx",index=False)
+        # if selected == tsk.task_name.send_birthday_data_to_sheets:
+        #     df_invoices = args_[asts.send_birthday_toSheets_require.invoices]
+        #     monthNum = "01"
+        #     df_invoices = df_invoices[df_invoices[asts.tjCol.birthday].str.contains(f'/{monthNum}/', na=False)]
+        #     # branchs_sheets = args_[asts.send_birthday_toSheets_require.branchs]
+        #     # brs = branchs_sheets.keys()
+        #     tjIndex = asts.getIndexTj(df_invoices)
+        #     thisPath = os.getcwd()
+        #     os.chdir(f"{thisPath}/media/exported")
+        #     try:
+        #         os.mkdir(tsk.task_name.send_birthday_data_to_sheets)
+        #     except:
+        #         pass
+        #     thisPath = os.getcwd()
+        #     os.chdir(f"{thisPath}/{tsk.task_name.send_birthday_data_to_sheets}")
+        #     df_invoices = df_invoices[[asts.tjCol.branch,asts.tjCol.mobile,asts.tjCol.birthday]]#asts.tjCol.buyer,
+        #     # df_invoices.to_excel("alll.xlsx",index=False)
             
             
-            temp_birthday="temp_birthday"
-            tjIndex = asts.getIndexTj(df_invoices)
-            shape = df_invoices.shape
-            columnCount = shape[1]
-            df_invoices.insert(columnCount,temp_birthday,"")
+        #     temp_birthday="temp_birthday"
+        #     tjIndex = asts.getIndexTj(df_invoices)
+        #     shape = df_invoices.shape
+        #     columnCount = shape[1]
+        #     df_invoices.insert(columnCount,temp_birthday,"")
             
-            for i in range(len(df_invoices)):
-                try:
-                    df_invoices.iat[i,columnCount]= df_invoices.iat[i,tjIndex.birthday][5:]
-                except:
-                    df_invoices.iat[i,columnCount]= "0000/00/00"
-            df_invoices = df_invoices.sort_values(by=temp_birthday)
-            # # end sort on day
-            # # کد مرتب سازی تا اینجاست
+        #     for i in range(len(df_invoices)):
+        #         try:
+        #             df_invoices.iat[i,columnCount]= df_invoices.iat[i,tjIndex.birthday][5:]
+        #         except:
+        #             df_invoices.iat[i,columnCount]= "0000/00/00"
+        #     df_invoices = df_invoices.sort_values(by=temp_birthday)
+        #     # # end sort on day
+        #     # # کد مرتب سازی تا اینجاست
 
 
-            # # حذف و اضافه نمودن ستون های دلخواه
-            # # df_invoices = df_invoices[[frCol.mobile,frCol.buyer,frCol.branch,frCol.birthday]]
-            df_invoices.insert(4,"تماس گیرنده","")
-            df_invoices.insert(5,"تاریخ پیگیری اول","")
-            df_invoices.insert(6,"تاریخ پیگیری دوم","")
-            df_invoices.insert(7,"تاریخ پیگیری سوم","")
-            df_invoices.insert(8,"تاریخ پیگیری چهارم","")
-            df_invoices.insert(9,"نتیجه","")
-            df_invoices.insert(10,"توضیحات","")
+        #     # # حذف و اضافه نمودن ستون های دلخواه
+        #     # # df_invoices = df_invoices[[frCol.mobile,frCol.buyer,frCol.branch,frCol.birthday]]
+        #     df_invoices.insert(4,"تماس گیرنده","")
+        #     df_invoices.insert(5,"تاریخ پیگیری اول","")
+        #     df_invoices.insert(6,"تاریخ پیگیری دوم","")
+        #     df_invoices.insert(7,"تاریخ پیگیری سوم","")
+        #     df_invoices.insert(8,"تاریخ پیگیری چهارم","")
+        #     df_invoices.insert(9,"نتیجه","")
+        #     df_invoices.insert(10,"توضیحات","")
 
-            df_invoices.drop(temp_birthday, axis=1 , inplace=True) 
+        #     df_invoices.drop(temp_birthday, axis=1 , inplace=True) 
 
-            while len(df_invoices):
-                branch = df_invoices.iat[0, tjIndex.branch]
-                dfbranchs = df_invoices.loc[df_invoices[asts.tjCol.branch]==branch]
-                df_invoices = df_invoices.loc[df_invoices[asts.tjCol.branch]!=branch]
-                dfbranchs.to_excel(f"{branch}.xlsx",index =False)
+        #     while len(df_invoices):
+        #         branch = df_invoices.iat[0, tjIndex.branch]
+        #         dfbranchs = df_invoices.loc[df_invoices[asts.tjCol.branch]==branch]
+        #         df_invoices = df_invoices.loc[df_invoices[asts.tjCol.branch]!=branch]
+        #         dfbranchs.to_excel(f"{branch}.xlsx",index =False)
                 
-                # mybrowser = Browser()
-                # this_address = branchs_sheets[branch]
+        #         # mybrowser = Browser()
+        #         # this_address = branchs_sheets[branch]
                 
-                # # mybrowser.change_url(main_url)
-                # driver = mybrowser.driver
-                # driver.get(this_address)
+        #         # # mybrowser.change_url(main_url)
+        #         # driver = mybrowser.driver
+        #         # driver.get(this_address)
                 
-        if selected == tsk.task_name.update_birthday_call_brs:
-            driver, is_logged_in = run_hesabro()
-            if is_logged_in:
-                title = tsk.task_name.update_birthday_call_brs
-                dfData = fbsd.get_birthdays_data(driver,title)
-                dfData.to_excel(f"{title}.xlsx", index= False)
-            # answer = update_birthday_for_call_brs(args_)
+        # # if selected == tsk.task_name.update_birthday_call_brs:
+        # #     driver, is_logged_in = run_hesabro()
+        # #     if is_logged_in:
+        # #         title = tsk.task_name.update_birthday_call_brs
+        # #         dfData = fbsd.get_birthdays_data(driver,title)
+        # #         dfData.to_excel(f"{title}.xlsx", index= False)
+        # #     # answer = update_birthday_for_call_brs(args_)
         if selected == tsk.task_name.salary:
             # pass
             df_invoices = args_[asts.salary_requires.invoices]
@@ -518,12 +520,14 @@ def task_selector(selected,args_= "",**kwargs):
                 
                 upsh.start_update(driver)
                 
-        elif selected == tsk.task_name.update_birthday:
+        elif selected == tsk.task_name.send_daily_birthday_message:
             driver, is_logged_in = run_hesabro()
+
             if is_logged_in:
+                title = tsk.task_name.send_daily_birthday_message
                 if True:
-                    dfData = upb.get_birthday_data(driver,main_url,tsk.task_name.update_birthday)
-                    send_sms_from_df(dfData, tsk.task_name.update_birthday,args_)
+                    dfData = upb.get_birthday_data(driver,main_url,title)
+                    send_sms_from_df(dfData, title,args_)
                         
                 # send_group_sms(dfData,tsk.task_name.update_birthday,args_)
                 # try:

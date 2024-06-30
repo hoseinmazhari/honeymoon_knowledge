@@ -1,4 +1,11 @@
-
+class Sale_factors():
+    tbl = '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div[2]/div/table'
+    tbody = '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div[2]/div/table/tbody'
+    # show_counter = '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/a[2]'
+    show_counter = '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/a[1]'
+    # n =      '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/ul/li[8]/a'
+    next_p = '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/ul/li[8]/a'
+    # next_p = '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/ul/li[8]/a'
 # class hesabro():
 class login_form():
     number = "//input[@id='loginform-number']"

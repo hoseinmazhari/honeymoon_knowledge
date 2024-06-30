@@ -155,9 +155,9 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_BEAT_SCHEDULE = {
-    "update_birthday_task":{
+    "update_customers_specifications":{
         "task": "club.tasks.run_update_customers_specifications",
-        "schedule":1200,
+        "schedule":crontab(minute=40,hour='0-23'),
         # "args": ['hello world']
     },
     # "send_daily_birthday":{
@@ -167,7 +167,24 @@ CELERY_BEAT_SCHEDULE = {
     # },
     "send_daily_sms_birthday_customers":{
         "task": "club.tasks.send_daily_sms_birthday_customers",
-        "schedule":crontab(minute=30,hour=10),
+        "schedule":crontab(minute=00,hour=10), # پیامک تبریک تولد
         # "args":['']
-    }
+    },
+    "fethch_sale_factor_list":{
+        "task": "club.tasks.fethch_sale_factor_list",
+        "schedule":crontab(minute=15, hour=11)
+        # "args":['']
+    },
+    # "test2":{
+    #     "task": "club.tasks.test2",
+    #     "schedule":50#crontab(minute=0,hour=10),
+    #     # "args":['']
+    # },
+    # "test3":{
+    #     "task": "club.tasks.test3",
+    #     "schedule":50#crontab(minute=0,hour=10),
+    #     # "args":['']
+    # }
+
+
 }

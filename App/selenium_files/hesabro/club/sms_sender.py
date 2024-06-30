@@ -53,7 +53,7 @@ def send_sms(domain_ = 'http://aradpayamak.net', username_ = 'hanimoon', passwor
     
 
 def send_sms_from_df(dfData,kind, args_):
-    if kind == task_name.update_birthday:
+    if kind == task_name.send_daily_birthday_message:
         thisCols = birthday_output_cols()
         thisIndex = get_index_birthday_output_cols(dfData)
         l = len(dfData)
@@ -89,7 +89,7 @@ def send_group_sms(dfData,kind ,msg="تست"):
     # ls.append({"name":"hosein","mobile":"09139960164"})
    
     # dfData = pd.DataFrame(ls)
-    if kind == task_name.update_birthday:
+    if kind == task_name.send_daily_birthday_message:
         is_name = "@نام_و_نام_خانوادگی"
         thisIndex = get_index_boc(dfData)
         while len(dfData):
