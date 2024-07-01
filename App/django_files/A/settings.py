@@ -167,12 +167,12 @@ CELERY_BEAT_SCHEDULE = {
     # },
     "send_daily_sms_birthday_customers":{
         "task": "club.tasks.send_daily_sms_birthday_customers",
-        "schedule":crontab(minute=00,hour=10), # پیامک تبریک تولد
+        "schedule":crontab(minute=00,hour=18), # پیامک تبریک تولد
         # "args":['']
     },
     "fethch_sale_factor_list":{
         "task": "club.tasks.fethch_sale_factor_list",
-        "schedule":crontab(minute=15, hour=11)
+        "schedule":crontab(minute=15, hour=1)
         # "args":['']
     },
     # "test2":{

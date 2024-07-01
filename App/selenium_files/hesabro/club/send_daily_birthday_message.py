@@ -59,7 +59,8 @@ def run_send_daily_birthday_message():
     dfData.to_excel(new_file,index=False)
     send_sms_from_df(dfData,title,sms_text)
     print("test sms to 09162078094 is started")
-    ls_mobiles = [9162078094, 9139960164]
+    ls_mobiles = [9162078094, 9132995389]
+    # ls_mobiles = [9162078094]
     birthday_count = len(dfData)
     sms_text = f"تعداد {birthday_count} تولدی ارسال شد"
     for mobile in ls_mobiles:
@@ -69,5 +70,5 @@ def run_send_daily_birthday_message():
         send_sms_from_df(dfData,title,sms_text)
     
     # dfData.to_excel("data.xlsx",index=False)
-        
+    
     print("send  birthday daily now is complete.")
